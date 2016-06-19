@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 
 public class SplashActivity extends BaseActivity
     implements Handler.Callback
@@ -28,7 +27,7 @@ public class SplashActivity extends BaseActivity
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -39,8 +38,17 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public boolean handleMessage(Message msg) {
+        gotoLoginScreen();
+        return true;
+    }
+
+    private void gotoLoginScreen() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
+    private void gotoMainScreen() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
-        return true;
     }
 }

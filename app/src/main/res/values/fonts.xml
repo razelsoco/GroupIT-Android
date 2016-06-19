@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="font_avenirltpro_book">fonts/AvenirLTPro-Book.ttf</string>
+    <string name="font_avenirltpro_heavy">fonts/AvenirLTPro-Heavy.ttf</string>
+    <string name="font_avenirltpro_light">fonts/AvenirLTPro-Light.ttf</string>
+    <string name="font_avenirltpro_medium">fonts/AvenirLTPro-Medium.ttf</string>
+    <string name="font_avenirltpro_roman">fonts/AvenirLTPro-Roman.ttf</string>
+    <string name="font_avenirltpro_black">fonts/AvenirLTPro-Black.ttf</string>
+
+</resources>
