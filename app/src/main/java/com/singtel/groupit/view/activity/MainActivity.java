@@ -1,7 +1,8 @@
-package com.singtel.groupit;
+package com.singtel.groupit.view.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import com.singtel.groupit.R;
 
 public class MainActivity extends BaseActivity {
 

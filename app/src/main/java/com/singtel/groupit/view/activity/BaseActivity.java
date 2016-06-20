@@ -1,4 +1,4 @@
-package com.singtel.groupit;
+package com.singtel.groupit.view.activity;
 
 import android.support.v4.app.FragmentActivity;
 

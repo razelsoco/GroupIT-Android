@@ -1,9 +1,11 @@
-package com.singtel.groupit;
+package com.singtel.groupit.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import com.singtel.groupit.R;
 
 public class SplashActivity extends BaseActivity
     implements Handler.Callback
