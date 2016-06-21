@@ -1,6 +1,42 @@
 <resources>
     <string name="app_name">GroupIT</string>
 
+    // commons
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="edit">Edit</string>
+    <string name="clear">Clear</string>
+    <string name="clear_all">Clear All</string>
+    <string name="submit">Submit</string>
+    <string name="done">Done</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="close">Close</string>
+    <string name="confirm">Confirm</string>
+    <string name="feedback">Feedback</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="not_now">Not Now</string>
+    <string name="restore">Restore</string>
+    <string name="agree">Agree</string>
+
+
+    // dialogs
+    <string name="loading">Loading&#8230;</string>
+    <string name="saving">Saving&#8230;</string>
+    <string name="please_wait">Please wait&#8230;</string>
+    <string name="signing_in">Signing in&#8230;</string>
+    <string name="generic_error_msg_title">Oops!</string>
+    <string name="generic_error_msg">We\'re having trouble completing your request. Please try again.</string>
+
+    <string name="internet_connection_problem_title">Internet connection problem</string>
+    <string name="internet_connection_problem_message">You currently have no internet connection. Please check your network / Wi-Fi connection and try again.</string>
+
+
     // login screen
     <string name="email">Email</string>
     <string name="password">Password</string>

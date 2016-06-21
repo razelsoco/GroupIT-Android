@@ -1,11 +1,35 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="NoActionModeCustomization">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="NoActionModeCustomization" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">true</item>
+        <!--<item name="android:actionBarStyle">@style/actionbar_transparent_ActionBar</item>-->
+        <!--<item name="android:windowActionBarOverlay">true</item>-->
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--<item name="android:listViewStyle">@style/ListViewStyle</item>-->
+        <!--<item name="android:divider">@drawable/transparent_1px</item>-->
+    </style>
+
+    <!--<style name="ListViewStyle" parent="@android:style/Widget.ListView">-->
+        <!--<item name="android:listSelector">@drawable/bg_article_cell</item>-->
+    <!--</style>-->
+
+    <style name="actionbar_transparent_ActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:progressBarStyle">@style/aurora_actionbar_ProgressBar</item>
+    </style>
+
+    <style name="aurora_actionbar_ProgressBar" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_actionbar</item>
     </style>
 
 </resources>
