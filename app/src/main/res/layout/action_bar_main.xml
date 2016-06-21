@@ -6,14 +6,16 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/action_bar_size"
-    android:layout_margin="@dimen/space_none"
     android:background="?attr/colorPrimary"
-    android:padding="@dimen/space_none">
+    android:padding="@dimen/space_none"
+    app:contentInsetStart="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetEnd="0dp"
+    app:contentInsetRight="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/space_none"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         tools:ignore="MissingPrefix">
