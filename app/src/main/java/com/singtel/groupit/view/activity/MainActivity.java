@@ -49,17 +49,6 @@ public class MainActivity extends SlidingActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Set up the action bar to show a dropdown list.
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-
-//        View customNav = LayoutInflater.from(this).inflate(R.layout.action_bar_main, null);
-
-//        actionBar.setCustomView(customNav, new ActionBar.LayoutParams(Gravity.LEFT));
-        actionBar.setDisplayShowCustomEnabled(true);
-
         final View ivMenu = toolbar.findViewById(R.id.iv_action_bar_menu);
         ivMenu.setOnClickListener(new View.OnClickListener() {
 
