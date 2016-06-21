@@ -10,7 +10,6 @@
 
 
     <style name="NoActionModeCustomization" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowActionBar">true</item>
         <!--<item name="android:actionBarStyle">@style/actionbar_transparent_ActionBar</item>-->
         <!--<item name="android:windowActionBarOverlay">true</item>-->
         <!-- Light.DarkActionBar specific -->
