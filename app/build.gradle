@@ -93,6 +93,7 @@ dependencies {
     def androidSupportVersion = "23.4.0"
     compile "com.android.support:support-v4:${androidSupportVersion}"
     compile "com.android.support:appcompat-v7:${androidSupportVersion}"
+    compile "com.android.support:recyclerview-v7:$androidSupportVersion"
     compile "com.android.support.constraint:constraint-layout:1.0.0-alpha3"
 
     // libraries

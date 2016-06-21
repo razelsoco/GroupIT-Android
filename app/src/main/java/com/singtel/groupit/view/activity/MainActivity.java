@@ -5,11 +5,15 @@ import android.os.Bundle;
 import com.singtel.groupit.R;
 
 public class MainActivity extends BaseActivity {
+    @Override
+    protected int getLayoutRes() {
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
     }
 }

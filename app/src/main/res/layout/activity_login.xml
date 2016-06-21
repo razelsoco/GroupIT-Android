@@ -18,11 +18,11 @@
         android:id="@+id/iv_logo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"
-        tools:layout_editor_absoluteY="0dp"
         android:paddingBottom="@dimen/space_large"
         android:paddingTop="@dimen/space_large"
+        android:src="@drawable/logo"
         app:layout_constraintLeft_toLeftOf="@+id/activity_main"
+        app:layout_constraintTop_toTopOf="@+id/activity_main"
         app:layout_constraintRight_toRightOf="@+id/activity_main"/>
 
     <EditText
@@ -46,7 +46,7 @@
         app:fontPath="@string/font_avenirltpro_book"
         app:layout_constraintLeft_toLeftOf="@+id/activity_main"
         app:layout_constraintTop_toBottomOf="@+id/tv_email"
-        android:layout_marginTop="@dimen/space_normal"
+        android:layout_marginTop="16dp"
         app:layout_constraintRight_toRightOf="@+id/activity_main"
         app:layout_constraintHorizontal_bias="1.0"/>
 

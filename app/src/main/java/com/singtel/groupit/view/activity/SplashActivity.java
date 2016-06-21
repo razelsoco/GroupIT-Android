@@ -8,16 +8,18 @@ import android.os.Message;
 import com.singtel.groupit.R;
 
 public class SplashActivity extends BaseActivity
-    implements Handler.Callback
-{
+    implements Handler.Callback {
 
     private Handler handler;
 
     @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-
         handler = new Handler(this);
     }
 
@@ -40,7 +42,7 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public boolean handleMessage(Message msg) {
-        gotoLoginScreen();
+        gotoMainScreen();
         return true;
     }
 
