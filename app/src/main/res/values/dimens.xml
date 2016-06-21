@@ -28,8 +28,11 @@
     <dimen name="button_textSize_medium">@dimen/textSize_body</dimen>
 
 
-    <!-- action bar / navigation bar -->
-    <dimen name="action_bar_size">48dp</dimen>
+    // action bar / navigation bar
+    <dimen name="action_bar_size">@dimen/button_height_normal</dimen>
     <dimen name="padded_action_bar_size">43dp</dimen>
+    // sliding menu
+    <dimen name="shadow_width">2dp</dimen>
+    <dimen name="slidingmenu_offset">@dimen/button_height_large</dimen>
 
 </resources>

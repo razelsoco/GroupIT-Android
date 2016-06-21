@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/action_bar_size"
-    android:orientation="vertical">
+    android:layout_margin="@dimen/space_none"
+    android:background="?attr/colorPrimary"
+    android:padding="@dimen/space_none">
 
-    <ImageView
-        android:id="@+id/iv_action_bar_menu"
-        android:layout_width="@dimen/padded_action_bar_size"
-        android:layout_height="@dimen/padded_action_bar_size"
-        android:clickable="true"
-        android:scaleType="center"
-        android:src="@drawable/ic_menu" />
-
-    <com.singtel.aurora.test.custom_views.CustomTextView
-        app:fontPath="@string/font_avenirltpro_book"
-        android:id="@+id/tv_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:ellipsize="end"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/space_none"
         android:gravity="center_vertical"
-        android:padding="@dimen/space_normal"
-        android:singleLine="true"
-        android:layout_marginRight="@dimen/padded_action_bar_size"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textSize_title"
-        />
+        android:orientation="horizontal"
+        tools:ignore="MissingPrefix">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/iv_action_bar_menu"
+            android:layout_width="@dimen/padded_action_bar_size"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu"/>
+
+        <TextView
+            android:id="@+id/tv_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padded_action_bar_size"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/space_normal"
+            android:paddingRight="@dimen/space_normal"
+            android:text="title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_title"
+            app:fontPath="@string/font_avenirltpro_book"
+            />
+
+    </LinearLayout>
+</android.support.v7.widget.Toolbar>
