@@ -65,12 +65,14 @@ android {
             output.outputFile = new File(file.parent, fileName)
         }
     }
+
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
         // but continue the build even when errors are found:
         abortOnError false
     }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
@@ -80,6 +82,11 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude 'AndroidManifest.xml'
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     dexOptions {
         //incremental true // By default incremental is turned on Java compilation in 2.1.0-rc1 (2016/4/22) or later
         javaMaxHeapSize "4g"
