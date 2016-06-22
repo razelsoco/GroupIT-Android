@@ -7,18 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/action_bar_size"
     android:background="?attr/colorPrimary"
-    android:padding="@dimen/space_none"
-    app:contentInsetStart="0dp"
-    app:contentInsetLeft="0dp"
-    app:contentInsetEnd="0dp"
-    app:contentInsetRight="0dp">
+    app:contentInsetEnd="@dimen/space_none"
+    app:contentInsetLeft="@dimen/space_none"
+    app:contentInsetRight="@dimen/space_none"
+    app:contentInsetStart="@dimen/space_none"
+    tools:ignore="MissingPrefix">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        tools:ignore="MissingPrefix">
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/iv_action_bar_menu"
@@ -31,19 +29,28 @@
         <TextView
             android:id="@+id/tv_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/padded_action_bar_size"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/padded_action_bar_size"
+            android:layout_marginStart="@dimen/padded_action_bar_size"
             android:clickable="true"
             android:ellipsize="end"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:maxLines="1"
             android:paddingLeft="@dimen/space_normal"
             android:paddingRight="@dimen/space_normal"
-            android:text="title"
+            android:text="@string/main_category_title"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_title"
-            app:fontPath="@string/font_avenirltpro_book"
-            />
+            app:fontPath="@string/font_avenirltpro_book"/>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_action_bar_right"
+            android:layout_width="@dimen/padded_action_bar_size"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_dropdown"/>
+
+    </RelativeLayout>
 </android.support.v7.widget.Toolbar>

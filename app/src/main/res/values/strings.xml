@@ -37,8 +37,11 @@
     <string name="internet_connection_problem_message">You currently have no internet connection. Please check your network / Wi-Fi connection and try again.</string>
 
 
-    // login screen
+    // Login screen
     <string name="email">Email</string>
     <string name="password">Password</string>
+
+    // Main screen
+    <string name="main_category_title">Home</string>
 
 </resources>

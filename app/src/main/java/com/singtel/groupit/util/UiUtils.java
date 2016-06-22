@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -15,8 +16,10 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spannable;
@@ -29,6 +32,8 @@ import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -42,6 +47,7 @@ import java.util.Random;
 
 /**
  * Created by lanna on 6/7/16.
+ *
  */
 
 public class UiUtils {
@@ -117,6 +123,25 @@ public class UiUtils {
     /*
         Color
      */
+
+    public static final int getColor(Context context, @ColorRes int colorId) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, colorId);
+        } else {
+            return context.getResources().getColor(colorId);
+        }
+    }
+
+    public static ColorStateList getColorStateList(Context context, @ColorRes int colorId) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColorStateList(context, colorId);
+        } else {
+            return context.getResources().getColorStateList(colorId);
+        }
+    }
+
     public static int getRandomColor() {
         Random rnd = new Random();
         return rnd.nextInt() & 0x00FFFFFF | 0xFF000000;
@@ -162,6 +187,18 @@ public class UiUtils {
 
     public static float getConvertedPixels(Context context, int value) {
         return context == null ? 0 : (value * context.getResources().getDisplayMetrics().density);
+    }
+
+    /*
+        System Views
+     */
+
+    public static void setDeviceStatusBarColor(Activity context, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = context.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
     }
 
     /*

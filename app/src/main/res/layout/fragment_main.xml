@@ -2,17 +2,15 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.singtel.groupit.view.activity.MainActivity">
+    tools:ignore="MissingPrefix">
 
-    <include layout="@layout/action_bar_main"/>
-
-    <FrameLayout
-        android:id="@+id/fragment_content"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:text="This is main fragment"/>
 
 </LinearLayout>
