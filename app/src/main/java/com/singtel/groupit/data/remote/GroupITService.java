@@ -1,10 +1,11 @@
 package com.singtel.groupit.data.remote;
 
-import android.database.Observable;
 
-import java.util.List;
+import com.singtel.groupit.model.TestResponse;
 
+import retrofit2.Response;
 import retrofit2.http.GET;
+import rx.Observable;
 
 /**
  * Created by lanna on 6/20/16.
@@ -19,6 +20,6 @@ public interface GroupITService {
      * Return a list of the latest post IDs.
      */
     @GET("/main")
-    Observable<List<Long>> getTopStories();
+    Observable<Response<TestResponse>> getTopStories();
 
 }

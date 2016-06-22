@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemHomeArticleBinding;
-import com.singtel.groupit.model.Article;
+import com.singtel.groupit.model.ArticleModel;
 import com.singtel.groupit.viewmodel.ItemArticleViewModel;
 
 /**
@@ -15,7 +15,7 @@ import com.singtel.groupit.viewmodel.ItemArticleViewModel;
  *
  */
 
-public class HomeArticlesAdapter extends BaseRecyclerAdapter<Article, HomeArticlesAdapter.BindingHolder> {
+public class HomeArticlesAdapter extends BaseRecyclerAdapter<ArticleModel, HomeArticlesAdapter.BindingHolder> {
 
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {

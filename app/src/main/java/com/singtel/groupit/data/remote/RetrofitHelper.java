@@ -13,6 +13,7 @@ public class RetrofitHelper {
     public GroupITService newGroupITService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(GroupITService.ENDPOINT)
+                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(GroupITService.class);

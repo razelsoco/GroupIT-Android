@@ -1,9 +1,8 @@
 package com.singtel.groupit.viewmodel;
 
-import android.content.Context;
 import android.view.View;
 
-import com.singtel.groupit.model.Article;
+import com.singtel.groupit.model.ArticleModel;
 import com.singtel.groupit.util.LogUtils;
 
 /**
@@ -13,9 +12,9 @@ import com.singtel.groupit.util.LogUtils;
 
 public class ItemArticleViewModel {
 
-    private Article article;
+    private ArticleModel article;
 
-    public ItemArticleViewModel(Article article) {
+    public ItemArticleViewModel(ArticleModel article) {
         this.article = article;
     }
 
@@ -23,7 +22,7 @@ public class ItemArticleViewModel {
         Data Binding
      */
     public String articleTitle() {
-        return "data binding test title: " + (article == null ? "null" : article.title);
+        return "data binding test title: " + (article == null ? "null" : article.getTitle());
     }
 
     public View.OnClickListener onClickRoot() {

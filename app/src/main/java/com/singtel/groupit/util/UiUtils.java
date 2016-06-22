@@ -205,29 +205,29 @@ public class UiUtils {
         Layout / View / ViewGroup
      */
 
-    static int touchAreaAddition = (int) getConvertedPixels(GroupITApplication.getInstance(), 20);
-
-    public static void enlargeTouchArea(final View parent, final View child) {
-        parent.post(new Runnable() {
-            @Override
-            public void run() {
-                int locationChild[] = new int[2];
-                child.getLocationOnScreen(locationChild);
-
-                int locationParent[] = new int[2];
-                parent.getLocationOnScreen(locationParent);
-
-                int left = locationChild[0] - locationParent[0];
-                int top = locationChild[1] - locationParent[1];
-
-                Rect rect = new Rect(left, top, left + child.getWidth(), top + child.getHeight());
-                rect.inset(-touchAreaAddition, -touchAreaAddition);
-
-                TouchDelegate delegate = new TouchDelegate(rect, child);
-                parent.setTouchDelegate(delegate);
-            }
-        });
-    }
+//    static int touchAreaAddition = (int) getConvertedPixels(GroupITApplication.getInstance(), 20);
+//
+//    public static void enlargeTouchArea(final View parent, final View child) {
+//        parent.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                int locationChild[] = new int[2];
+//                child.getLocationOnScreen(locationChild);
+//
+//                int locationParent[] = new int[2];
+//                parent.getLocationOnScreen(locationParent);
+//
+//                int left = locationChild[0] - locationParent[0];
+//                int top = locationChild[1] - locationParent[1];
+//
+//                Rect rect = new Rect(left, top, left + child.getWidth(), top + child.getHeight());
+//                rect.inset(-touchAreaAddition, -touchAreaAddition);
+//
+//                TouchDelegate delegate = new TouchDelegate(rect, child);
+//                parent.setTouchDelegate(delegate);
+//            }
+//        });
+//    }
 
     public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
         ViewTreeObserver observer = view.getViewTreeObserver();
