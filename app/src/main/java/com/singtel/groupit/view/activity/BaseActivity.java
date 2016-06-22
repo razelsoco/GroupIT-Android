@@ -1,8 +1,11 @@
 package com.singtel.groupit.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by lanna on 6/18/16.
@@ -18,5 +21,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract int getLayoutRes();
+
+    // to apply custom font
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
 }
