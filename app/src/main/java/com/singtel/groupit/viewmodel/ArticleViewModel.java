@@ -10,11 +10,11 @@ import com.singtel.groupit.util.LogUtils;
  *
  */
 
-public class ItemArticleViewModel {
+public class ArticleViewModel {
 
     private ArticleModel article;
 
-    public ItemArticleViewModel(ArticleModel article) {
+    public ArticleViewModel(ArticleModel article) {
         this.article = article;
     }
 

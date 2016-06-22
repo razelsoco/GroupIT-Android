@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemHomeArticleBinding;
 import com.singtel.groupit.model.ArticleModel;
-import com.singtel.groupit.viewmodel.ItemArticleViewModel;
+import com.singtel.groupit.viewmodel.ArticleViewModel;
 
 /**
  * Created by lanna on 6/22/16.
@@ -29,7 +29,7 @@ public class HomeArticlesAdapter extends BaseRecyclerAdapter<ArticleModel, HomeA
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
         ItemHomeArticleBinding itemBinding = holder.binding;
-        itemBinding.setViewModel(new ItemArticleViewModel(getItem(position)));
+        itemBinding.setViewModel(new ArticleViewModel(getItem(position)));
     }
 
     /*
