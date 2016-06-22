@@ -177,15 +177,15 @@ public abstract class SlidingActivity extends BaseActivity {
      * @param addToBackStack
      * @param fragment
      */
-    protected void showMenuFragment(boolean addToBackStack, Fragment fragment) {
+    protected void showMenuFragment(Fragment fragment, boolean addToBackStack) {
         mFrag = fragment;
-        Utils.replaceMenuFragment(this, addToBackStack, mFrag, R.id.menu_frame);
+        Utils.replaceFragment(this, mFrag, R.id.menu_frame, addToBackStack);
         showMenu();
     }
 
     protected void showMenuFragment(String name, Fragment fragment) {
         mFrag = fragment;
-        Utils.replaceMenuFragment(this, name, mFrag, R.id.menu_frame);
+        Utils.replaceFragment(this, name, mFrag, R.id.menu_frame);
         showMenu();
     }
 

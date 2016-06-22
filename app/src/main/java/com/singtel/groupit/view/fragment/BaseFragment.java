@@ -21,4 +21,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract int getLayoutRes();
+
+    public boolean onBackPressed() {
+        return false;
+    }
 }
