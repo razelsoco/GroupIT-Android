@@ -11,6 +11,7 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.data.DataManager;
 import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.util.AlertHelper;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
@@ -18,6 +19,7 @@ import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
 import java.io.IOException;
 
 import butterknife.Bind;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -74,46 +76,52 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        mSubscriptions.unsubscribe();
         loadStoriesIfNetworkConnected();
     }
 
     private void loadStoriesIfNetworkConnected() {
         if (NetworkUtils.isOnline(getActivity())) {
+            swipeRefreshLayout.setRefreshing(true);
             fetchTopStories();
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+            AlertHelper.showInternetAlert(getContext(), null);
         }
     }
 
     public void fetchTopStories() {
-//        mSubscriptions.unsubscribe();
+        LogUtils.w(MainFragment.this, "fetchTopStories: ");
         mSubscriptions.add(dataManager.getTopStories()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
-                .subscribe(new Subscriber<Response<TestResponse>>() {
+                .subscribe(new Subscriber<TestResponse>() {
                     @Override
                     public void onCompleted() {
                         LogUtils.w(MainFragment.this, "fetchTopStories: onCompleted");
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
-                    public void onError(Throwable throwable) {
-                        if (throwable instanceof HttpException) {
+                    public void onError(Throwable e) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        if (e instanceof HttpException) {
                             // We had non-2XX http error
-                            LogUtils.w(MainFragment.this, "fetchTopStories: onError: We had non-2XX http error");
+                            LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+((HttpException) e).response().code());
                         }
-                        else if (throwable instanceof IOException) {
+                        else if (e instanceof IOException) {
                             // A network or conversion error happened
                             LogUtils.w(MainFragment.this, "fetchTopStories: onError: A network or conversion error happened");
                         }
 
                         // We don't know what happened. We need to simply convert to an unknown error
-                        LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+ throwable.getMessage());
+                        LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+ e.getMessage());
                     }
 
                     @Override
-                    public void onNext(Response<TestResponse> articles) {
-                        LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+ articles.body().articles);
-                        adapter.setItemsAndNotify(articles.body().articles);
+                    public void onNext(TestResponse articles) {
+                        LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+", "+ articles.articles);
+                        swipeRefreshLayout.setRefreshing(false);
+                        adapter.setItemsAndNotify(articles.articles);
                     }
                 })
         );

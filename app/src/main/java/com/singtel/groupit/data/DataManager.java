@@ -10,7 +10,6 @@ import com.singtel.groupit.model.TestResponse;
 
 import javax.inject.Inject;
 
-import retrofit2.Response;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -44,7 +43,7 @@ public class DataManager {
         return mSubscribeScheduler;
     }
 
-    public Observable<Response<TestResponse>> getTopStories() {
+    public Observable<TestResponse> getTopStories() {
         return mGroupITService.getTopStories();
     }
 

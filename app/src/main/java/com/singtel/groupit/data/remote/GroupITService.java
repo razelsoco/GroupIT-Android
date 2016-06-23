@@ -17,9 +17,9 @@ public interface GroupITService {
     String ENDPOINT = " http://demo1023649.mockable.io"; // test
 
     /**
-     * Return a list of the latest post IDs.
+     * Return a list of articles.
      */
     @GET("/main")
-    Observable<Response<TestResponse>> getTopStories();
+    Observable<TestResponse> getTopStories();
 
 }
