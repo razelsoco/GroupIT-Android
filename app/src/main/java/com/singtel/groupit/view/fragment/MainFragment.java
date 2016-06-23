@@ -14,13 +14,12 @@ import com.singtel.groupit.model.TestResponse;
 import com.singtel.groupit.util.AlertHelper;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
+import com.singtel.groupit.util.UiUtils;
 import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
 
 import java.io.IOException;
 
 import butterknife.Bind;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -51,7 +50,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new HomeArticlesAdapter();
+        adapter = new HomeArticlesAdapter(getContext());
 
         dataManager = GroupITApplication.get(getContext()).getComponent().dataManager();
         mSubscriptions = new CompositeSubscription();
@@ -69,6 +68,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new UiUtils.DividerItemDecoration(getContext(), R.drawable.vertical_divider));
         recyclerView.setAdapter(adapter);
 
         loadStoriesIfNetworkConnected();
@@ -83,22 +83,24 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
         if (NetworkUtils.isOnline(getActivity())) {
             swipeRefreshLayout.setRefreshing(true);
             fetchTopStories();
-        } else {
+        }
+        else { // no internet connection
             swipeRefreshLayout.setRefreshing(false);
             AlertHelper.showInternetAlert(getContext(), null);
         }
     }
 
     public void fetchTopStories() {
-        LogUtils.w(MainFragment.this, "fetchTopStories: ");
+        //LogUtils.w(MainFragment.this, "fetchTopStories: ");
         mSubscriptions.add(dataManager.getTopStories()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
                 .subscribe(new Subscriber<TestResponse>() {
                     @Override
                     public void onCompleted() {
-                        LogUtils.w(MainFragment.this, "fetchTopStories: onCompleted");
+                        //LogUtils.w(MainFragment.this, "fetchTopStories: onCompleted");
                         swipeRefreshLayout.setRefreshing(false);
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -119,9 +121,8 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
                     @Override
                     public void onNext(TestResponse articles) {
-                        LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+", "+ articles.articles);
-                        swipeRefreshLayout.setRefreshing(false);
-                        adapter.setItemsAndNotify(articles.articles);
+                        //LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+", "+ articles.articles);
+                        adapter.setItems(articles.articles);
                     }
                 })
         );

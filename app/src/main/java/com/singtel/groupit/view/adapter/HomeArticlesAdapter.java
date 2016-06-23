@@ -1,5 +1,6 @@
 package com.singtel.groupit.view.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,12 @@ import com.singtel.groupit.viewmodel.ArticleViewModel;
 
 public class HomeArticlesAdapter extends BaseRecyclerAdapter<ArticleModel, HomeArticlesAdapter.BindingHolder> {
 
+    private Context context;
+
+    public HomeArticlesAdapter(Context context) {
+        this.context = context;
+    }
+
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemHomeArticleBinding itemBinding = DataBindingUtil.inflate(
@@ -29,7 +36,7 @@ public class HomeArticlesAdapter extends BaseRecyclerAdapter<ArticleModel, HomeA
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
         ItemHomeArticleBinding itemBinding = holder.binding;
-        itemBinding.setViewModel(new ArticleViewModel(getItem(position)));
+        itemBinding.setViewModel(new ArticleViewModel(context, getItem(position)));
     }
 
     /*

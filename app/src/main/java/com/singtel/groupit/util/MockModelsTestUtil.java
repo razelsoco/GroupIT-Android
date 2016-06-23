@@ -25,8 +25,10 @@ public class MockModelsTestUtil {
     }
 
     public static ArticleModel createMockArticleModel() {
-        ArticleModel articleModel = new ArticleModel();
-        articleModel.setTitle(generateRandomString());
-        return articleModel;
+        return new ArticleModel(
+                generateRandomString(), generateRandomString(),
+                generateRandomString(), generateRandomString(),
+                true, false, generateRandomString()
+                );
     }
 }

@@ -24,6 +24,37 @@
     <string name="restore">Restore</string>
     <string name="agree">Agree</string>
 
+    <!-- data and time -->
+    <string name="sunday">Su</string>
+    <string name="monday">Mo</string>
+    <string name="tuesday">Tu</string>
+    <string name="wednesday">We</string>
+    <string name="thursday">Th</string>
+    <string name="friday">Fr</string>
+    <string name="saturday">Sa</string>
+
+    <string name="day_ago">\u0020day ago</string>
+    <string name="days_ago">\u0020days ago</string>
+
+    <string name="hour_ago">\u0020hr ago</string>
+    <string name="hours_ago">\u0020hrs ago</string>
+
+    <string name="minute_ago">\u0020min ago</string>
+    <string name="minutes_ago">\u0020mins ago</string>
+
+    <string name="week_ago">\u0020week ago</string>
+    <string name="weeks_ago">\u0020weeks ago</string>
+
+    <string name="now">now</string>
+
+    <string name="today">Today</string>
+    <string name="hour">Hour</string>
+    <string name="hours">Hours</string>
+    <string name="minute">Minute</string>
+    <string name="minutes">Minutes</string>
+    <string name="second">Second</string>
+    <string name="seconds">Seconds</string>
+
 
     // dialogs
     <string name="loading">Loading&#8230;</string>
