@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.singtel.groupit.data.remote.ApiCommons;
+import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.model.ArticleModel;
 import com.singtel.groupit.util.DateHelper;
 import com.singtel.groupit.util.LogUtils;

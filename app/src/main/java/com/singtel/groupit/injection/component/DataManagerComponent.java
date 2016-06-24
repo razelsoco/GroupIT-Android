@@ -1,6 +1,6 @@
 package com.singtel.groupit.injection.component;
 
-import com.singtel.groupit.data.DataManager;
+import com.singtel.groupit.DataManager;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.injection.scope.PerDataManager;
 

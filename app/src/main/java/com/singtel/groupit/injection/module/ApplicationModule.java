@@ -3,7 +3,7 @@ package com.singtel.groupit.injection.module;
 import android.app.Application;
 
 
-import com.singtel.groupit.data.DataManager;
+import com.singtel.groupit.DataManager;
 
 import javax.inject.Singleton;
 

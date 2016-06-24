@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
-import com.singtel.groupit.data.DataManager;
+import com.singtel.groupit.DataManager;
 import com.singtel.groupit.model.TestResponse;
 import com.singtel.groupit.util.AlertHelper;
 import com.singtel.groupit.util.LogUtils;

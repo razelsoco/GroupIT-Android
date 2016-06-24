@@ -1,7 +1,6 @@
 package com.singtel.groupit.injection.module;
 
-import com.singtel.groupit.data.remote.GroupITService;
-import com.singtel.groupit.data.remote.RetrofitHelper;
+import com.singtel.groupit.model.remote.GroupITService;
 import com.singtel.groupit.injection.scope.PerDataManager;
 
 import dagger.Module;
@@ -22,7 +21,7 @@ public class DataManagerModule {
     @Provides
     @PerDataManager
     GroupITService provideGroupITService() {
-        return new RetrofitHelper().newGroupITService();
+        return GroupITService.Factory.create();
     }
 
     @Provides

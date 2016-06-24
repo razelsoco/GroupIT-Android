@@ -1,4 +1,4 @@
-package com.singtel.groupit.data.remote;
+package com.singtel.groupit.model.remote;
 
 /**
  * Created by lanna on 6/23/16.

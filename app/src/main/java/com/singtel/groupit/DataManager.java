@@ -1,12 +1,11 @@
-package com.singtel.groupit.data;
+package com.singtel.groupit;
 
 import android.content.Context;
 
-import com.singtel.groupit.GroupITApplication;
-import com.singtel.groupit.data.remote.GroupITService;
 import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.remote.GroupITService;
 
 import javax.inject.Inject;
 
@@ -15,8 +14,8 @@ import rx.Scheduler;
 
 public class DataManager {
 
-    @Inject GroupITService mGroupITService;
-    @Inject Scheduler mSubscribeScheduler;
+    @Inject private GroupITService mGroupITService;
+    @Inject private Scheduler mSubscribeScheduler;
 
     public DataManager(Context context) {
         injectDependencies(context);
@@ -31,7 +30,7 @@ public class DataManager {
         mSubscribeScheduler = subscribeScheduler;
     }
 
-    protected void injectDependencies(Context context) {
+    private void injectDependencies(Context context) {
         DaggerDataManagerComponent.builder()
                 .applicationComponent(GroupITApplication.get(context).getComponent())
                 .dataManagerModule(new DataManagerModule())
