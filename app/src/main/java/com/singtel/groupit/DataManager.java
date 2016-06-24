@@ -14,8 +14,8 @@ import rx.Scheduler;
 
 public class DataManager {
 
-    @Inject private GroupITService mGroupITService;
-    @Inject private Scheduler mSubscribeScheduler;
+    @Inject GroupITService mGroupITService;
+    @Inject Scheduler mSubscribeScheduler;
 
     public DataManager(Context context) {
         injectDependencies(context);
