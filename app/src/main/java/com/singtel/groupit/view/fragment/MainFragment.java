@@ -12,6 +12,7 @@ import com.singtel.groupit.R;
 import com.singtel.groupit.DataManager;
 import com.singtel.groupit.model.TestResponse;
 import com.singtel.groupit.uiutil.AlertUtils;
+import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.uiutil.UiUtils;
@@ -68,7 +69,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new UiUtils.DividerItemDecoration(getContext(), R.drawable.vertical_divider));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), R.drawable.vertical_divider));
         recyclerView.setAdapter(adapter);
 
         loadStoriesIfNetworkConnected();

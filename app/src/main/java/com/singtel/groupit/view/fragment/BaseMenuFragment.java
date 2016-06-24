@@ -1,9 +1,6 @@
 package com.singtel.groupit.view.fragment;
 
-import android.view.View;
-import android.view.View.OnClickListener;
-
-public abstract class BaseMenuFragment extends BaseFragment implements OnClickListener {
+public abstract class BaseMenuFragment extends BaseFragment{
 
     /**
      * Called when the sliding menu is closing.
@@ -13,11 +10,7 @@ public abstract class BaseMenuFragment extends BaseFragment implements OnClickLi
 
     }
 	
-	@Override
-	public void onClick(View v) {
-
+	public void onBackPressed(){
+		getFragmentManager().popBackStack();
 	}
-
-    public void refreshData() {
-    }
 }

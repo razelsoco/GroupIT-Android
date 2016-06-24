@@ -1,5 +1,6 @@
 package com.singtel.groupit.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -7,11 +8,12 @@ import android.view.View;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.uiutil.AlertUtils;
-import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.uiutil.UiUtils;
-import com.singtel.groupit.util.Utils;
+import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.view.fragment.MenuFragment;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 /**
@@ -32,7 +34,7 @@ public class MainActivity extends SlidingActivity {
         super.onCreate(savedInstanceState);
         createCustomActionBar();
 
-        Utils.replaceFragment(this, MainFragment.newInstance(), R.id.fragment_content, false);
+        UiUtils.replaceFragment(this, MainFragment.newInstance(), R.id.fragment_content, false);
     }
 
     @Override
@@ -72,5 +74,10 @@ public class MainActivity extends SlidingActivity {
         }
 
         super.onBackPressed();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

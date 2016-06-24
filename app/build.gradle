@@ -4,6 +4,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.singtel.groupit"
         minSdkVersion 21 // from android L (5.0)
@@ -116,7 +120,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
-    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
 
     final daggerVersion = '2.0.1'
     apply plugin: 'com.neenbedankt.android-apt'

@@ -21,7 +21,11 @@ import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -149,33 +153,6 @@ public class UiUtils {
         }
     }
 
-    /*
-        Layout / View / ViewGroup
-     */
-
-//    static int touchAreaAddition = (int) getConvertedPixels(GroupITApplication.getInstance(), 20);
-//
-//    public static void enlargeTouchArea(final View parent, final View child) {
-//        parent.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                int locationChild[] = new int[2];
-//                child.getLocationOnScreen(locationChild);
-//
-//                int locationParent[] = new int[2];
-//                parent.getLocationOnScreen(locationParent);
-//
-//                int left = locationChild[0] - locationParent[0];
-//                int top = locationChild[1] - locationParent[1];
-//
-//                Rect rect = new Rect(left, top, left + child.getWidth(), top + child.getHeight());
-//                rect.inset(-touchAreaAddition, -touchAreaAddition);
-//
-//                TouchDelegate delegate = new TouchDelegate(rect, child);
-//                parent.setTouchDelegate(delegate);
-//            }
-//        });
-//    }
 
     public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
         ViewTreeObserver observer = view.getViewTreeObserver();
@@ -386,7 +363,48 @@ public class UiUtils {
     }
 
     /*
-        Recycle View
+    Fragment supports
+    */
+    public static void replaceFragment(FragmentActivity context, String tag,
+                                       Fragment f, @IdRes int containerId) {
+        context.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(
+                        android.R.anim.fade_in, android.R.anim.fade_out,
+                        android.R.anim.fade_in, android.R.anim.fade_out)
+                .addToBackStack(tag)
+                .replace(containerId, f).commit();
+    }
+
+    public static void replaceFragmentWithoutHistory(FragmentActivity context,
+                                                     Fragment f, @IdRes int containerId) {
+        context.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(
+                        android.R.anim.fade_in, android.R.anim.fade_out,
+                        android.R.anim.fade_in, android.R.anim.fade_out)
+                .replace(containerId, f).commit();
+    }
+
+    public static void replaceFragment(FragmentActivity context,
+                                       Fragment f, @IdRes int containerId, boolean addToBackStack) {
+        FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
+        ft.replace(containerId, f);
+        if (addToBackStack) {
+            ft.addToBackStack(null);
+        }
+        ft.commit();
+        context.getSupportFragmentManager().executePendingTransactions();
+    }
+
+    /**
+     * @param activity
+     * @param name     -> Sent null to pop top of stack.
+     *                 Sent a valid tag to pop till that tag is reached.
+     * @param flag     -> Either 0 or FragmentManager.POP_BACK_STACK_INCLUSIVE
      */
+    public static void popBackStack(FragmentActivity activity, String name, int flag) {
+        activity.getSupportFragmentManager().popBackStack(name, flag);
+    }
 
 }

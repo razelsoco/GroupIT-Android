@@ -3,7 +3,6 @@ package com.singtel.groupit.util;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 
 import com.singtel.groupit.R;
 
@@ -138,54 +137,5 @@ public class DateUtils {
                                                @StringRes int oneString, @StringRes int manyString) {
         return number + ((number <= 1) ? context.getString(oneString) : context.getString(manyString));
     }
-/*
-    public static boolean sameDay(Date date1, Date date2) {
-        if (date1 == null || date2 == null) {
-            return false;
-        }
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(date1);
-        cal2.setTime(date2);
-        boolean sameDay = cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
-                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
-        return sameDay;
-    }
 
-    public static boolean beforeDay(Date date1, Date date2) {
-        if (date1 == null || date2 == null) {
-            return false;
-        }
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(date1);
-        cal2.setTime(date2);
-        boolean beforeDay = cal1.get(Calendar.YEAR) < cal2.get(Calendar.YEAR)
-                || (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)&&
-                    cal1.get(Calendar.DAY_OF_YEAR) < cal2.get(Calendar.DAY_OF_YEAR)
-        );
-//        LogUtils.i("datetime", "beforeDay: " + beforeDay
-//                + " by day1: "+cal1.get(Calendar.DAY_OF_YEAR)+"/"+cal1.get(Calendar.YEAR)
-//                + " vs day2: "+cal2.get(Calendar.DAY_OF_YEAR)+"/"+cal2.get(Calendar.YEAR));
-        return beforeDay;
-    }
-
-    public static boolean afterDay(Date date1, Date date2) {
-        if (date1 == null || date2 == null) {
-            return false;
-        }
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(date1);
-        cal2.setTime(date2);
-        boolean afterDay = cal1.get(Calendar.YEAR) > cal2.get(Calendar.YEAR)
-                || (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)&&
-                cal1.get(Calendar.DAY_OF_YEAR) > cal2.get(Calendar.DAY_OF_YEAR)
-        );
-//        LogUtils.i("datetime", "afterDay: " + afterDay
-//                + " by day1: "+cal1.get(Calendar.DAY_OF_YEAR)+"/"+cal1.get(Calendar.YEAR)
-//                + " vs day2: "+cal2.get(Calendar.DAY_OF_YEAR)+"/"+cal2.get(Calendar.YEAR));
-        return afterDay;
-    }
-    //*/
 }

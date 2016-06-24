@@ -38,6 +38,8 @@
     <dimen name="shadow_width">2dp</dimen>
     <dimen name="slidingmenu_offset">@dimen/button_height_large</dimen>
 
+
     // Article item
+
 
 </resources>

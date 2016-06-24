@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.singtel.groupit.view.fragment.SettingsFragment" />
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteTwo"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_size"
+        android:background="@color/secondaryBlue">
+        <ImageView android:id="@+id/bt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/space_normal"
+            android:onClick="@{fragment::onBackClick}"/>
+        <TextView
+            style="@style/topbarTitle"
+            android:text="@string/settings"/>
+    </FrameLayout>
+    <TextView
+        style="@style/dashboardMenuItem"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_about"
+        android:drawablePadding="@dimen/space_normal"
+        android:text="@string/about"
+        android:onClick="@{fragment::onAboutClick}"/>
+
+    <TextView
+        style="@style/dashboardMenuItem"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_feedback"
+        android:drawablePadding="@dimen/space_normal"
+        android:text="@string/feedback"
+        android:onClick="@{fragment::onFeedbackClick}"/>
+
+    <TextView
+        style="@style/dashboardMenuItem"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_terms"
+        android:drawablePadding="@dimen/space_normal"
+        android:text="@string/tnc"
+        android:onClick="@{fragment::onTNCClick}"/>
+
+    <TextView
+        style="@style/dashboardMenuItem"
+        android:background="@color/white"
+        android:drawablePadding="@dimen/space_normal"
+        android:text="@string/signout"
+        android:onClick="@{fragment::onSignoutClick}"/>
+</LinearLayout>
+</layout>
