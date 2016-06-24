@@ -11,7 +11,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.singtel.groupit.R;
-import com.singtel.groupit.util.UiUtils;
+import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.util.Utils;
 import com.singtel.groupit.view.fragment.BaseMenuFragment;
 

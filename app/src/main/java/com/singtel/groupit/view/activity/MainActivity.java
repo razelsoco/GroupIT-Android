@@ -6,9 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.util.AlertHelper;
+import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.util.NetworkUtils;
-import com.singtel.groupit.util.UiUtils;
+import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.util.Utils;
 import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.view.fragment.MenuFragment;
@@ -58,7 +58,7 @@ public class MainActivity extends SlidingActivity {
                 if (NetworkUtils.isOnline(getApplicationContext())) {
                     showMenu();
                 } else {
-                    AlertHelper.showInternetAlert(getApplicationContext(), null);
+                    AlertUtils.showInternetAlert(getApplicationContext(), null);
                 }
             }
         });

@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class DateHelper {
+public class DateUtils {
 
     public static final String COMMON_SERVER_DATE_ONLY_FORMAT = "EEE, dd MMM yyyy";
     public static final String COMMON_SERVER_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z"; // format 24h
@@ -98,7 +98,7 @@ public class DateHelper {
         int DAYS_IN_WEEK = 7; // only within 24 hours.
         int MAX_WEEKS_TO_SHOW_RELAVENT_DATE = 4; // zero means show xx hours ago,
 
-        long remainder = (relevantTime / DateUtils.DAY_IN_MILLIS);
+        long remainder = (relevantTime / android.text.format.DateUtils.DAY_IN_MILLIS);
 
         // more than max weeks
         if (remainder > MAX_WEEKS_TO_SHOW_RELAVENT_DATE * DAYS_IN_WEEK) {
@@ -117,12 +117,12 @@ public class DateHelper {
             return getOneOrManyStringRes(context, remainder, R.string.day_ago, R.string.days_ago);
 
         // in hours
-        remainder = relevantTime / DateUtils.HOUR_IN_MILLIS;
+        remainder = relevantTime / android.text.format.DateUtils.HOUR_IN_MILLIS;
         if (remainder >= 1)
             return getOneOrManyStringRes(context, remainder, R.string.hour_ago, R.string.hours_ago);
 
         // in minutes
-        remainder = relevantTime / DateUtils.MINUTE_IN_MILLIS;
+        remainder = relevantTime / android.text.format.DateUtils.MINUTE_IN_MILLIS;
         if (remainder >= 1)
             return getOneOrManyStringRes(context, remainder, R.string.minute_ago, R.string.minutes_ago);
 

@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.model.ArticleModel;
-import com.singtel.groupit.util.DateHelper;
+import com.singtel.groupit.util.DateUtils;
 import com.singtel.groupit.util.LogUtils;
 
 /**
@@ -65,7 +65,7 @@ public class ArticleViewModel {
     }
 
     public String articleTime() {
-        return DateHelper.timeRecentlyElapsed(context, article.getCreatedTime());
+        return DateUtils.timeRecentlyElapsed(context, article.getCreatedTime());
     }
 
     public View.OnClickListener onClickRoot() {

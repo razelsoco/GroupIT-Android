@@ -11,10 +11,10 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.DataManager;
 import com.singtel.groupit.model.TestResponse;
-import com.singtel.groupit.util.AlertHelper;
+import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
-import com.singtel.groupit.util.UiUtils;
+import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
 
 import java.io.IOException;
@@ -86,7 +86,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
         }
         else { // no internet connection
             swipeRefreshLayout.setRefreshing(false);
-            AlertHelper.showInternetAlert(getContext(), null);
+            AlertUtils.showInternetAlert(getContext(), null);
         }
     }
 

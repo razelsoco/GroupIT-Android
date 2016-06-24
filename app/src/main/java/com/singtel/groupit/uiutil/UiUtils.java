@@ -1,4 +1,4 @@
-package com.singtel.groupit.util;
+package com.singtel.groupit.uiutil;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -44,6 +44,7 @@ import android.widget.LinearLayout;
 
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
+import com.singtel.groupit.util.LogUtils;
 
 import java.math.BigDecimal;
 import java.util.Random;
@@ -387,100 +388,5 @@ public class UiUtils {
     /*
         Recycle View
      */
-    // Custom item offset
-    public static class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
 
-        private int itemOffset;
-        private int cols;
-        private boolean hasOutSidePadding;
-
-        public ItemOffsetDecoration(int itemOffset, int cols, boolean hasOutSidePadding) {
-            this.itemOffset = itemOffset;
-            this.cols = cols;
-            this.hasOutSidePadding = hasOutSidePadding;
-        }
-
-        public ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId,
-                                    int cols, boolean hasOutSidePadding) {
-            this(context.getResources().getDimensionPixelSize(itemOffsetId), cols, hasOutSidePadding);
-        }
-
-        public ItemOffsetDecoration(int itemOffset, boolean hasOutSidePadding) {
-            this(itemOffset, 1, hasOutSidePadding);
-        }
-
-        public ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId, boolean hasOutSidePadding) {
-            this(context, itemOffsetId, 1, hasOutSidePadding);
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            int position = parent.getChildAdapterPosition(view);
-            int colIndex = position % cols;
-            int rowIndex = position / cols;
-
-            // reset data
-//            outRect.left = outRect.top = 0;
-
-            // item at left or right side
-            if (colIndex < cols - 1 // others except right
-                    || (hasOutSidePadding && colIndex == cols - 1) // include right if required
-                    ) {
-                outRect.right = itemOffset;
-            }
-
-            // item at top or bottom side
-            if (rowIndex > 0 // others except top
-                    || (hasOutSidePadding && rowIndex == 0) // include top if required
-                    ) {
-                outRect.top = itemOffset;
-            }
-
-//            LogUtils.i(this, "getItemOffsets: pos:" + position// + ", outside:" + hasOutSidePadding
-//                    + ", row:" + rowIndex + ", col:" + colIndex
-//                    + " ->ltrb:(" + outRect.left + "," + outRect.top + "-" + outRect.right + "," + outRect.bottom + ")");
-        }
-    }
-
-    public static class DividerItemDecoration extends RecyclerView.ItemDecoration {
-        private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
-
-        private Drawable mDivider;
-
-        /**
-         * Default divider will be used
-         */
-        public DividerItemDecoration(Context context) {
-            final TypedArray styledAttributes = context.obtainStyledAttributes(ATTRS);
-            mDivider = styledAttributes.getDrawable(0);
-            styledAttributes.recycle();
-        }
-
-        /**
-         * Custom divider will be used
-         */
-        public DividerItemDecoration(Context context, @DrawableRes int resId) {
-            mDivider = ContextCompat.getDrawable(context, resId);
-        }
-
-        @Override
-        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-            int left = parent.getPaddingLeft();
-            int right = parent.getWidth() - parent.getPaddingRight();
-
-            int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View child = parent.getChildAt(i);
-
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-
-                int top = child.getBottom() + params.bottomMargin;
-                int bottom = top + mDivider.getIntrinsicHeight();
-
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(c);
-            }
-        }
-    }
 }
