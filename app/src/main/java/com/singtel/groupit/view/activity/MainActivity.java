@@ -1,5 +1,6 @@
 package com.singtel.groupit.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,8 @@ import com.singtel.groupit.util.AlertHelper;
 import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.util.UiUtils;
 import com.singtel.groupit.view.fragment.MenuFragment;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 /**
@@ -72,5 +75,10 @@ public class MainActivity extends SlidingActivity {
         }
 
         super.onBackPressed();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

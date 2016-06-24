@@ -4,6 +4,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.singtel.groupit"
         minSdkVersion 21 // from android L (5.0)
@@ -107,6 +111,7 @@ dependencies {
     def retrofitVersion = "2.1.0"
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile 'io.reactivex:rxandroid:1.2.1'
 
     // test framework
     testCompile 'junit:junit:4.12'

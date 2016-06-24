@@ -1,16 +1,10 @@
 package com.singtel.groupit.view.fragment;
 
 import android.support.v4.app.Fragment;
-import android.view.View;
-import android.view.View.OnClickListener;
-
+import com.singtel.groupit.R;
 import com.singtel.groupit.util.Utils;
 
-public abstract class BaseMenuFragment extends BaseFragment implements OnClickListener {
-
-//	public static final String SIGN_IN = "Sign In";
-//	public static final String EDIT = "Edit";
-
+public abstract class BaseMenuFragment extends BaseFragment{
 
 	/**
 	 * Convinience method to replace fragment.
@@ -19,8 +13,8 @@ public abstract class BaseMenuFragment extends BaseFragment implements OnClickLi
 	 * @param f
 	 */
 
-    public void replaceFragment(String name, Fragment f, int containerId) {
-        Utils.replaceMenuFragment(getActivity(), name, f, containerId);
+    public void replaceMenuFragment(String name, Fragment f) {
+        Utils.replaceMenuFragment(getActivity(), name, f, R.id.menu_frame);
     }
 
 	/**
@@ -32,24 +26,12 @@ public abstract class BaseMenuFragment extends BaseFragment implements OnClickLi
 	public void popBackStack(String name, int flag) {
 		Utils.popBackStack(getActivity(), name, flag);
 	}
-	
-	public boolean onBackPressed() {
-		return false;
-	}
 
-    /**
-     * Called when the sliding menu is closing.
-     * Called by the @SlidingActivity class.
-     */
-    public void onMenuClosing() {
-
-    }
-	
-	@Override
-	public void onClick(View v) {
+	public void onMenuClosing(){
 
 	}
 
-    public void refreshData() {
-    }
+	public void onBackPressed(){
+		getFragmentManager().popBackStack();
+	}
 }

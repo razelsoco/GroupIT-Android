@@ -3,6 +3,7 @@ package com.singtel.groupit.view.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -34,15 +35,6 @@ public abstract class SlidingActivity extends BaseActivity {
             showLoadingProfile(savedInstanceState.getBoolean("loadingProfile", false));
         }
 
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                Fragment frag = getSupportFragmentManager().findFragmentById(R.id.menu_frame);
-                if (frag instanceof BaseMenuFragment) {
-                    ((BaseMenuFragment) frag).refreshData();
-                }
-            }
-        });
     }
 
     @Override
@@ -111,7 +103,7 @@ public abstract class SlidingActivity extends BaseActivity {
                     //Uncomment the 2 lines below in the event that in the future, the content part of the screen also uses the back stack.
                     //The 2 lines below, when u figure out a solution to the statement in the <> below,
                     //will result in the popping of all menu fragments when the menu is closed.
-//						&& 
+//						&&
 //						getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount()-1).getId() == <figure out a way to differentiate menu fragments with content fragments>){
 //					LogUtils.d("pop back stack "+getSupportFragmentManager().getBackStackEntryCount());
                     getSupportFragmentManager().popBackStackImmediate();
@@ -211,4 +203,16 @@ public abstract class SlidingActivity extends BaseActivity {
         return mDrawer.isMenuShowing();
     }
 
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+            if( count > 0) {
+                getSupportFragmentManager().popBackStack();
+                return true;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }

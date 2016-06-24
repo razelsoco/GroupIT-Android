@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#FFF</color>
-
+    <color name="whiteTwo">#e6e6e6</color>
+    <color name="secondaryBlue">#0f95b3</color>
 </resources>

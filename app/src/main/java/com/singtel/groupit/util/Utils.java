@@ -146,13 +146,16 @@ public class Utils {
 
     public static void replaceMenuFragment(FragmentActivity context, boolean addToBackStack,
                                            Fragment f, @IdRes int containerId) {
-        FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
-        ft.replace(containerId, f);
-        if (addToBackStack) {
-            ft.addToBackStack(null);
-        }
-        ft.commit();
-        context.getSupportFragmentManager().executePendingTransactions();
+        FragmentTransaction ft = context.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(
+                        android.R.anim.fade_in, android.R.anim.fade_out,
+                        android.R.anim.fade_in, android.R.anim.fade_out);
+
+                if(addToBackStack)
+                  ft.addToBackStack(null);
+
+                ft.replace(containerId, f).commit();
     }
 
     /**
