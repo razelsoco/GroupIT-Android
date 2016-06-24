@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.ArticleViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{viewModel.onClickRoot()}"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_normal"
+        android:paddingLeft="@dimen/space_medium"
+        android:paddingTop="@dimen/space_normal"
+        tools:ignore="MissingPrefix">
+
+        <ImageView
+            android:id="@+id/iv_caret_right"
+            android:layout_width="@dimen/space_double"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/space_none"
+            android:src="@drawable/ic_caret_right"
+            android:scaleType="fitStart"
+            />
+
+        <ImageView
+            android:id="@+id/iv_need_read"
+            android:layout_width="@dimen/space_double"
+            android:layout_height="@dimen/space_double"
+            android:layout_toLeftOf="@id/iv_caret_right"
+            android:src="@drawable/selector_ic_need_read"
+            android:visibility="@{viewModel.articleNeedReadVisible()}"
+            app:readState="@{viewModel.articleIsReaded()}"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/ArticleTextView"
+            fontPath="@string/font_avenirltpro_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/space_min"
+            android:layout_toLeftOf="@id/iv_need_read"
+            android:text="@{viewModel.articleTitle()}"
+            android:textSize="@dimen/textSize_title"
+            />
+
+        <TextView
+            android:id="@+id/tv_category"
+            style="@style/ArticleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="@dimen/space_small"
+            android:background="@{viewModel.articleCategoryBGColor()}"
+            android:paddingLeft="@dimen/space_small"
+            android:paddingRight="@dimen/space_small"
+            android:text="@{viewModel.articleCategory()}"
+            android:textColor="@color/white"
+            android:visibility="@{viewModel.articleCategoryVisible()}"
+            />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/ArticleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_category"
+            android:layout_marginTop="@dimen/space_small"
+            android:layout_toLeftOf="@id/iv_need_read"
+            android:paddingRight="@dimen/space_min"
+            android:maxLines="2"
+            android:text="@{viewModel.articleContent()}"
+            />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/ArticleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_marginTop="@dimen/space_small"
+            android:layout_toLeftOf="@id/iv_need_read"
+            android:paddingRight="@dimen/space_min"
+            android:maxLines="1"
+            android:textColor="@color/greyishBrown"
+            android:text="@{viewModel.articleTime()}"
+            />
+
+    </RelativeLayout>
+</layout>

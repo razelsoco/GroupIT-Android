@@ -6,7 +6,9 @@
     <dimen name="space_none">0dp</dimen>
     <dimen name="space_min">4dp</dimen>
     <dimen name="space_small">8dp</dimen>
+    <dimen name="space_medium">10dp</dimen>
     <dimen name="space_normal">16dp</dimen>
+    <dimen name="space_double">20dp</dimen>
     <dimen name="space_large">24dp</dimen>
     <dimen name="space_xlarge">32dp</dimen>
 
@@ -31,9 +33,13 @@
     // action bar / navigation bar
     <dimen name="action_bar_size">@dimen/button_height_normal</dimen>
     <dimen name="padded_action_bar_size">43dp</dimen>
+
     // sliding menu
     <dimen name="shadow_width">2dp</dimen>
     <dimen name="slidingmenu_offset">@dimen/button_height_large</dimen>
+
+
+    // Article item
 
 
 </resources>

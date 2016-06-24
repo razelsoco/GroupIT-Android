@@ -3,17 +3,14 @@ package com.singtel.groupit.view.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.util.AlertHelper;
+import com.singtel.groupit.uiutil.AlertUtils;
+import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.util.NetworkUtils;
-import com.singtel.groupit.util.UiUtils;
+import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.view.fragment.MenuFragment;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -28,7 +25,7 @@ public class MainActivity extends SlidingActivity {
 
     @Override
     protected int getLayoutRes() {
-        requestWindowFeature(Window.FEATURE_ACTION_BAR);
+//        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         return R.layout.activity_main;
     }
 
@@ -36,6 +33,8 @@ public class MainActivity extends SlidingActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createCustomActionBar();
+
+        UiUtils.replaceFragment(this, MainFragment.newInstance(), R.id.fragment_content, false);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class MainActivity extends SlidingActivity {
                 if (NetworkUtils.isOnline(getApplicationContext())) {
                     showMenu();
                 } else {
-                    AlertHelper.showInternetAlert(getApplicationContext(), null);
+                    AlertUtils.showInternetAlert(getApplicationContext(), null);
                 }
             }
         });

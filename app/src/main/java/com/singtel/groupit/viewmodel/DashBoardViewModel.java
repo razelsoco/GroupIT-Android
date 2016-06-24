@@ -4,7 +4,8 @@ import android.databinding.ObservableField;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.singtel.groupit.view.fragment.BaseMenuFragment;
+import com.singtel.groupit.R;
+import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.view.fragment.NotesFragment;
 import com.singtel.groupit.view.fragment.SettingsFragment;
 
@@ -24,11 +25,11 @@ public class DashBoardViewModel {
     }
 
     public void onNotesClick(View view){
-        ((BaseMenuFragment)this.mFragment).replaceMenuFragment(NotesFragment.class.getName(), NotesFragment.newInstance());
+        UiUtils.replaceFragment(mFragment.getActivity(), NotesFragment.class.getName(), NotesFragment.newInstance(), R.id.menu_frame);
     }
 
     public void onSettingsClick(View view){
-        ((BaseMenuFragment)this.mFragment).replaceMenuFragment(SettingsFragment.class.getName(), SettingsFragment.newInstance());
+        UiUtils.replaceFragment(mFragment.getActivity(), SettingsFragment.class.getName(), SettingsFragment.newInstance(), R.id.menu_frame);
     }
 
 }

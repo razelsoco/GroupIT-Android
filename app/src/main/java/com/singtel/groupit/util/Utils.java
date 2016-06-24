@@ -95,78 +95,6 @@ public class Utils {
     }
 
 
-    public static <T> void initLoader(final int loaderId, final Bundle args,
-                                      final LoaderManager.LoaderCallbacks<T> callbacks, final LoaderManager loaderManager) {
-
-        final Loader<T> loader = loaderManager.getLoader(loaderId);
-        if (loader != null && loader.isReset()) {
-            loaderManager.restartLoader(loaderId, args, callbacks);
-        } else {
-            loaderManager.initLoader(loaderId, args, callbacks);
-        }
-    }
-
-    public static int countItemsNotEmpty(List<String> items) {
-        if (items == null || items.size() == 0) {
-            return 0;
-        }
-
-        int count = items.size();
-        for (String item : items) {
-            if (TextUtils.isEmpty(item)) {
-                count--;
-            }
-        }
-        return count;
-    }
-
-    /*
-        Fragment supports
-     */
-    public static void replaceMenuFragment(FragmentActivity context, String tag,
-                                           Fragment f, @IdRes int containerId) {
-        context.getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        android.R.anim.fade_in, android.R.anim.fade_out,
-                        android.R.anim.fade_in, android.R.anim.fade_out)
-                .addToBackStack(tag)
-                .replace(containerId, f).commit();
-    }
-
-    public static void replaceFragmentWithoutHistory(FragmentActivity context,
-                                                     Fragment f, @IdRes int containerId) {
-        context.getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        android.R.anim.fade_in, android.R.anim.fade_out,
-                        android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(containerId, f).commit();
-    }
-
-    public static void replaceMenuFragment(FragmentActivity context, boolean addToBackStack,
-                                           Fragment f, @IdRes int containerId) {
-        FragmentTransaction ft = context.getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        android.R.anim.fade_in, android.R.anim.fade_out,
-                        android.R.anim.fade_in, android.R.anim.fade_out);
-
-                if(addToBackStack)
-                  ft.addToBackStack(null);
-
-                ft.replace(containerId, f).commit();
-    }
-
-    /**
-     * @param activity
-     * @param name     -> Sent null to pop top of stack.
-     *                 Sent a valid tag to pop till that tag is reached.
-     * @param flag     -> Either 0 or FragmentManager.POP_BACK_STACK_INCLUSIVE
-     */
-    public static void popBackStack(FragmentActivity activity, String name, int flag) {
-        activity.getSupportFragmentManager().popBackStack(name, flag);
-    }
 
     public static boolean isInIntegerArray(int key, ArrayList<Integer> mustMatchList) {
         boolean isInMustMatchList = false;
@@ -177,74 +105,6 @@ public class Utils {
             }
         }
         return isInMustMatchList;
-    }
-
-    /**
-     * Give it 2 array of integers. It will return the smallest index in 'choices' that is not in the blacklist.
-     * Returns -1 if no match is found.
-     *
-     * @param choices
-     * @param blacklist
-     * @return
-     */
-    public static int getFirstIntThatIsntInBlackList(ArrayList<Integer> choices, ArrayList<Integer> blacklist) {
-
-        int chosenInt = 0;
-        boolean idToAvoid = false;
-        //Create a loop to go through all category id options returned by the article
-        for (int i = 0; i < choices.size(); i++) {
-            idToAvoid = false; //Reset flag since next id selected
-            //Pick one of them
-            chosenInt = choices.get(i);
-            //Check if its inside the list to avoid
-            for (int k = 0; k < blacklist.size(); k++) {
-                //If it is, we throw a flag
-                if (chosenInt == blacklist.get(k)) {
-                    idToAvoid = true;
-                    break;
-                }
-            }
-            //If the flag is false, it means we found a valid id.
-            //If flag is true, it means we have to loop again.
-            if (!idToAvoid)
-                break;
-            else {
-                //Reset for next loop. If all the categories this
-                //article is in is within the list to avoid, then
-                //we will chosenCategoryId will be 0
-                chosenInt = -1;
-            }
-        }
-
-        return chosenInt;
-    }
-
-    public static Object newInstance(Class clazz) {
-        if (clazz == null) {
-            return null;
-        }
-
-        Constructor[] ctors = clazz.getDeclaredConstructors();
-        Constructor ctor = null;
-        for (int i = 0; i < ctors.length; i++) {
-            ctor = ctors[i];
-            if (ctor.getGenericParameterTypes().length == 0)
-                break;
-        }
-
-        try {
-            ctor.setAccessible(true);
-            return ctor.newInstance();
-
-            // production code should handle these exceptions more gracefully
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static String convertArrayToString(List<String> list) {
@@ -280,29 +140,6 @@ public class Utils {
         return text == null ? "" : text;
     }
 
-    public static boolean hasData(String... array) {
-        if (array == null || array.length == 0) {
-            return false;
-        }
 
-        for (String a : array) {
-            if (!TextUtils.isEmpty(a)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public static boolean hasData(Collection<String> list) {
-        if (list == null || list.size() == 0) {
-            return false;
-        }
-
-        for (String item : list) {
-            if (!TextUtils.isEmpty(item) && !"0".equals(item)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
