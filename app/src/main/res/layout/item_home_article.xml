@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_category"
             android:layout_marginTop="@dimen/space_small"
-            android:layout_toLeftOf="@id/iv_caret_right"
+            android:layout_toLeftOf="@id/iv_need_read"
             android:paddingRight="@dimen/space_min"
             android:maxLines="2"
             android:text="@{viewModel.articleContent()}"
@@ -89,9 +89,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_content"
             android:layout_marginTop="@dimen/space_small"
-            android:layout_toLeftOf="@id/iv_caret_right"
+            android:layout_toLeftOf="@id/iv_need_read"
             android:paddingRight="@dimen/space_min"
             android:maxLines="1"
+            android:textColor="@color/greyishBrown"
             android:text="@{viewModel.articleTime()}"
             />
 

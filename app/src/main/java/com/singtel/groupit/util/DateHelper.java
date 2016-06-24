@@ -90,7 +90,7 @@ public class DateHelper {
             return "";
         }
 
-        long relevantTime = System.currentTimeMillis() - (timeStamp * 1000);
+        long relevantTime = System.currentTimeMillis() - timeStamp;
         if (relevantTime < 0) {
             return "";
         }
@@ -119,12 +119,12 @@ public class DateHelper {
         // in hours
         remainder = relevantTime / DateUtils.HOUR_IN_MILLIS;
         if (remainder >= 1)
-            getOneOrManyStringRes(context, remainder, R.string.hour_ago, R.string.hours_ago);
+            return getOneOrManyStringRes(context, remainder, R.string.hour_ago, R.string.hours_ago);
 
         // in minutes
         remainder = relevantTime / DateUtils.MINUTE_IN_MILLIS;
         if (remainder >= 1)
-            getOneOrManyStringRes(context, remainder, R.string.minute_ago, R.string.minutes_ago);
+            return getOneOrManyStringRes(context, remainder, R.string.minute_ago, R.string.minutes_ago);
 
         // seconds / just now / recently / ...
         return context.getString(R.string.now);

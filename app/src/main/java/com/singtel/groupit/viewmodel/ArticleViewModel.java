@@ -52,7 +52,7 @@ public class ArticleViewModel {
     public int articleNeedReadVisible() {
         return article.isNeedRead()
                 ? View.VISIBLE
-                : View.GONE;
+                : View.INVISIBLE;
     }
 
     @BindingAdapter("readState")

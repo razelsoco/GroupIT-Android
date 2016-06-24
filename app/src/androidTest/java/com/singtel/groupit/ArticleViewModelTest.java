@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static junit.framework.Assert.assertEquals;
 
@@ -47,7 +48,7 @@ public class ArticleViewModelTest {
         assertEquals(articleViewModel.articleCategory(), article.getCategory());
         assertEquals(articleViewModel.articleCategoryBGColor(), Color.TRANSPARENT);
         assertEquals(articleViewModel.articleCategoryVisible(), TextUtils.isEmpty(article.getCategory()) ? GONE : VISIBLE);
-        assertEquals(articleViewModel.articleNeedReadVisible(), article.isNeedRead() ? VISIBLE : GONE);
+        assertEquals(articleViewModel.articleNeedReadVisible(), article.isNeedRead() ? VISIBLE : INVISIBLE);
         assertEquals(articleViewModel.articleIsReaded(), article.isReaded());
     }
 }
