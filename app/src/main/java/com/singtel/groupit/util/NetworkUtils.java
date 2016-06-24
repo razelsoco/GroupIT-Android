@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
-import com.singtel.groupit.model.APIStatusCode;
+import com.singtel.groupit.model.remote.ApiStatusCode;
 import com.singtel.groupit.model.Response;
 
 import java.net.MalformedURLException;
@@ -26,14 +26,14 @@ public class NetworkUtils {
 	public static boolean statusOK(Response res) {
 		if(res == null) return false;
 		if(res.getStatus() == null) return false;
-		if(res.getStatus().getCode() == APIStatusCode.STATUS_OK || res.getStatus().getCode() == APIStatusCode.STATUS_CREATED) return true;
+		if(res.getStatus().getCode() == ApiStatusCode.STATUS_OK || res.getStatus().getCode() == ApiStatusCode.STATUS_CREATED) return true;
 		return false;
 	}
 	
 	public static boolean deviceStatusOK(Response res) {
 		if(res == null) return false;
 		if(res.getStatus() == null) return false;
-		if(res.getStatus().getCode() == APIStatusCode.STATUS_OK || res.getStatus().getCode() == APIStatusCode.STATUS_DEVICE_ALREADY_REGISTERED || res.getStatus().getCode() == APIStatusCode.STATUS_CREATED) return true;
+		if(res.getStatus().getCode() == ApiStatusCode.STATUS_OK || res.getStatus().getCode() == ApiStatusCode.STATUS_DEVICE_ALREADY_REGISTERED || res.getStatus().getCode() == ApiStatusCode.STATUS_CREATED) return true;
 		return false;
 	}
 

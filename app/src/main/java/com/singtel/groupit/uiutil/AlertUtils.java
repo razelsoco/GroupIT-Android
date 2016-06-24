@@ -1,4 +1,4 @@
-package com.singtel.groupit.util;
+package com.singtel.groupit.uiutil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,9 +7,10 @@ import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 
 import com.singtel.groupit.R;
+import com.singtel.groupit.util.NetworkUtils;
 
 
-public class AlertHelper {
+public class AlertUtils {
 
     public static void showAlert(Context context,
                                  String title, String message,

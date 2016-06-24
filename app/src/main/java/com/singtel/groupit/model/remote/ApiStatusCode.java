@@ -1,6 +1,6 @@
-package com.singtel.groupit.model;
+package com.singtel.groupit.model.remote;
 
-public interface APIStatusCode {
+public interface ApiStatusCode {
 	public static final int STATE_STARTED = 1;
 	public static final int STATE_INTERNET_CONNECTED = 2;
 	public static final int STATE_INTERNET_NOT_CONNECTED = 3;

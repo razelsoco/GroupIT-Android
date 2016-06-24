@@ -1,4 +1,4 @@
-package com.singtel.groupit.util;
+package com.singtel.groupit.uiutil;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -6,17 +6,23 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spannable;
@@ -29,6 +35,8 @@ import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -36,71 +44,17 @@ import android.widget.LinearLayout;
 
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
+import com.singtel.groupit.util.LogUtils;
 
 import java.math.BigDecimal;
 import java.util.Random;
 
 /**
  * Created by lanna on 6/7/16.
+ *
  */
 
 public class UiUtils {
-
-    // Custom item offset
-    public static class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
-
-        private int itemOffset;
-        private int cols;
-        private boolean hasOutSidePadding;
-
-        public ItemOffsetDecoration(int itemOffset, int cols, boolean hasOutSidePadding) {
-            this.itemOffset = itemOffset;
-            this.cols = cols;
-            this.hasOutSidePadding = hasOutSidePadding;
-        }
-
-        public ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId,
-                                    int cols, boolean hasOutSidePadding) {
-            this(context.getResources().getDimensionPixelSize(itemOffsetId), cols, hasOutSidePadding);
-        }
-
-        public ItemOffsetDecoration(int itemOffset, boolean hasOutSidePadding) {
-            this(itemOffset, 1, hasOutSidePadding);
-        }
-
-        public ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId, boolean hasOutSidePadding) {
-            this(context, itemOffsetId, 1, hasOutSidePadding);
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            int position = parent.getChildAdapterPosition(view);
-            int colIndex = position % cols;
-            int rowIndex = position / cols;
-
-            // reset data
-//            outRect.left = outRect.top = 0;
-
-            // item at left or right side
-            if (colIndex < cols - 1 // others except right
-                    || (hasOutSidePadding && colIndex == cols - 1) // include right if required
-                    ) {
-                outRect.right = itemOffset;
-            }
-
-            // item at top or bottom side
-            if (rowIndex > 0 // others except top
-                    || (hasOutSidePadding && rowIndex == 0) // include top if required
-                    ) {
-                outRect.top = itemOffset;
-            }
-
-//            LogUtils.i(this, "getItemOffsets: pos:" + position// + ", outside:" + hasOutSidePadding
-//                    + ", row:" + rowIndex + ", col:" + colIndex
-//                    + " ->ltrb:(" + outRect.left + "," + outRect.top + "-" + outRect.right + "," + outRect.bottom + ")");
-        }
-    }
 
     /*
         Keyboard
@@ -117,6 +71,25 @@ public class UiUtils {
     /*
         Color
      */
+
+    public static final int getColor(Context context, @ColorRes int colorId) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, colorId);
+        } else {
+            return context.getResources().getColor(colorId);
+        }
+    }
+
+    public static ColorStateList getColorStateList(Context context, @ColorRes int colorId) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColorStateList(context, colorId);
+        } else {
+            return context.getResources().getColorStateList(colorId);
+        }
+    }
+
     public static int getRandomColor() {
         Random rnd = new Random();
         return rnd.nextInt() & 0x00FFFFFF | 0xFF000000;
@@ -165,32 +138,44 @@ public class UiUtils {
     }
 
     /*
+        System Views
+     */
+
+    public static void setDeviceStatusBarColor(Activity context, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = context.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
+    }
+
+    /*
         Layout / View / ViewGroup
      */
 
-    static int touchAreaAddition = (int) getConvertedPixels(GroupITApplication.getInstance(), 20);
-
-    public static void enlargeTouchArea(final View parent, final View child) {
-        parent.post(new Runnable() {
-            @Override
-            public void run() {
-                int locationChild[] = new int[2];
-                child.getLocationOnScreen(locationChild);
-
-                int locationParent[] = new int[2];
-                parent.getLocationOnScreen(locationParent);
-
-                int left = locationChild[0] - locationParent[0];
-                int top = locationChild[1] - locationParent[1];
-
-                Rect rect = new Rect(left, top, left + child.getWidth(), top + child.getHeight());
-                rect.inset(-touchAreaAddition, -touchAreaAddition);
-
-                TouchDelegate delegate = new TouchDelegate(rect, child);
-                parent.setTouchDelegate(delegate);
-            }
-        });
-    }
+//    static int touchAreaAddition = (int) getConvertedPixels(GroupITApplication.getInstance(), 20);
+//
+//    public static void enlargeTouchArea(final View parent, final View child) {
+//        parent.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                int locationChild[] = new int[2];
+//                child.getLocationOnScreen(locationChild);
+//
+//                int locationParent[] = new int[2];
+//                parent.getLocationOnScreen(locationParent);
+//
+//                int left = locationChild[0] - locationParent[0];
+//                int top = locationChild[1] - locationParent[1];
+//
+//                Rect rect = new Rect(left, top, left + child.getWidth(), top + child.getHeight());
+//                rect.inset(-touchAreaAddition, -touchAreaAddition);
+//
+//                TouchDelegate delegate = new TouchDelegate(rect, child);
+//                parent.setTouchDelegate(delegate);
+//            }
+//        });
+//    }
 
     public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
         ViewTreeObserver observer = view.getViewTreeObserver();
@@ -399,4 +384,9 @@ public class UiUtils {
                 Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         return ss;
     }
+
+    /*
+        Recycle View
+     */
+
 }

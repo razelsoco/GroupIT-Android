@@ -65,12 +65,14 @@ android {
             output.outputFile = new File(file.parent, fileName)
         }
     }
+
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
         // but continue the build even when errors are found:
         abortOnError false
     }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
@@ -80,6 +82,11 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude 'AndroidManifest.xml'
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     dexOptions {
         //incremental true // By default incremental is turned on Java compilation in 2.1.0-rc1 (2016/4/22) or later
         javaMaxHeapSize "4g"
@@ -90,29 +97,39 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
     // android support or google play services
-    def androidSupportVersion = "23.4.0"
+    final androidSupportVersion = "23.4.0"
     compile "com.android.support:support-v4:$androidSupportVersion"
     compile "com.android.support:appcompat-v7:$androidSupportVersion"
     compile "com.android.support:recyclerview-v7:$androidSupportVersion"
     compile "com.android.support.constraint:constraint-layout:1.0.0-alpha3"
 
-
     // project libs
     compile(project(':libraryProjects:sliding_menu')) {
         exclude module: 'support-v13'
     }
+
     // libraries
-    compile 'com.jakewharton:butterknife:7.0.1'
     compile "uk.co.chrisjenx:calligraphy:2.2.0"
-    def retrofitVersion = "2.1.0"
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    final retrofitVersion = "2.1.0"
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    compile 'io.reactivex:rxandroid:1.0.1'
+
+    final daggerVersion = '2.0.1'
+    apply plugin: 'com.neenbedankt.android-apt'
+    apt "com.google.dagger:dagger-compiler:$daggerVersion" // apt command comes from the android-apt plugin
+    compile "com.google.dagger:dagger:$daggerVersion"
+    provided 'javax.annotation:jsr250-api:1.0'
 
     // test framework
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile "com.android.support:support-annotations:$androidSupportVersion"
+    androidTestApt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // others
     def leakcanaryVersion = "1.3.1"
@@ -124,6 +141,6 @@ dependencies {
 
 def getDate() {
     def date = new Date()
-    def formattedDate = date.format('yyyyMMdd')
+    def formattedDate = date.format('yyyy-MM-dd')
     return formattedDate
 }

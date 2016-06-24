@@ -123,8 +123,8 @@ public class Utils {
     /*
         Fragment supports
      */
-    public static void replaceMenuFragment(FragmentActivity context, String tag,
-                                           Fragment f, @IdRes int containerId) {
+    public static void replaceFragment(FragmentActivity context, String tag,
+                                       Fragment f, @IdRes int containerId) {
         context.getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
@@ -144,8 +144,8 @@ public class Utils {
                 .replace(containerId, f).commit();
     }
 
-    public static void replaceMenuFragment(FragmentActivity context, boolean addToBackStack,
-                                           Fragment f, @IdRes int containerId) {
+    public static void replaceFragment(FragmentActivity context,
+                                       Fragment f, @IdRes int containerId, boolean addToBackStack) {
         FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
         ft.replace(containerId, f);
         if (addToBackStack) {
