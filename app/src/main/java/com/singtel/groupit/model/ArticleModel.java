@@ -2,7 +2,6 @@ package com.singtel.groupit.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.databinding.BaseObservable;
 
 /**
  * Created by lanna on 6/22/16.
@@ -17,7 +16,7 @@ import android.databinding.BaseObservable;
  }
  */
 
-public class ArticleModel extends BaseObservable implements Parcelable {
+public class ArticleModel implements Parcelable {
 
     private String title;
     private String category;
