@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.uiutil.UiUtils;
+import com.singtel.groupit.view.activity.InboxActivity;
 import com.singtel.groupit.view.fragment.NotesFragment;
 import com.singtel.groupit.view.fragment.SettingsFragment;
 

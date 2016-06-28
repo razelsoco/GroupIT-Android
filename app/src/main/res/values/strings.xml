@@ -86,4 +86,7 @@
     // Main screen
     <string name="main_category_title">Home</string>
 
+    // Inbox screen
+    <string name="inbox_page_title">Inbox</string>
+
 </resources>

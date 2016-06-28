@@ -58,7 +58,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_main;
+        return R.layout.swipe_refresh_recycler_view;
     }
 
     @Override

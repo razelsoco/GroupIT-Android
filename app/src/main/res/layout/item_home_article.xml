@@ -28,8 +28,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/space_none"
-            android:src="@drawable/ic_caret_right"
             android:scaleType="fitStart"
+            android:src="@drawable/ic_caret_right"
             />
 
         <ImageView
@@ -48,8 +48,8 @@
             fontPath="@string/font_avenirltpro_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/space_min"
             android:layout_toLeftOf="@id/iv_need_read"
+            android:paddingRight="@dimen/space_min"
             android:text="@{viewModel.articleTitle()}"
             android:textSize="@dimen/textSize_title"
             />
@@ -62,8 +62,10 @@
             android:layout_below="@id/tv_title"
             android:layout_marginTop="@dimen/space_small"
             android:background="@{viewModel.articleCategoryBGColor()}"
+            android:paddingBottom="@dimen/space_min_extra"
             android:paddingLeft="@dimen/space_small"
             android:paddingRight="@dimen/space_small"
+            android:paddingTop="@dimen/space_min_extra"
             android:text="@{viewModel.articleCategory()}"
             android:textColor="@color/white"
             android:visibility="@{viewModel.articleCategoryVisible()}"
@@ -77,8 +79,8 @@
             android:layout_below="@id/tv_category"
             android:layout_marginTop="@dimen/space_small"
             android:layout_toLeftOf="@id/iv_need_read"
-            android:paddingRight="@dimen/space_min"
             android:maxLines="2"
+            android:paddingRight="@dimen/space_min"
             android:text="@{viewModel.articleContent()}"
             />
 
@@ -90,10 +92,10 @@
             android:layout_below="@id/tv_content"
             android:layout_marginTop="@dimen/space_small"
             android:layout_toLeftOf="@id/iv_need_read"
-            android:paddingRight="@dimen/space_min"
             android:maxLines="1"
-            android:textColor="@color/greyishBrown"
+            android:paddingRight="@dimen/space_min"
             android:text="@{viewModel.articleTime()}"
+            android:textColor="@color/greyishBrown"
             />
 
     </RelativeLayout>
