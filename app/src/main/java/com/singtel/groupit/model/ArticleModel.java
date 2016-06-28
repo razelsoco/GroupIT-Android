@@ -18,6 +18,7 @@ import android.os.Parcelable;
 
 public class ArticleModel implements Parcelable {
 
+    // FIXME data test, will update when api ready
     private String title;
     private String category;
     private String color;

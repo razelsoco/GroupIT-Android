@@ -18,10 +18,12 @@
     <color name="whiteTwo">#e6e6e6</color>
     <color name="aquaBlue">#00b9e3</color>
     <color name="greyishBrown">#4d4d4d</color>
+    <color name="silver">#C7C7CC</color>
 
 
     <color name="textDark">#222222</color>
 
     <color name="dividerDark">@color/greyishBrown</color>
+    <color name="dividerLight">@color/silver</color>
 
 </resources>

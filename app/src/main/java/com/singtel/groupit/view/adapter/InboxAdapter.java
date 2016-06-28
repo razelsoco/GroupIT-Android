@@ -1,41 +1,38 @@
 package com.singtel.groupit.view.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.databinding.ItemHomeArticleBinding;
-import com.singtel.groupit.model.ArticleModel;
-import com.singtel.groupit.viewmodel.ArticleViewModel;
+import com.singtel.groupit.databinding.ItemNoteBinding;
+import com.singtel.groupit.model.Note;
+import com.singtel.groupit.viewmodel.NoteViewModel;
 
 /**
  * Created by lanna on 6/22/16.
  *
  */
 
-public class HomeArticlesAdapter extends BaseRecyclerAdapter<ArticleModel, HomeArticlesAdapter.BindingHolder> {
+public class InboxAdapter extends BaseRecyclerAdapter<Note, InboxAdapter.BindingHolder> {
 
-    private Context context;
+    public InboxAdapter() {
 
-    public HomeArticlesAdapter(Context context) {
-        this.context = context;
     }
 
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemHomeArticleBinding itemBinding = DataBindingUtil.inflate(
+        ItemNoteBinding itemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.item_home_article, parent, false);
+                R.layout.item_note, parent, false);
 
         return new BindingHolder(itemBinding);
     }
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        holder.binding.setViewModel(new ArticleViewModel(context, getItem(position)));
+        holder.binding.setViewModel(new NoteViewModel(getItem(position)));
     }
 
     /*
@@ -43,9 +40,9 @@ public class HomeArticlesAdapter extends BaseRecyclerAdapter<ArticleModel, HomeA
      */
 
     public static class BindingHolder extends RecyclerView.ViewHolder {
-        private ItemHomeArticleBinding binding;
+        private ItemNoteBinding binding;
 
-        public BindingHolder(ItemHomeArticleBinding binding) {
+        public BindingHolder(ItemNoteBinding binding) {
             super(binding.rootView);
             this.binding = binding;
         }

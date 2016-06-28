@@ -10,7 +10,7 @@ import android.view.View;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.DataManager;
-import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.util.LogUtils;
@@ -95,7 +95,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
         mSubscriptions.add(dataManager.getTopStories()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
-                .subscribe(new Subscriber<TestResponse>() {
+                .subscribe(new Subscriber<ArticlesResponse>() {
                     @Override
                     public void onCompleted() {
                         //LogUtils.w(MainFragment.this, "fetchTopStories: onCompleted");
@@ -120,7 +120,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
                     }
 
                     @Override
-                    public void onNext(TestResponse articles) {
+                    public void onNext(ArticlesResponse articles) {
                         //LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+", "+ articles.articles);
                         adapter.setItems(articles.articles);
                     }

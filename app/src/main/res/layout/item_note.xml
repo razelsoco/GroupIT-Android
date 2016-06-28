@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.NoteViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_normal"
+        android:paddingLeft="@dimen/space_medium"
+        android:paddingTop="@dimen/space_normal"
+        tools:ignore="MissingPrefix">
+
+        <ImageView
+            android:id="@+id/iv_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_normal"
+            android:src="@drawable/ic_reply_left"
+            android:visibility="@{viewModel.replyNoteVisibility}"
+            />
+
+        <ImageView
+            android:id="@+id/iv_caret_right"
+            android:layout_width="@dimen/space_double"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_normal"
+            android:paddingLeft="@dimen/space_none"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_caret_right"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TextView"
+            fontPath="@string/font_avenirltpro_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/iv_caret_right"
+            android:layout_toRightOf="@id/iv_reply"
+            android:padding="@dimen/space_min_extra"
+            android:text="@{viewModel.title}"
+            android:textSize="@dimen/textSize_subheading"
+            />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="@dimen/space_small"
+            android:layout_toLeftOf="@id/iv_caret_right"
+            android:layout_toRightOf="@id/iv_reply"
+            android:maxLines="2"
+            android:padding="@dimen/space_min_extra"
+            android:text="@{viewModel.content}"
+            />
+
+    </RelativeLayout>
+</layout>

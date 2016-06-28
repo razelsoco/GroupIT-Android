@@ -1,7 +1,8 @@
 package com.singtel.groupit.model.remote;
 
 
-import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.ArticlesResponse;
+import com.singtel.groupit.model.InboxResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -58,5 +59,11 @@ public interface GroupITService {
      * Return a list of articles.
      */
     @GET("/main")
-    Observable<TestResponse> getTopStories();
+    Observable<ArticlesResponse> getTopStories();
+
+    /**
+     * Return a list of notes.
+     */
+    @GET("/inbox")
+    Observable<InboxResponse> getInbox();
 }

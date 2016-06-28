@@ -15,6 +15,7 @@
         android:layout_height="match_parent">
 
         <include
+            android:id="@+id/swipe_refresh_recycler_view"
             layout="@layout/swipe_refresh_recycler_view"
             bind:viewModel="@{viewModel}"/>
     </FrameLayout>

@@ -44,7 +44,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/ArticleTextView"
+            style="@style/TextView"
             fontPath="@string/font_avenirltpro_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
 
         <TextView
             android:id="@+id/tv_category"
-            style="@style/ArticleTextView"
+            style="@style/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
@@ -73,7 +73,7 @@
 
         <TextView
             android:id="@+id/tv_content"
-            style="@style/ArticleTextView"
+            style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_category"
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/tv_time"
-            style="@style/ArticleTextView"
+            style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_content"
