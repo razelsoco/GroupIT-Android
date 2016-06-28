@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/action_bar_size"
-    android:background="?attr/colorPrimary"
-    app:contentInsetEnd="@dimen/space_none"
-    app:contentInsetLeft="@dimen/space_none"
-    app:contentInsetRight="@dimen/space_none"
-    app:contentInsetStart="@dimen/space_none"
-    tools:ignore="MissingPrefix">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.MainViewModel"/>
+
+    </data>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical">
+        android:layout_height="@dimen/action_bar_size"
+        android:background="?attr/colorPrimary"
+        app:contentInsetEnd="@dimen/space_none"
+        app:contentInsetLeft="@dimen/space_none"
+        app:contentInsetRight="@dimen/space_none"
+        app:contentInsetStart="@dimen/space_none"
+        tools:ignore="MissingPrefix">
 
-        <ImageView
-            android:id="@+id/iv_action_bar_menu"
-            android:layout_width="@dimen/padded_action_bar_size"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:scaleType="center"
-            android:src="@drawable/ic_menu"/>
-
-        <TextView
-            android:id="@+id/tv_spinner"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/padded_action_bar_size"
-            android:layout_marginStart="@dimen/padded_action_bar_size"
-            android:clickable="true"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingLeft="@dimen/space_normal"
-            android:paddingRight="@dimen/space_normal"
-            android:text="@string/main_category_title"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_title"
-            app:fontPath="@string/font_avenirltpro_book"/>
+            android:gravity="center_vertical">
 
-        <ImageView
-            android:id="@+id/iv_action_bar_right"
-            android:layout_width="@dimen/padded_action_bar_size"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:scaleType="center"
-            android:src="@drawable/ic_dropdown"/>
+            <ImageView
+                android:id="@+id/iv_action_bar_menu"
+                android:layout_width="@dimen/padded_action_bar_size"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:onClick="@{viewModel::onClickMenu}"
+                android:scaleType="center"
+                android:src="@drawable/ic_menu"/>
 
-    </RelativeLayout>
-</android.support.v7.widget.Toolbar>
+            <TextView
+                android:id="@+id/tv_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/padded_action_bar_size"
+                android:layout_marginStart="@dimen/padded_action_bar_size"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/space_normal"
+                android:paddingRight="@dimen/space_normal"
+                android:text="@string/main_category_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_title"
+                app:fontPath="@string/font_avenirltpro_book"/>
+
+            <ImageView
+                android:id="@+id/iv_action_bar_right"
+                android:layout_width="@dimen/padded_action_bar_size"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:src="@drawable/ic_dropdown"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+</layout>

@@ -14,10 +14,12 @@ import com.singtel.groupit.view.fragment.SettingsFragment;
  */
 
 public class DashBoardViewModel {
+
     public ObservableField<String> userName;
     public ObservableField<String> userGroup;
 
     private Fragment mFragment;
+
     public DashBoardViewModel(Fragment fragment) {
         this.userName =  new ObservableField<>("Razel S");
         this.userGroup =  new ObservableField<>("Group IT");

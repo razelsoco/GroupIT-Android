@@ -90,7 +90,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
         }
     }
 
-    public void fetchTopStories() {
+    private void fetchTopStories() {
         //LogUtils.w(MainFragment.this, "fetchTopStories: ");
         mSubscriptions.add(dataManager.getTopStories()
                 .observeOn(AndroidSchedulers.mainThread())
