@@ -15,7 +15,6 @@ import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
-import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
 
 import java.io.IOException;
