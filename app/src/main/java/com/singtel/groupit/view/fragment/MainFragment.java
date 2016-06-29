@@ -68,7 +68,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), R.drawable.vertical_divider));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), R.drawable.divider_vertical_dark));
         recyclerView.setAdapter(adapter);
 
         loadStoriesIfNetworkConnected();

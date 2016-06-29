@@ -40,13 +40,17 @@ public class InboxViewModel implements ViewModel {
         this.delegate = delegate;
         dataManager = GroupITApplication.get(context).getComponent().dataManager();
 
+        onRefresh();
+    }
+
+    public void onRefresh() {
         fetchData();
     }
 
     private void fetchData() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
+        checkUnsubscribe();
+
+        delegate.onStartGetData();
         subscription = dataManager.getInbox()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
@@ -54,14 +58,14 @@ public class InboxViewModel implements ViewModel {
                     InboxResponse inboxResponse;
                     @Override
                     public void onCompleted() {
-                        LogUtils.w(InboxViewModel.this, "onCompleted: "+ inboxResponse.notes);
+//                        LogUtils.d(InboxViewModel.this, "onCompleted: "+ inboxResponse.notes);
                         delegate.onDataChanged(inboxResponse.notes);
                     }
 
                     @Override
                     public void onError(Throwable e) {
+//                        LogUtils.w(InboxViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
                         delegate.onError(e);
-                        LogUtils.w(InboxViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
                     }
 
                     @Override
@@ -71,11 +75,15 @@ public class InboxViewModel implements ViewModel {
                 });
     }
 
-    @Override
-    public void destroy() {
+    private void checkUnsubscribe() {
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
+    }
+
+    @Override
+    public void destroy() {
+        checkUnsubscribe();
         subscription = null;
         context = null;
         delegate = null;

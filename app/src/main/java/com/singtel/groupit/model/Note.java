@@ -24,7 +24,7 @@ public class Note {
     public String toString() {
         return new StringBuilder()
                 .append("sender=").append(sender)
-                .append(", title=").append(title)
+//                .append(", title=").append(title)
                 .append(", replied=").append(replied)
                 .toString();
     }

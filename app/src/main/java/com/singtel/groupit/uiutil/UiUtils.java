@@ -37,6 +37,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.util.LogUtils;
@@ -144,6 +145,13 @@ public class UiUtils {
         }
     }
 
+    public static void doWhenViewHasSize(final View view, final Runnable runnable) {
+        if (view.getWidth() == 0 || view.getHeight() == 0) {
+            addOnGlobalLayoutListener(view, runnable);
+        } else {
+            runnable.run();
+        }
+    }
 
     public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
         ViewTreeObserver observer = view.getViewTreeObserver();
@@ -398,4 +406,15 @@ public class UiUtils {
         activity.getSupportFragmentManager().popBackStack(name, flag);
     }
 
+
+    /*
+        Toast
+     */
+    public static void makeToastShort(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void makeToastLong(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
 }
