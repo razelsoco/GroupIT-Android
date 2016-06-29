@@ -6,8 +6,7 @@ import android.view.View;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.uiutil.UiUtils;
-import com.singtel.groupit.view.activity.InboxActivity;
-import com.singtel.groupit.view.fragment.NotesFragment;
+import com.singtel.groupit.view.fragment.MenuNotesFragment;
 import com.singtel.groupit.view.fragment.SettingsFragment;
 
 /**
@@ -28,7 +27,7 @@ public class DashBoardViewModel {
     }
 
     public void onNotesClick(View view){
-        UiUtils.replaceFragment(mFragment.getActivity(), NotesFragment.class.getName(), NotesFragment.newInstance(), R.id.menu_frame);
+        UiUtils.replaceFragment(mFragment.getActivity(), MenuNotesFragment.class.getName(), MenuNotesFragment.newInstance(), R.id.menu_frame);
     }
 
     public void onSettingsClick(View view){
