@@ -1,6 +1,7 @@
 package com.singtel.groupit.model.remote;
 
 
+import com.singtel.groupit.model.AccountInfo;
 import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.model.NotesResponse;
 
@@ -10,7 +11,10 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import rx.Observable;
 
 /**
@@ -23,7 +27,14 @@ public interface GroupITService {
     /*
         ENDPOINT
      */
-    String ENDPOINT = " http://demo1023649.mockable.io"; // test
+    String MOCKABLE_TEST = " http://demo1023649.mockable.io"; // test
+    String SERVER_STAGING = "http://groupit-staging.ap-southeast-1.elasticbeanstalk.com"; // staging
+
+    String ENDPOINT = SERVER_STAGING;
+
+    /*
+        Api Constants
+     */
     byte READ_TIME_OUT_IN_SECOND = 5;
     byte CONNECTION_TIME_OUT_IN_SECOND = 5;
 
@@ -54,6 +65,17 @@ public interface GroupITService {
     /*
         API Defines
      */
+
+    /**
+     * AccountInfo
+     */
+    @FormUrlEncoded
+    @POST("/token")
+    Observable<AccountInfo> getToken(
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("grant_type") String grantType
+    );
 
     /**
      * Return a list of articles.

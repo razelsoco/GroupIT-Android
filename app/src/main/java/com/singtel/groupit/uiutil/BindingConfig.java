@@ -56,5 +56,6 @@ public class BindingConfig {
         }
         view.setOnRefreshListener(newValue);
     }
+
 }
 
