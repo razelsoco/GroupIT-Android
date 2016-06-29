@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.databinding.FragmentNotesBinding;
-import com.singtel.groupit.view.activity.InboxActivity;
+import com.singtel.groupit.databinding.FragmentMenuNotesBinding;
+import com.singtel.groupit.view.activity.NotesActivity;
+import com.singtel.groupit.viewmodel.NotesViewModel;
 
 /**
  * Created by razelsoco on 6/23/16.
@@ -18,10 +19,6 @@ import com.singtel.groupit.view.activity.InboxActivity;
  */
 
 public class MenuNotesFragment extends BaseMenuFragment {
-
-    public static MenuNotesFragment getInstance() {
-        return new MenuNotesFragment();
-    }
 
     public static MenuNotesFragment newInstance() {
         MenuNotesFragment fragment = new MenuNotesFragment();
@@ -51,10 +48,11 @@ public class MenuNotesFragment extends BaseMenuFragment {
 
     public void onInboxClick(View view) {
         getActivity().startActivity(
-                InboxActivity.getLaunchedIntent(getActivity()));
+                NotesActivity.getLaunchedIntent(getActivity(), NotesViewModel.PAGE_TYPE_INBOX));
     }
 
-    public void onSentClick(View view){
-        Toast.makeText(getActivity(),"sent", Toast.LENGTH_SHORT).show();
+    public void onSentClick(View view) {
+        getActivity().startActivity(
+                NotesActivity.getLaunchedIntent(getActivity(), NotesViewModel.PAGE_TYPE_SENT_NOTES));
     }
 }

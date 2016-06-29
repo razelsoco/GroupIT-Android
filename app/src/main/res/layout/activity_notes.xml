@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.singtel.groupit.view.activity.InboxActivity">
+        tools:context="com.singtel.groupit.view.activity.NotesActivity">
 
         <include
             android:id="@+id/actionBarBack"

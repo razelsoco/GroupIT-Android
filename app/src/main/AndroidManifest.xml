@@ -30,7 +30,7 @@
             android:windowSoftInputMode="adjustNothing"
             />
         <activity
-            android:name=".view.activity.InboxActivity"
+            android:name=".view.activity.NotesActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustNothing"
             />

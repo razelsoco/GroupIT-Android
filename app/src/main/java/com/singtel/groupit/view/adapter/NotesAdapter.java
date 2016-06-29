@@ -15,9 +15,9 @@ import com.singtel.groupit.viewmodel.NoteViewModel;
  *
  */
 
-public class InboxAdapter extends BaseRecyclerAdapter<Note, InboxAdapter.BindingHolder> {
+public class NotesAdapter extends BaseRecyclerAdapter<Note, NotesAdapter.BindingHolder> {
 
-    public InboxAdapter() {
+    public NotesAdapter() {
 
     }
 

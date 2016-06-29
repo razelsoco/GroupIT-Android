@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.singtel.groupit.viewmodel.InboxViewModel"/>
+            type="com.singtel.groupit.viewmodel.ViewModel"/>
     </data>
 
     <android.support.v4.widget.SwipeRefreshLayout

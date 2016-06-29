@@ -1,13 +1,12 @@
 package com.singtel.groupit.viewmodel;
 
 import android.content.Context;
+import android.support.annotation.IntDef;
 
 import com.singtel.groupit.DataManager;
 import com.singtel.groupit.GroupITApplication;
-import com.singtel.groupit.model.InboxResponse;
+import com.singtel.groupit.model.NotesResponse;
 import com.singtel.groupit.model.Note;
-import com.singtel.groupit.util.LogUtils;
-import com.singtel.groupit.view.fragment.MainFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,28 +16,35 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
+
 /**
  * Created by lanna on 6/28/16.
  *
  */
 
-public class InboxViewModel implements ViewModel {
+public class NotesViewModel implements ViewModel {
 
-    private Context context;
+    public static final int PAGE_TYPE_INBOX         = 1;
+    public static final int PAGE_TYPE_SENT_NOTES    = 2;
+    @IntDef({PAGE_TYPE_INBOX, PAGE_TYPE_SENT_NOTES})
+    public @interface NotesPageType {}
 
     private DataManager dataManager;
     private Subscription subscription;
+    private @NotesPageType
+    int type;
 
-    public interface InboxDelegate {
+    public interface NotesDelegate {
         void onStartGetData();
         void onDataChanged(List<Note> notes);
         void onError(Throwable e);
     }
-    private InboxDelegate delegate;
+    private NotesDelegate delegate;
 
-    public InboxViewModel(@NotNull Context context, @NotNull InboxDelegate delegate) {
+    public NotesViewModel(@NotNull Context context, @NotNull NotesDelegate delegate, @NotesPageType int type) {
         this.delegate = delegate;
-        dataManager = GroupITApplication.get(context).getComponent().dataManager();
+        this.dataManager = GroupITApplication.get(context).getComponent().dataManager();
+        this.type = type;
 
         onRefresh();
     }
@@ -51,25 +57,25 @@ public class InboxViewModel implements ViewModel {
         checkUnsubscribe();
 
         delegate.onStartGetData();
-        subscription = dataManager.getInbox()
+        subscription = (type == PAGE_TYPE_INBOX ? dataManager.getInbox() : dataManager.getSentNotes())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
-                .subscribe(new Subscriber<InboxResponse>() {
-                    InboxResponse inboxResponse;
+                .subscribe(new Subscriber<NotesResponse>() {
+                    NotesResponse inboxResponse;
                     @Override
                     public void onCompleted() {
-//                        LogUtils.d(InboxViewModel.this, "onCompleted: "+ inboxResponse.notes);
+//                        LogUtils.d(NotesViewModel.this, "onCompleted: "+ inboxResponse.notes);
                         delegate.onDataChanged(inboxResponse.notes);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-//                        LogUtils.w(InboxViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
+//                        LogUtils.w(NotesViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
                         delegate.onError(e);
                     }
 
                     @Override
-                    public void onNext(InboxResponse inboxResponse) {
+                    public void onNext(NotesResponse inboxResponse) {
                         this.inboxResponse = inboxResponse;
                     }
                 });
@@ -85,7 +91,6 @@ public class InboxViewModel implements ViewModel {
     public void destroy() {
         checkUnsubscribe();
         subscription = null;
-        context = null;
         delegate = null;
     }
 

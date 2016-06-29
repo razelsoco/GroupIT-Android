@@ -7,7 +7,7 @@ import java.util.List;
  * FIXME test only, then remove this
  */
 
-public class InboxResponse {
+public class NotesResponse {
 
     public List<Note> notes;
 

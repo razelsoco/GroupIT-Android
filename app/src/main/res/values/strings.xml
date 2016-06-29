@@ -78,15 +78,12 @@
     <string name="settings">Settings</string>
     <string name="send_note">Send a note</string>
     <string name="inbox">Inbox</string>
-    <string name="sent">Sent notes</string>
+    <string name="sent_notes">Sent notes</string>
     <string name="about">About</string>
     <string name="tnc">Terms of Use</string>
     <string name="signout">Sign Out</string>
 
     // Main screen
     <string name="main_category_title">Home</string>
-
-    // Inbox screen
-    <string name="inbox_page_title">Inbox</string>
 
 </resources>

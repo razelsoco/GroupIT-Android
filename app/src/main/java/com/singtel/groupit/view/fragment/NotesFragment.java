@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,47 +12,55 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.databinding.FragmentInboxBinding;
+import com.singtel.groupit.databinding.FragmentNotesBinding;
 import com.singtel.groupit.model.Note;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.uiutil.UiUtils;
+import com.singtel.groupit.util.Constants;
 import com.singtel.groupit.util.LogUtils;
-import com.singtel.groupit.view.adapter.InboxAdapter;
-import com.singtel.groupit.viewmodel.InboxViewModel;
-import com.singtel.groupit.viewmodel.InboxViewModel.InboxDelegate;
+import com.singtel.groupit.view.adapter.NotesAdapter;
+import com.singtel.groupit.viewmodel.NotesViewModel;
 
 import java.util.List;
+
 
 /**
  * Created by lanna on 6/28/16.
  *
  */
 
-public class InboxFragment extends BaseFragment implements InboxDelegate, SwipeRefreshLayout.OnRefreshListener {
+public class NotesFragment extends BaseFragment
+        implements NotesViewModel.NotesDelegate, SwipeRefreshLayout.OnRefreshListener {
 
-    private FragmentInboxBinding binding;
-    private InboxAdapter adapter;
+    private FragmentNotesBinding binding;
+    private NotesAdapter adapter;
 
-    public static Fragment newInstance() {
-        return new InboxFragment();
+
+    public static NotesFragment newInstance(@NotesViewModel.NotesPageType int type) {
+        NotesFragment fragment = new NotesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.NOTES_PAGE_TYPE, type);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        adapter = new InboxAdapter();
+        adapter = new NotesAdapter();
     }
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_inbox;
+        return R.layout.fragment_notes;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
-        binding.setViewModel(new InboxViewModel(getContext(), this));
+        @NotesViewModel.NotesPageType int type = getArguments().getInt(Constants.NOTES_PAGE_TYPE);
+        binding.setViewModel(new NotesViewModel(getContext(), this, type));
         return binding.getRoot();
     }
 
