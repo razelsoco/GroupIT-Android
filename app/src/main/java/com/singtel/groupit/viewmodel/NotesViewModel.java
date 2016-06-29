@@ -7,6 +7,7 @@ import com.singtel.groupit.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.NotesResponse;
 import com.singtel.groupit.model.Note;
+import com.singtel.groupit.uiutil.OnGetDataDelegate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +23,7 @@ import rx.android.schedulers.AndroidSchedulers;
  *
  */
 
-public class NotesViewModel implements ViewModel {
+public class NotesViewModel extends RefreshingViewModel {
 
     public static final int PAGE_TYPE_INBOX         = 1;
     public static final int PAGE_TYPE_SENT_NOTES    = 2;
@@ -31,17 +32,13 @@ public class NotesViewModel implements ViewModel {
 
     private DataManager dataManager;
     private Subscription subscription;
-    private @NotesPageType
-    int type;
+    private @NotesPageType int type;
 
-    public interface NotesDelegate {
-        void onStartGetData();
-        void onDataChanged(List<Note> notes);
-        void onError(Throwable e);
-    }
-    private NotesDelegate delegate;
+    private OnGetDataDelegate<List<Note>> delegate;
 
-    public NotesViewModel(@NotNull Context context, @NotNull NotesDelegate delegate, @NotesPageType int type) {
+    public NotesViewModel(@NotNull Context context,
+                          @NotNull OnGetDataDelegate<List<Note>> delegate,
+                          @NotesPageType int type) {
         this.delegate = delegate;
         this.dataManager = GroupITApplication.get(context).getComponent().dataManager();
         this.type = type;
@@ -49,6 +46,7 @@ public class NotesViewModel implements ViewModel {
         onRefresh();
     }
 
+    @Override
     public void onRefresh() {
         fetchData();
     }
@@ -56,7 +54,7 @@ public class NotesViewModel implements ViewModel {
     private void fetchData() {
         checkUnsubscribe();
 
-        delegate.onStartGetData();
+        setRefreshing(true);
         subscription = (type == PAGE_TYPE_INBOX ? dataManager.getInbox() : dataManager.getSentNotes())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
@@ -65,12 +63,14 @@ public class NotesViewModel implements ViewModel {
                     @Override
                     public void onCompleted() {
 //                        LogUtils.d(NotesViewModel.this, "onCompleted: "+ inboxResponse.notes);
+                        setRefreshing(false);
                         delegate.onDataChanged(inboxResponse.notes);
                     }
 
                     @Override
                     public void onError(Throwable e) {
 //                        LogUtils.w(NotesViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
+                        setRefreshing(false);
                         delegate.onError(e);
                     }
 

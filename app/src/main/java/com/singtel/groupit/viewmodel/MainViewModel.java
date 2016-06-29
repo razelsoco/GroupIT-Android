@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  *
  */
 
-public class MainViewModel {
+public class MainViewModel implements ViewModel {
 
     private SlidingActivity context;
 
@@ -37,6 +37,11 @@ public class MainViewModel {
         }
 
         return false;
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
 

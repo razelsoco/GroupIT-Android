@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentNotesBinding;
 import com.singtel.groupit.model.Note;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
+import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.util.Constants;
 import com.singtel.groupit.util.LogUtils;
@@ -29,8 +29,7 @@ import java.util.List;
  *
  */
 
-public class NotesFragment extends BaseFragment
-        implements NotesViewModel.NotesDelegate, SwipeRefreshLayout.OnRefreshListener {
+public class NotesFragment extends BaseFragment implements OnGetDataDelegate<List<Note>> {
 
     private FragmentNotesBinding binding;
     private NotesAdapter adapter;
@@ -61,13 +60,13 @@ public class NotesFragment extends BaseFragment
         binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
         @NotesViewModel.NotesPageType int type = getArguments().getInt(Constants.NOTES_PAGE_TYPE);
         binding.setViewModel(new NotesViewModel(getContext(), this, type));
+        binding.executePendingBindings();
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.swipeRefreshRecyclerView.swipeRefreshContainer.setOnRefreshListener(this);
         setupRecyclerView(binding.swipeRefreshRecyclerView.recyclerView);
     }
 
@@ -79,33 +78,14 @@ public class NotesFragment extends BaseFragment
     }
 
     @Override
-    public void onRefresh() {
-        binding.getViewModel().onRefresh();
-    }
-
-    @Override
-    public void onStartGetData() {
-        LogUtils.i(this, "onStartGetData: ");
-        UiUtils.doWhenViewHasSize(binding.swipeRefreshRecyclerView.swipeRefreshContainer,
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.swipeRefreshRecyclerView.swipeRefreshContainer.setRefreshing(true);
-                    }
-                });
-    }
-
-    @Override
-    public void onDataChanged(List<Note> notes) {
-        LogUtils.i(this, "onDataChanged: " + notes);
-        binding.swipeRefreshRecyclerView.swipeRefreshContainer.setRefreshing(false);
-        adapter.setItemsAndNotify(notes);
+    public void onDataChanged(List<Note> data) {
+        LogUtils.i(this, "onDataChanged: " + data);
+        adapter.setItemsAndNotify(data);
     }
 
     @Override
     public void onError(Throwable e) {
         LogUtils.i(this, "onError: " + e.getMessage());
-        binding.swipeRefreshRecyclerView.swipeRefreshContainer.setRefreshing(false);
         UiUtils.makeToastShort(getContext(), "Error: " + e.getMessage());
     }
 }
