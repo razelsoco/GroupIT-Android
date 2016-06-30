@@ -407,4 +407,12 @@ public class UiUtils {
         activity.getSupportFragmentManager().popBackStack(name, flag);
     }
 
+    public static void setStatusBarColor(Context c, int resId){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = ((Activity)c).getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getColor(c, resId));
+        }
+    }
+
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.ItemSelectableContactViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingPrefix"
+        android:paddingBottom="@dimen/space_medium"
+        android:paddingLeft="@dimen/space_normal"
+        android:paddingRight="@dimen/space_normal"
+        android:paddingTop="@dimen/space_medium">
+        <com.singtel.groupit.view.customview.CheckableImageView
+            android:id="@+id/bt_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/selector_bg_checkbox"
+            app:checked="@{viewModel.selectedState}"
+            android:clickable="true"
+            android:onClick="@{viewModel.onCheckboxClicked}"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.name}"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/space_normal"
+            fontPath="@string/font_avenirltpro_roman"/>
+
+
+    </LinearLayout>
+</layout>

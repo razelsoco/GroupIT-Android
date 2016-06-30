@@ -20,7 +20,7 @@ public class MenuFragment extends BaseMenuFragment {
     public static MenuFragment getInstance() {
         return new MenuFragment();
     }
-
+    FragmentMenuBinding binding;
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_menu;
@@ -29,9 +29,11 @@ public class MenuFragment extends BaseMenuFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentMenuBinding mBinding = DataBindingUtil.inflate(inflater,getLayoutRes(),container, false);
-        mBinding.setModel(new DashBoardViewModel(this));
-        return mBinding.getRoot();
+        if(binding == null) {
+            binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
+            binding.setModel(new DashBoardViewModel(this));
+        }
+        return binding.getRoot();
     }
 
 }

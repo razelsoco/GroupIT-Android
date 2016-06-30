@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
+import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.TestUserResponse;
 import com.singtel.groupit.model.remote.GroupITService;
 
 import javax.inject.Inject;
@@ -44,6 +46,14 @@ public class DataManager {
 
     public Observable<TestResponse> getTopStories() {
         return mGroupITService.getTopStories();
+    }
+
+    public Observable<TestUserResponse> getUser() {
+        return mGroupITService.getUser();
+    }
+
+    public Observable<TestContactsResponse> getContacts() {
+        return mGroupITService.getContacts();
     }
 
 }

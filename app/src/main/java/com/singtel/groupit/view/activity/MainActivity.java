@@ -43,6 +43,16 @@ public class MainActivity extends SlidingActivity {
     }
 
     @Override
+    protected void onDrawerClosing() {
+        UiUtils.setStatusBarColor(this, R.color.aquaBlue);
+    }
+
+    @Override
+    protected void onDrawerOpening() {
+        UiUtils.setStatusBarColor(this, R.color.darkBlueGrayTwo);
+    }
+
+    @Override
     protected Fragment onCreateMenuPanel() {
         return MenuFragment.getInstance();
     }

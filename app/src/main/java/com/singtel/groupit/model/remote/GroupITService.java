@@ -1,7 +1,9 @@
 package com.singtel.groupit.model.remote;
 
 
+import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.TestUserResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +24,7 @@ public interface GroupITService {
     /*
         ENDPOINT
      */
-    String ENDPOINT = " http://demo1023649.mockable.io"; // test
+    String ENDPOINT = "http://demo6174646.mockable.io"; // raz: demo6174646 lan: demo1023649
     byte READ_TIME_OUT_IN_SECOND = 5;
     byte CONNECTION_TIME_OUT_IN_SECOND = 5;
 
@@ -59,4 +61,10 @@ public interface GroupITService {
      */
     @GET("/main")
     Observable<TestResponse> getTopStories();
+
+    @GET("/user")
+    Observable<TestUserResponse> getUser();
+
+    @GET("/contacts")
+    Observable<TestContactsResponse> getContacts();
 }

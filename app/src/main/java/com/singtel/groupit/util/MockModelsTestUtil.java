@@ -1,6 +1,6 @@
 package com.singtel.groupit.util;
 
-import com.singtel.groupit.model.ArticleModel;
+import com.singtel.groupit.model.domain.ArticleModel;
 
 import java.util.Random;
 import java.util.UUID;

@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.singtel.groupit.model.remote.ApiCommons;
-import com.singtel.groupit.model.ArticleModel;
+import com.singtel.groupit.model.domain.ArticleModel;
 import com.singtel.groupit.util.DateUtils;
 import com.singtel.groupit.util.LogUtils;
 
