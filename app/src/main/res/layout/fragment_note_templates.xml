@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.singtel.groupit.viewmodel.NoteTemplatesViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingPrefix">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/templates_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:setAdapter="@{model.templatesAdapter}"
+                tools:listitem="@layout/item_template"
+                android:layout_margin="@dimen/space_normal"/>
+
+            <com.singtel.groupit.view.customview.AspectRatioImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@{model.selectedTemplateImage}"/>
+    </LinearLayout>
+</layout>

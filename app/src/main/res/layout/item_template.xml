@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.ItemTemplateViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <com.singtel.groupit.view.customview.CheckableImageView
+        android:id="@+id/template_image_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:checked="@{viewModel.selectedState}"
+        android:clickable="true"
+        android:scaleType="centerCrop"
+        app:imageUrl="@{viewModel.imageUrl}"
+        android:background="@drawable/selector_bg_template"
+        android:padding="5dp"
+        />
+    </FrameLayout>
+</layout>

@@ -6,6 +6,7 @@ import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.TestTemplatesResponse;
 import com.singtel.groupit.model.TestUserResponse;
 import com.singtel.groupit.model.remote.GroupITService;
 
@@ -54,6 +55,10 @@ public class DataManager {
 
     public Observable<TestContactsResponse> getContacts() {
         return mGroupITService.getContacts();
+    }
+
+    public Observable<TestTemplatesResponse> getTemplates() {
+        return mGroupITService.getTemplates();
     }
 
 }

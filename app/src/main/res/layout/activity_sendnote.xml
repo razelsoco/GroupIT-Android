@@ -28,7 +28,7 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/iv_action_bar_menu"
+                android:id="@+id/bt_back"
                 android:layout_width="@dimen/padded_action_bar_size"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -36,7 +36,6 @@
                 android:src="@drawable/ic_back"/>
 
             <TextView
-                android:id="@+id/tv_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/padded_action_bar_size"
@@ -51,6 +50,20 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_title"
                 app:fontPath="@string/font_avenirltpro_book"/>
+
+            <TextView android:id="@+id/bt_next"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/space_normal"
+                android:paddingRight="@dimen/space_normal"
+                android:text="@string/next"
+                android:textColor="@color/cst_text_white"
+                android:textSize="@dimen/textSize_subheading"
+                app:fontPath="@string/font_avenirltpro_book"
+                android:layout_alignParentRight="true"/>
 
 
         </RelativeLayout>

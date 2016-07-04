@@ -3,6 +3,7 @@ package com.singtel.groupit.model.remote;
 
 import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.TestTemplatesResponse;
 import com.singtel.groupit.model.TestUserResponse;
 
 import java.util.concurrent.TimeUnit;
@@ -67,4 +68,7 @@ public interface GroupITService {
 
     @GET("/contacts")
     Observable<TestContactsResponse> getContacts();
+
+    @GET("/templates")
+    Observable<TestTemplatesResponse> getTemplates();
 }
