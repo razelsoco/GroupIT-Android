@@ -1,6 +1,9 @@
 package com.singtel.groupit.util;
 
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.singtel.groupit.BuildConfig;
 
 import java.util.List;
 
@@ -10,12 +13,12 @@ import java.util.List;
  */
 public class LogUtils {
 
-//    protected static boolean isDebug = BuildConfig.DEBUG;
-    private static boolean isDebug = true;
+    private static boolean isDebug = BuildConfig.DEBUG;
+//    private static boolean isDebug = true;
     private static String DEFAULT_TAG = "app";
 
     // TODO Log model interface
-    public interface ILogModel {
+    interface ILogModel {
         String toLogString();
     }
 
@@ -214,6 +217,13 @@ public class LogUtils {
         }
     }
 
+
+    // TODO by pass Log methods
+
+    public static String getStackTraceString(Throwable tr) {
+        return Log.getStackTraceString(tr);
+    }
+
     // TODO Log(msg) (add 11/29/2013 by lanna)
     public static void v(String msg) {
         v(DEFAULT_TAG, msg);
@@ -293,12 +303,11 @@ public class LogUtils {
         List
      */
 
-
-    public static String toLogStrings(List logModels) {
+    public static String toLogString(List logModels) {
         return toLogStrings(false, logModels);
     }
 
-    public static String toLogStringsWithEnter(List logModels) {
+    public static String toLogStringWithEnter(List logModels) {
         return toLogStrings(true, logModels);
     }
 

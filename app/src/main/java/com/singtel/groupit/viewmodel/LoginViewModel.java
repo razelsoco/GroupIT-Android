@@ -9,6 +9,7 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.AccountInfo;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.SimpleTextWatcher;
+import com.singtel.groupit.util.KeystoreUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,6 +48,8 @@ public class LoginViewModel implements ViewModel {
 //        username = "super.admin@2359media.com";
 //        password = "Admin@123456";
 //        checkLogin();
+
+        KeystoreUtil.test(context);
     }
 
     /*
@@ -95,6 +98,7 @@ public class LoginViewModel implements ViewModel {
                     @Override
                     public void onCompleted() {
                         loadingVisible.set(GONE);
+                        storeUserData(account);
                         delegate.onDataChanged(account);
                     }
 
@@ -109,6 +113,10 @@ public class LoginViewModel implements ViewModel {
                         this.account = account;
                     }
                 });
+    }
+
+    private void storeUserData(AccountInfo account) {
+
     }
 
     private void checkUnsubscribe() {
