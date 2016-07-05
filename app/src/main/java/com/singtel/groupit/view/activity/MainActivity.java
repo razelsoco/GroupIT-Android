@@ -1,19 +1,15 @@
 package com.singtel.groupit.view.activity;
 
-import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.uiutil.AlertUtils;
+import com.singtel.groupit.databinding.ActivityMainBinding;
 import com.singtel.groupit.uiutil.UiUtils;
-import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.view.fragment.MenuFragment;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import com.singtel.groupit.viewmodel.MainViewModel;
 
 
 /**
@@ -23,16 +19,21 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends SlidingActivity {
 
+    private ActivityMainBinding binding;
+    private MainViewModel viewModel;
+
     @Override
     protected int getLayoutRes() {
-//        requestWindowFeature(Window.FEATURE_ACTION_BAR);
-        return R.layout.activity_main;
+        return 0; // no need call setContentView(..) in BaseActivity
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createCustomActionBar();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        viewModel = new MainViewModel(this);
+        binding.setViewModel(viewModel);
+        setSupportActionBar(binding.actionBarMain.toolbar);
 
         UiUtils.replaceFragment(this, MainFragment.newInstance(), R.id.fragment_content, false);
     }
@@ -47,37 +48,13 @@ public class MainActivity extends SlidingActivity {
         return MenuFragment.getInstance();
     }
 
-    private void createCustomActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        final View ivMenu = toolbar.findViewById(R.id.iv_action_bar_menu);
-        ivMenu.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                ivMenu.clearAnimation();
-                if (NetworkUtils.isOnline(getApplicationContext())) {
-                    showMenu();
-                } else {
-                    AlertUtils.showInternetAlert(getApplicationContext(), null);
-                }
-            }
-        });
-    }
-
     @Override
     public void onBackPressed() {
-        if (isMenuShowing()) {
-            showContent();
+        if (viewModel.onBackPressed()) {
             return;
         }
 
         super.onBackPressed();
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 }

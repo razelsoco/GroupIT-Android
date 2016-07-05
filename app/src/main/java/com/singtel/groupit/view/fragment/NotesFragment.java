@@ -1,29 +1,52 @@
 package com.singtel.groupit.view.fragment;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentNotesBinding;
+import com.singtel.groupit.model.Note;
+import com.singtel.groupit.uiutil.DividerItemDecoration;
+import com.singtel.groupit.uiutil.OnGetDataDelegate;
+import com.singtel.groupit.uiutil.UiUtils;
+import com.singtel.groupit.util.Constants;
+import com.singtel.groupit.util.LogUtils;
+import com.singtel.groupit.view.adapter.NotesAdapter;
+import com.singtel.groupit.viewmodel.NotesViewModel;
+
+import java.util.List;
+
 
 /**
- * Created by razelsoco on 6/23/16.
+ * Created by lanna on 6/28/16.
  *
  */
 
-public class NotesFragment extends BaseMenuFragment {
-    public static NotesFragment getInstance() {
-        return new NotesFragment();
+public class NotesFragment extends BaseFragment implements OnGetDataDelegate<List<Note>> {
+
+    private FragmentNotesBinding binding;
+    private NotesAdapter adapter;
+
+
+    public static NotesFragment newInstance(@NotesViewModel.NotesPageType int type) {
+        NotesFragment fragment = new NotesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.NOTES_PAGE_TYPE, type);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
-    public static NotesFragment newInstance() {
-        NotesFragment fragment = new NotesFragment();
-        return fragment;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        adapter = new NotesAdapter();
     }
 
     @Override
@@ -34,41 +57,35 @@ public class NotesFragment extends BaseMenuFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentNotesBinding binding = DataBindingUtil.inflate(inflater,getLayoutRes(),container, false);
-        binding.setFragment(this);
+        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
+        @NotesViewModel.NotesPageType int type = getArguments().getInt(Constants.NOTES_PAGE_TYPE);
+        binding.setViewModel(new NotesViewModel(getContext(), this, type));
+        binding.executePendingBindings();
         return binding.getRoot();
     }
 
-//    public void onClick(View view){
-//        switch (view.getId()){
-//            case R.id.bt_back:
-//                getFragmentManager().popBackStack();
-//                break;
-//            case R.id.tv_send_note:
-//                Toast.makeText(getActivity(),"send a note", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.tv_inbox:
-//                Toast.makeText(getActivity(),"inbox", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.tv_sent:
-//                Toast.makeText(getActivity(),"sent", Toast.LENGTH_SHORT).show();
-//                break;
-//        }
-//    }
-
-    public void onBackClick(View view){
-        onBackPressed();
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupRecyclerView(binding.swipeRefreshRecyclerView.recyclerView);
     }
 
-    public void onSendNoteClick(View view){
-        Toast.makeText(getActivity(),"send a note", Toast.LENGTH_SHORT).show();
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), R.drawable.divider_vertical_light));
     }
 
-    public void onInboxClick(View view){
-        Toast.makeText(getActivity(),"inbox", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onDataChanged(List<Note> data) {
+        LogUtils.i(this, "onDataChanged: " + data);
+        adapter.setItemsAndNotify(data);
     }
 
-    public void onSentClick(View view){
-        Toast.makeText(getActivity(),"sent", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onError(Throwable e) {
+        LogUtils.i(this, "onError: " + e.getMessage());
+        UiUtils.makeToastShort(getContext(), "Error: " + e.getMessage());
     }
 }
