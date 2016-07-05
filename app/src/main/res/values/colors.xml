@@ -6,6 +6,7 @@
     <color name="colorAccent">@color/tomato</color>
 
     <color name="white">@android:color/white</color>
+    <color name="white40">#66ffffff</color>
     <color name="black">@android:color/black</color>
     <color name="transparent">@android:color/transparent</color>
 
@@ -18,12 +19,15 @@
     <color name="whiteTwo">#e6e6e6</color>
     <color name="aquaBlue">#00b9e3</color>
     <color name="greyishBrown">#4d4d4d</color>
-    <color name="silver">#C7C7CC</color>
-
+    <color name="darkBlueGray">#1d3444</color>
+    <color name="darkBlueGrayTwo">#1e3344</color>
+    <color name="white82">#f6f6f6</color>
+    <color name="silver">#c7c7cc</color>
+    <color name="azure">#17b7e4</color>
 
     <color name="textDark">#222222</color>
-
     <color name="dividerDark">@color/greyishBrown</color>
+    <color name="warmGrey">#777777</color>
     <color name="dividerLight">@color/silver</color>
 
 </resources>

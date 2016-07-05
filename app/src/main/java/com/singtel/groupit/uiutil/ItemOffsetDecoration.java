@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -22,6 +23,7 @@ public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
         this.itemOffset = itemOffset;
         this.cols = cols;
         this.hasOutSidePadding = hasOutSidePadding;
+
     }
 
     public ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId,
@@ -40,6 +42,7 @@ public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
+
         int position = parent.getChildAdapterPosition(view);
         int colIndex = position % cols;
         int rowIndex = position / cols;
@@ -58,11 +61,27 @@ public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
         if (rowIndex > 0 // others except top
                 || (hasOutSidePadding && rowIndex == 0) // include top if required
                 ) {
-            outRect.top = itemOffset;
+            if(getOrientation(parent) == LinearLayoutManager.HORIZONTAL){
+                outRect.left = itemOffset;
+            }else {
+                outRect.top = itemOffset;
+            }
         }
+
+
 
 //            LogUtils.i(this, "getItemOffsets: pos:" + position// + ", outside:" + hasOutSidePadding
 //                    + ", row:" + rowIndex + ", col:" + colIndex
 //                    + " ->ltrb:(" + outRect.left + "," + outRect.top + "-" + outRect.right + "," + outRect.bottom + ")");
+    }
+
+
+    private int getOrientation(RecyclerView parent) {
+        if (parent.getLayoutManager() instanceof LinearLayoutManager) {
+            LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();
+            return layoutManager.getOrientation();
+        } else {
+            return -1;
+        }
     }
 }

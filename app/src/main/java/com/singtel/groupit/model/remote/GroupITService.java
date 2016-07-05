@@ -1,7 +1,10 @@
 package com.singtel.groupit.model.remote;
 
 
-import com.singtel.groupit.model.AccountInfo;
+import com.singtel.groupit.model.TestContactsResponse;
+import com.singtel.groupit.model.TestTemplatesResponse;
+import com.singtel.groupit.model.TestUserResponse;
+import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.model.NotesResponse;
 
@@ -27,7 +30,7 @@ public interface GroupITService {
     /*
         ENDPOINT
      */
-    String MOCKABLE_TEST = " http://demo1023649.mockable.io"; // test
+    String MOCKABLE_TEST = " http://demo1023649.mockable.io"; // test  // raz: demo6174646 lan: demo1023649
     String SERVER_STAGING = "http://groupit-staging.ap-southeast-1.elasticbeanstalk.com"; // staging
 
     String ENDPOINT = SERVER_STAGING;
@@ -94,4 +97,13 @@ public interface GroupITService {
      */
     @GET("/sentnotes")
     Observable<NotesResponse> getSentNotes();
+
+    @GET("/user")
+    Observable<TestUserResponse> getUser();
+
+    @GET("/contacts")
+    Observable<TestContactsResponse> getContacts();
+
+    @GET("/templates")
+    Observable<TestTemplatesResponse> getTemplates();
 }

@@ -119,7 +119,7 @@ public abstract class SlidingActivity extends BaseActivity {
         mDrawer.setOnOpenListener(new OnOpenListener() {
             @Override
             public void onOpen() {
-                onDrawerOpen();
+                onDrawerOpening();
             }
         });
         mDrawer.setBeforeCloseListener(new BeforeCloseListener() {
@@ -140,14 +140,18 @@ public abstract class SlidingActivity extends BaseActivity {
         }
     }
 
-    protected void onDrawerOpen() {
+    protected void onDrawerOpening() {
     }
 
     protected void onDrawerOpened() {
     }
 
     protected boolean canCloseDrawer() {
+        onDrawerClosing();
         return true;
+    }
+
+    protected void onDrawerClosing() {
     }
 
     protected abstract void onDrawerClosed();

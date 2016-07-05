@@ -40,7 +40,7 @@ public class MainViewModel implements ViewModel {
     }
 
     @Override
-    public void destroy() {
+    public void onDestroy() {
 
     }
 }

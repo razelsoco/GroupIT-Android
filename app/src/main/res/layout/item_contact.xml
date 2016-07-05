@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.ItemRecepientViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingPrefix"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingLeft="@dimen/space_medium"
+        android:paddingRight="@dimen/space_medium"
+        android:paddingTop="@dimen/space_small">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.name}"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            fontPath="@string/font_avenirltpro_roman"/>
+
+    </LinearLayout>
+</layout>

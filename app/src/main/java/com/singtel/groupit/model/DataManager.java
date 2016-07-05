@@ -1,12 +1,11 @@
-package com.singtel.groupit;
+package com.singtel.groupit.model;
 
 import android.content.Context;
 
+import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
-import com.singtel.groupit.model.AccountInfo;
-import com.singtel.groupit.model.ArticlesResponse;
-import com.singtel.groupit.model.NotesResponse;
+import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.remote.GroupITService;
 
 import javax.inject.Inject;
@@ -50,6 +49,18 @@ public class DataManager {
 
     public Observable<ArticlesResponse> getTopStories() {
         return mGroupITService.getTopStories();
+    }
+
+    public Observable<TestUserResponse> getUser() {
+        return mGroupITService.getUser();
+    }
+
+    public Observable<TestContactsResponse> getContacts() {
+        return mGroupITService.getContacts();
+    }
+
+    public Observable<TestTemplatesResponse> getTemplates() {
+        return mGroupITService.getTemplates();
     }
 
     public Observable<NotesResponse> getInbox() {

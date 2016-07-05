@@ -1,9 +1,9 @@
 package com.singtel.groupit.viewmodel;
 
 /**
- * Interface that every ViewModel must implement
+ * Created by razelsoco on 27/6/16.
  */
-public interface ViewModel {
 
-    void destroy();
+public interface ViewModel {
+    void onDestroy();
 }

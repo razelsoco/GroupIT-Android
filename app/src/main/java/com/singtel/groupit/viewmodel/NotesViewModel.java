@@ -3,10 +3,10 @@ package com.singtel.groupit.viewmodel;
 import android.content.Context;
 import android.support.annotation.IntDef;
 
-import com.singtel.groupit.DataManager;
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.NotesResponse;
-import com.singtel.groupit.model.Note;
+import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +27,8 @@ public class NotesViewModel extends RefreshingViewModel {
 
     public static final int PAGE_TYPE_INBOX         = 1;
     public static final int PAGE_TYPE_SENT_NOTES    = 2;
+
+
     @IntDef({PAGE_TYPE_INBOX, PAGE_TYPE_SENT_NOTES})
     public @interface NotesPageType {}
 
@@ -88,7 +90,7 @@ public class NotesViewModel extends RefreshingViewModel {
     }
 
     @Override
-    public void destroy() {
+    public void onDestroy() {
         checkUnsubscribe();
         subscription = null;
         delegate = null;

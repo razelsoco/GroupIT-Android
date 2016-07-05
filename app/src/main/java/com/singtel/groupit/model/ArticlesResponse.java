@@ -1,5 +1,7 @@
 package com.singtel.groupit.model;
 
+import com.singtel.groupit.model.domain.ArticleModel;
+
 import java.util.List;
 
 /**

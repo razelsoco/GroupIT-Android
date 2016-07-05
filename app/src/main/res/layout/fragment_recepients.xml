@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.singtel.groupit.viewmodel.RecepientsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingPrefix">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white82"
+            android:paddingBottom="@dimen/space_small"
+            android:paddingLeft="@dimen/space_medium"
+            android:paddingRight="@dimen/space_medium"
+            android:paddingTop="@dimen/space_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To:"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="3"
+                android:textSize="15sp"
+                android:text="@{model.searchString}"
+                android:background="@null"
+                app:addTextChangedListener="@{model.contactNameEditTextWatcher}" />
+
+            <ImageView
+                android:id="@+id/bt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/space_normal"
+                android:onClick="@{model::onOpenAllContacts}"
+                android:src="@drawable/ic_plus" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/silver"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recepients_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:setAdapter="@{model.recepientsAdapter}"
+                app:visibility="@{model.recepientsListVisibility}"
+                tools:listitem="@layout/item_recepient" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filtered_contacts_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:setAdapter="@{model.filteredContactsAdapter}"
+                app:visibility="@{model.autocompleteListVisibility}" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

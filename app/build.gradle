@@ -132,6 +132,8 @@ dependencies {
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
     debugCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion"
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 
 

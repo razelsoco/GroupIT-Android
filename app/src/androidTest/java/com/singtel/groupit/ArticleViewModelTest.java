@@ -8,7 +8,7 @@ import android.test.RenamingDelegatingContext;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.text.TextUtils;
 
-import com.singtel.groupit.model.ArticleModel;
+import com.singtel.groupit.model.domain.ArticleModel;
 import com.singtel.groupit.util.MockModelsTestUtil;
 import com.singtel.groupit.viewmodel.ArticleViewModel;
 

@@ -1,4 +1,4 @@
-package com.singtel.groupit.model;
+package com.singtel.groupit.model.domain;
 
 /**
  * Created by lanna on 6/28/16.

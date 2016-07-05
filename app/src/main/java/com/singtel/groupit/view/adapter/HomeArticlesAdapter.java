@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemHomeArticleBinding;
-import com.singtel.groupit.model.ArticleModel;
+import com.singtel.groupit.model.domain.ArticleModel;
 import com.singtel.groupit.viewmodel.ArticleViewModel;
 
 /**

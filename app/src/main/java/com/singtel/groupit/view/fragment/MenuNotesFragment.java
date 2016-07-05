@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentMenuNotesBinding;
+import com.singtel.groupit.databinding.FragmentNotesBinding;
 import com.singtel.groupit.view.activity.NotesActivity;
+import com.singtel.groupit.view.activity.SendNoteActivity;
 import com.singtel.groupit.viewmodel.NotesViewModel;
 
 /**
@@ -19,6 +21,9 @@ import com.singtel.groupit.viewmodel.NotesViewModel;
  */
 
 public class MenuNotesFragment extends BaseMenuFragment {
+    public static MenuNotesFragment getInstance() {
+        return new MenuNotesFragment();
+    }
 
     public static MenuNotesFragment newInstance() {
         MenuNotesFragment fragment = new MenuNotesFragment();
@@ -43,7 +48,7 @@ public class MenuNotesFragment extends BaseMenuFragment {
     }
 
     public void onSendNoteClick(View view){
-        Toast.makeText(getActivity(),"send a note", Toast.LENGTH_SHORT).show();
+        startActivity(SendNoteActivity.newIntent(getActivity()));
     }
 
     public void onInboxClick(View view) {
