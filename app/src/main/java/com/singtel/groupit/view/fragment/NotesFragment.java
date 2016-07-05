@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentNotesBinding;
-import com.singtel.groupit.model.Note;
+import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.UiUtils;

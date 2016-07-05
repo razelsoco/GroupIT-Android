@@ -1,15 +1,11 @@
-package com.singtel.groupit;
+package com.singtel.groupit.model;
 
 import android.content.Context;
 
+import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
-import com.singtel.groupit.model.TestContactsResponse;
-import com.singtel.groupit.model.TestTemplatesResponse;
-import com.singtel.groupit.model.TestUserResponse;
-import com.singtel.groupit.model.AccountInfo;
-import com.singtel.groupit.model.ArticlesResponse;
-import com.singtel.groupit.model.NotesResponse;
+import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.remote.GroupITService;
 
 import javax.inject.Inject;

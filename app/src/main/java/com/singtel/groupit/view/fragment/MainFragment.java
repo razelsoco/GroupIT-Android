@@ -7,9 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
-import com.singtel.groupit.DataManager;
 import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
@@ -30,7 +30,7 @@ import rx.subscriptions.CompositeSubscription;
  *
  */
 
-public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.swipe_refresh_container)
     SwipeRefreshLayout swipeRefreshLayout;

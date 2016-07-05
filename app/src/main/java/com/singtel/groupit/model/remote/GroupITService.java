@@ -4,7 +4,7 @@ package com.singtel.groupit.model.remote;
 import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.TestTemplatesResponse;
 import com.singtel.groupit.model.TestUserResponse;
-import com.singtel.groupit.model.AccountInfo;
+import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.model.NotesResponse;
 

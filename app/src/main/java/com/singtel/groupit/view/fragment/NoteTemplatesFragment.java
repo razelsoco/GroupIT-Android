@@ -12,7 +12,6 @@ import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentNoteTemplatesBinding;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.uiutil.ItemOffsetDecoration;
-import com.singtel.groupit.view.adapter.ImageTemplateAdapter;
 import com.singtel.groupit.viewmodel.NoteTemplatesViewModel;
 
 /**
@@ -20,7 +19,7 @@ import com.singtel.groupit.viewmodel.NoteTemplatesViewModel;
  *
  */
 
-public class NoteTemplatesFragment extends BaseMenuFragment {
+public class NoteTemplatesFragment extends BaseFragment {
     public static NoteTemplatesFragment getInstance() {
         return new NoteTemplatesFragment();
     }

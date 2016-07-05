@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ActivityLoginBinding;
-import com.singtel.groupit.model.AccountInfo;
+import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.util.LogUtils;

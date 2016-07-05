@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.singtel.groupit.DataManager;
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.domain.Contact;
@@ -40,7 +40,7 @@ public class RecepientsViewModel implements ViewModel {
 
     Subscription subscription;
 
-    ArrayList<Contact> allContacts;
+    ArrayList<Contact> allContacts = new ArrayList<>();
     List<Contact> addedContacts = new ArrayList<>();
     List<Contact> filteredContacts = new ArrayList<>();
 
@@ -129,7 +129,8 @@ public class RecepientsViewModel implements ViewModel {
 
                     @Override
                     public void onNext(TestContactsResponse testContactsResponse) {
-                        allContacts = testContactsResponse.contacts;
+                        if(testContactsResponse.contacts != null)
+                            allContacts = testContactsResponse.contacts;
                     }
                 });
     }

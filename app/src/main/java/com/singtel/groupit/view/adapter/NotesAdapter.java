@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemNoteBinding;
-import com.singtel.groupit.model.Note;
+import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.viewmodel.NoteViewModel;
 
 /**

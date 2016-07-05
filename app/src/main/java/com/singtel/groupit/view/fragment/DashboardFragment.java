@@ -16,9 +16,9 @@ import com.singtel.groupit.viewmodel.DashBoardViewModel;
  *
  */
 
-public class MenuFragment extends BaseMenuFragment {
-    public static MenuFragment getInstance() {
-        return new MenuFragment();
+public class DashboardFragment extends BaseMenuFragment {
+    public static DashboardFragment getInstance() {
+        return new DashboardFragment();
     }
     FragmentMenuBinding binding;
     @Override

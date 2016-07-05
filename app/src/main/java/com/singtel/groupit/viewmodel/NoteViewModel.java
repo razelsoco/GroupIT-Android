@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.view.View;
 
-import com.singtel.groupit.model.Note;
+import com.singtel.groupit.model.domain.Note;
 
 /**
  * Created by lanna on 6/28/16.

@@ -1,4 +1,4 @@
-package com.singtel.groupit.model;
+package com.singtel.groupit.model.domain;
 
 import com.google.gson.annotations.SerializedName;
 

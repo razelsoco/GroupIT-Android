@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.singtel.groupit.DataManager;
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.model.TestUserResponse;

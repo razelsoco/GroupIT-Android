@@ -8,7 +8,7 @@ import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ActivityMainBinding;
 import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.view.fragment.MainFragment;
-import com.singtel.groupit.view.fragment.MenuFragment;
+import com.singtel.groupit.view.fragment.DashboardFragment;
 import com.singtel.groupit.viewmodel.MainViewModel;
 
 
@@ -55,7 +55,7 @@ public class MainActivity extends SlidingActivity {
 
     @Override
     protected Fragment onCreateMenuPanel() {
-        return MenuFragment.getInstance();
+        return DashboardFragment.getInstance();
     }
 
     @Override

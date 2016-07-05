@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.singtel.groupit.DataManager;
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.model.TestTemplatesResponse;
@@ -83,18 +83,6 @@ public class NoteTemplatesViewModel implements ViewModel {
         return this.templatesAdapter;
     }
 
-//    public String getImageUrl() {
-//        // The URL will usually come from a model (i.e Profile)
-//        return selectedTemplateUrl.get();
-//    }
-//
-//    @BindingAdapter({"bind:imageUrl"})
-//    public static void loadImage(ImageView view, String imageUrl) {
-//        Picasso.with(view.getContext())
-//                .load(imageUrl)
-//                .placeholder(R.drawable.placeholder)
-//                .into(view);
-//    }
     /**Binding methods end**/
 
 
@@ -115,17 +103,13 @@ public class NoteTemplatesViewModel implements ViewModel {
 
                     @Override
                     public void onNext(TestTemplatesResponse testTemplatesResponse) {
-
-                        templates.addAll(testTemplatesResponse.templates);
-                        templatesAdapter.notifyDataSetChanged();
-                        templates.get(0).setSelected(true);
-
+                        if(testTemplatesResponse.templates != null) {
+                            templates.addAll(testTemplatesResponse.templates);
+                            templatesAdapter.notifyDataSetChanged();
+                            templates.get(0).setSelected(true);
+                        }
                     }
                 });
-    }
-
-    public void onOpenAllContacts(View view){
-        //context.startActivity(SelectableContactsActivity.newIntent(context, allContacts));
     }
 
 

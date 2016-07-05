@@ -48,7 +48,6 @@ public class MenuNotesFragment extends BaseMenuFragment {
     }
 
     public void onSendNoteClick(View view){
-        //Toast.makeText(getActivity(),"send a note", Toast.LENGTH_SHORT).show();
         startActivity(SendNoteActivity.newIntent(getActivity()));
     }
 

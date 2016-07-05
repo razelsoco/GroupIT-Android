@@ -4,9 +4,9 @@ import android.content.Context;
 import android.databinding.ObservableInt;
 import android.text.TextWatcher;
 
-import com.singtel.groupit.DataManager;
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
-import com.singtel.groupit.model.AccountInfo;
+import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.SimpleTextWatcher;
 import com.singtel.groupit.util.KeystoreUtil;
