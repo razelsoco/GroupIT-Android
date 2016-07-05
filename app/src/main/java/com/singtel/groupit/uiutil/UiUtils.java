@@ -9,25 +9,18 @@ import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -35,7 +28,6 @@ import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Surface;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -45,8 +37,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.util.LogUtils;
 
@@ -153,6 +145,13 @@ public class UiUtils {
         }
     }
 
+    public static void doWhenViewHasSize(final View view, final Runnable runnable) {
+        if (view.getWidth() == 0 || view.getHeight() == 0) {
+            addOnGlobalLayoutListener(view, runnable);
+        } else {
+            runnable.run();
+        }
+    }
 
     public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
         ViewTreeObserver observer = view.getViewTreeObserver();
@@ -415,4 +414,14 @@ public class UiUtils {
         }
     }
 
+    /*
+        Toast
+     */
+    public static void makeToastShort(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void makeToastLong(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
 }

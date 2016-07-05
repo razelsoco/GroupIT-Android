@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.singtel.groupit.viewmodel.MainViewModel"/>
+            type="com.singtel.groupit.viewmodel.ActionBarBackViewModel"/>
     </data>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.singtel.groupit.view.activity.MainActivity">
+        tools:context="com.singtel.groupit.view.activity.NotesActivity">
 
         <include
-            android:id="@+id/actionBarMain"
-            layout="@layout/action_bar_main"
+            android:id="@+id/actionBarBack"
+            layout="@layout/action_bar_back"
             bind:viewModel="@{viewModel}"/>
 
         <FrameLayout

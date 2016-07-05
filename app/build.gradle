@@ -27,20 +27,12 @@ android {
     }
 
     // keystore
-//    signingConfigs {
-//        release {
-//            storeFile file('groupit_production_key.keystore')
-//            storePassword 'groupit_production_key'
-//            keyPassword 'groupit_production_key'
-//            keyAlias 'groupit'
-//        }
-//    }
     signingConfigs {
         release {
-            keyAlias 'groupit'
-            keyPassword 'groupit_production_key'
-            storeFile file('/Users/lanna/Documents/Projects/GroupIT/GroupIT-Android/app/src/groupit_production_key.jks')
+            storeFile file('keystore/groupit_production_key.jks')
             storePassword 'groupit_production_key'
+            keyPassword 'groupit_production_key'
+            keyAlias 'groupit'
         }
     }
 

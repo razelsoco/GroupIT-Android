@@ -10,12 +10,11 @@ import android.view.View;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.DataManager;
-import com.singtel.groupit.model.TestResponse;
+import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
-import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
 
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_main;
+        return R.layout.swipe_refresh_recycler_view;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), R.drawable.vertical_divider));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), R.drawable.divider_vertical_dark));
         recyclerView.setAdapter(adapter);
 
         loadStoriesIfNetworkConnected();
@@ -91,12 +90,12 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
         }
     }
 
-    public void fetchTopStories() {
+    private void fetchTopStories() {
         //LogUtils.w(MainFragment.this, "fetchTopStories: ");
         mSubscriptions.add(dataManager.getTopStories()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
-                .subscribe(new Subscriber<TestResponse>() {
+                .subscribe(new Subscriber<ArticlesResponse>() {
                     @Override
                     public void onCompleted() {
                         //LogUtils.w(MainFragment.this, "fetchTopStories: onCompleted");
@@ -121,7 +120,7 @@ public class MainFragment extends BaseMenuFragment implements SwipeRefreshLayout
                     }
 
                     @Override
-                    public void onNext(TestResponse articles) {
+                    public void onNext(ArticlesResponse articles) {
                         //LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+", "+ articles.articles);
                         adapter.setItems(articles.articles);
                     }

@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public boolean handleMessage(Message msg) {
-        gotoMainScreen();
+        gotoLoginScreen();
         return true;
     }
 

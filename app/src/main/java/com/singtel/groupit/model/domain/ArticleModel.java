@@ -2,7 +2,6 @@ package com.singtel.groupit.model.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.databinding.BaseObservable;
 
 /**
  * Created by lanna on 6/22/16.
@@ -19,6 +18,7 @@ import android.databinding.BaseObservable;
 
 public class ArticleModel implements Parcelable {
 
+    // FIXME data test, will update when api ready
     private String title;
     private String category;
     private String color;

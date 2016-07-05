@@ -2,7 +2,6 @@ package com.singtel.groupit.injection.component;
 
 import android.app.Application;
 
-
 import com.singtel.groupit.DataManager;
 import com.singtel.groupit.injection.module.ApplicationModule;
 import com.singtel.groupit.view.activity.MainActivity;

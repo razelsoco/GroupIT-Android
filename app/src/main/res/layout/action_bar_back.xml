@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.singtel.groupit.viewmodel.MainViewModel"/>
+            type="com.singtel.groupit.viewmodel.ActionBarBackViewModel"/>
 
     </data>
 
@@ -33,9 +33,9 @@
                 android:layout_width="@dimen/padded_action_bar_size"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:onClick="@{viewModel::onClickMenu}"
+                android:onClick="@{viewModel::onClickBack}"
                 android:scaleType="center"
-                android:src="@drawable/ic_menu"/>
+                android:src="@drawable/ic_back"/>
 
             <TextView
                 android:id="@+id/tv_spinner"
@@ -49,19 +49,10 @@
                 android:maxLines="1"
                 android:paddingLeft="@dimen/space_normal"
                 android:paddingRight="@dimen/space_normal"
-                android:text="@string/main_category_title"
+                android:text="@{viewModel.title}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_title"
                 app:fontPath="@string/font_avenirltpro_book"/>
-
-            <ImageView
-                android:id="@+id/iv_action_bar_right"
-                android:layout_width="@dimen/padded_action_bar_size"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:clickable="true"
-                android:scaleType="center"
-                android:src="@drawable/ic_dropdown"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="TextView" >
+        <item name="android:textColor">@color/textDark</item>
+        <item name="android:textSize">@dimen/textSize_body</item>
+    </style>
+
     <style name="dashboardMenuItem" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

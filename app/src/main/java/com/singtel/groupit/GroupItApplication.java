@@ -29,6 +29,7 @@ public class GroupITApplication extends Application {
                 .build()
         );
 
+        // dagger application component
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();

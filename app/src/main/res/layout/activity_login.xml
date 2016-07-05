@@ -1,64 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingBottom="@dimen/activity_horizontal_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_horizontal_margin"
-    tools:context="com.singtel.groupit.view.activity.MainActivity"
-    tools:ignore="MissingPrefix">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/space_large"
-        android:paddingTop="@dimen/space_large"
-        android:src="@drawable/logo"
-        app:layout_constraintLeft_toLeftOf="@+id/activity_main"
-        app:layout_constraintRight_toRightOf="@+id/activity_main"
-        app:layout_constraintTop_toTopOf="@+id/activity_main"/>
+    <data>
 
-    <EditText
-        android:id="@+id/tv_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:textSize="@dimen/textSize_title"
-        app:fontPath="@string/font_avenirltpro_book"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="@+id/activity_main"
-        app:layout_constraintRight_toRightOf="@+id/activity_main"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo"/>
+        <variable
+            name="viewModel"
+            type="com.singtel.groupit.viewmodel.LoginViewModel"/>
+    </data>
 
-    <EditText
-        android:id="@+id/tv_password"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/password"
-        android:textSize="@dimen/textSize_title"
-        app:fontPath="@string/font_avenirltpro_book"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="@+id/activity_main"
-        app:layout_constraintRight_toRightOf="@+id/activity_main"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_main"
-        app:layout_constraintCenterX_toCenterX="@id/activity_main"
-        app:layout_constraintLeft_toLeftOf="@+id/activity_main"
-        app:layout_constraintRight_toRightOf="@+id/activity_main"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        tools:context="com.singtel.groupit.view.activity.MainActivity"
+        tools:ignore="MissingPrefix">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space_large"
+            android:paddingTop="@dimen/space_large"
+            android:src="@drawable/logo"
+            app:layout_constraintLeft_toLeftOf="@+id/activity_main"
+            app:layout_constraintRight_toRightOf="@+id/activity_main"
+            app:layout_constraintTop_toTopOf="@+id/activity_main"/>
+
+        <EditText
+            android:id="@+id/tv_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/textSize_title"
+            app:addTextChangedListener="@{viewModel.onEmailChanged}"
+            app:fontPath="@string/font_avenirltpro_book"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="@+id/activity_main"
+            app:layout_constraintRight_toRightOf="@+id/activity_main"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo"/>
+
+        <EditText
+            android:id="@+id/tv_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/textSize_title"
+            app:addTextChangedListener="@{viewModel.onPasswordChanged}"
+            app:fontPath="@string/font_avenirltpro_book"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="@+id/activity_main"
+            app:layout_constraintRight_toRightOf="@+id/activity_main"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:visibility="@{viewModel.loadingVisible}"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_main"
+            app:layout_constraintCenterX_toCenterX="@id/activity_main"
+            app:layout_constraintLeft_toLeftOf="@+id/activity_main"
+            app:layout_constraintRight_toRightOf="@+id/activity_main"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

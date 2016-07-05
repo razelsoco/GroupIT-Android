@@ -1,7 +1,5 @@
 package com.singtel.groupit.model;
 
-import com.singtel.groupit.model.domain.ArticleModel;
-
 import java.util.List;
 
 /**
@@ -9,8 +7,8 @@ import java.util.List;
  * FIXME test only, then remove this
  */
 
-public class TestResponse {
+public class NotesResponse {
 
-    public List<ArticleModel> articles;
+    public List<Note> notes;
 
 }

@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">@dimen/space_normal</dimen>
 
     <dimen name="space_none">0dp</dimen>
+    <dimen name="space_min_extra">2dp</dimen>
     <dimen name="space_min">4dp</dimen>
     <dimen name="space_small">8dp</dimen>
     <dimen name="space_medium">10dp</dimen>
