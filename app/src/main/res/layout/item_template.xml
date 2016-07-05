@@ -17,10 +17,10 @@
         android:layout_height="100dp"
         app:checked="@{viewModel.selectedState}"
         android:clickable="true"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         app:imageUrl="@{viewModel.imageUrl}"
         android:background="@drawable/selector_bg_template"
-        android:padding="5dp"
+        android:padding="2dp"
         />
     </FrameLayout>
 </layout>

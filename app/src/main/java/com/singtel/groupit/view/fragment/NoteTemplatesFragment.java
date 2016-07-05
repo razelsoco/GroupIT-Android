@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentNoteTemplatesBinding;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
+import com.singtel.groupit.uiutil.ItemOffsetDecoration;
+import com.singtel.groupit.view.adapter.ImageTemplateAdapter;
 import com.singtel.groupit.viewmodel.NoteTemplatesViewModel;
 
 /**
@@ -40,6 +42,8 @@ public class NoteTemplatesFragment extends BaseMenuFragment {
         binding.setModel(new NoteTemplatesViewModel(getActivity()));
         binding.templatesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         binding.templatesRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.templates_divider));
+        binding.templatesRecyclerView.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.dimen.space_medium, false));
+
         return binding.getRoot();
     }
 

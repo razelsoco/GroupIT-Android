@@ -26,5 +26,6 @@
     <color name="azure">#17b7e4</color>
     <color name="textDark">#222222</color>
     <color name="dividerDark">@color/greyishBrown</color>
+    <color name="warmGrey">#777777</color>
 
 </resources>

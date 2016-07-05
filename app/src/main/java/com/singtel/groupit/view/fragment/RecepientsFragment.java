@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentRecepientsBinding;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
+import com.singtel.groupit.uiutil.ItemOffsetDecoration;
 import com.singtel.groupit.viewmodel.RecepientsViewModel;
 
 /**
@@ -42,6 +43,8 @@ public class RecepientsFragment extends BaseMenuFragment {
         binding.recepientsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
         binding.filteredContactsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.filteredContactsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
+        binding.filteredContactsRecyclerView.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.dimen.space_medium, false));
+
         return binding.getRoot();
     }
 

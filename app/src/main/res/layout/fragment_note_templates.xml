@@ -26,6 +26,15 @@
             <com.singtel.groupit.view.customview.AspectRatioImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:src="@{model.selectedTemplateImage}"/>
+                android:src="@{model.selectedTemplateImage}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.message}"
+                android:textSize="17sp"
+                fontPath="@string/font_avenirltpro_roman"
+                android:textColor="@color/warmGrey"
+                android:layout_margin="@dimen/space_normal"/>
     </LinearLayout>
 </layout>

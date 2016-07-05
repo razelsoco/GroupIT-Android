@@ -21,12 +21,13 @@ import com.singtel.groupit.viewmodel.ViewModel;
 public class ImageTemplateAdapter extends BaseRecyclerAdapter<Template, ImageTemplateAdapter.BindingHolder> {
 
     private Context context;
-    protected OnItemViewModelClickListener onItemClickListener;
-    public static interface OnItemViewModelClickListener {
-        public void onItemClicked(View view, int position, ViewModel data);
+    protected OnViewModelChangeListener onItemClickListener;
+
+    public interface OnViewModelChangeListener {
+        void onItemClicked(View view, int position, ViewModel data);
     }
 
-    public ImageTemplateAdapter(Context context, OnItemViewModelClickListener onItemClickListener) {
+    public ImageTemplateAdapter(Context context, OnViewModelChangeListener onItemClickListener) {
         this.context = context;
         this.onItemClickListener = onItemClickListener;
     }
@@ -43,7 +44,13 @@ public class ImageTemplateAdapter extends BaseRecyclerAdapter<Template, ImageTem
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
         ItemTemplateBinding itemBinding = holder.binding;
-        itemBinding.setViewModel(new ItemTemplateViewModel(getItem(position)));
+
+        ItemTemplateViewModel itemTemplateViewModel = new ItemTemplateViewModel(getItem(position));
+        itemBinding.setViewModel(itemTemplateViewModel);
+
+        if(position == 0)
+            onItemClickListener.onItemClicked(null, 0, itemTemplateViewModel);
+
     }
 
     /*
@@ -52,8 +59,8 @@ public class ImageTemplateAdapter extends BaseRecyclerAdapter<Template, ImageTem
 
     public static class BindingHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ItemTemplateBinding binding;
-        private OnItemViewModelClickListener onItemClickListener;
-        public BindingHolder(ItemTemplateBinding binding, OnItemViewModelClickListener onItemClickListener) {
+        private OnViewModelChangeListener onItemClickListener;
+        public BindingHolder(ItemTemplateBinding binding, OnViewModelChangeListener onItemClickListener) {
             super(binding.getRoot());
             this.binding = binding;
             this.onItemClickListener = onItemClickListener;
@@ -68,6 +75,8 @@ public class ImageTemplateAdapter extends BaseRecyclerAdapter<Template, ImageTem
             this.binding.getViewModel().onImageClicked(v);
             if(onItemClickListener != null)
                 onItemClickListener.onItemClicked(v, getAdapterPosition(), this.binding.getViewModel());
+
         }
     }
+
 }
