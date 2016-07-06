@@ -1,9 +1,7 @@
 package com.singtel.groupit.util;
 
 import android.content.Context;
-import android.os.Build;
 import android.security.KeyPairGeneratorSpec;
-import android.security.keystore.KeyInfo;
 import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
@@ -12,7 +10,6 @@ import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
 import java.security.Signature;
 import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
@@ -27,6 +24,9 @@ import javax.security.auth.x500.X500Principal;
 /**
  * Created by lanna on 7/1/16.
  *
+ * Prefers:
+ * https://developer.android.com/training/articles/keystore.html
+ * http://www.androidauthority.com/use-android-keystore-store-passwords-sensitive-information-623779/
  */
 
 public class KeystoreUtil {
@@ -35,12 +35,6 @@ public class KeystoreUtil {
 
     // FIXME
     public static void test(Context context) {
-        KeyInfo keyInfo = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            LogUtils.i("keystore", "isInsideSecureHardware:" + (keyInfo == null ? "null" : keyInfo.isInsideSecureHardware()));
-        }
-
-
         /*
          * Load the Android KeyStore instance using the the
          * "AndroidKeyStore" provider to list out what entries are
@@ -67,9 +61,9 @@ public class KeystoreUtil {
         if (ks != null) {
             String alias = "password";
             String textNeedSecure = "lanna123"; // the inputted password
-            createNewKeys(context, ks, alias);
-            String encryptedText = encryptString(ks, alias, textNeedSecure);
-            decryptString(ks, alias, encryptedText);
+            checkCreateNewKeys(context, alias);
+            String encryptedText = encryptString(alias, textNeedSecure);
+            decryptString(alias, encryptedText);
         }
     }
 
@@ -100,9 +94,11 @@ public class KeystoreUtil {
 //        }
 //    }
 
-    public static void createNewKeys(Context context, KeyStore keyStore, String alias) {
+    public static boolean checkCreateNewKeys(Context context, String alias) {
         try {
             // Create new key if needed
+            KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
             if (!keyStore.containsAlias(alias)) {
                 Calendar start = Calendar.getInstance();
                 Calendar end = Calendar.getInstance();
@@ -121,8 +117,10 @@ public class KeystoreUtil {
                 LogUtils.d("keystore", "generatePrivateKey: privateKey=" + kp.getPrivate().toString()
                         +", publicKey=" + kp.getPublic().toString());
             }
+            return true;
         } catch (Exception e) {
             LogUtils.w("keystore", LogUtils.getStackTraceString(e));
+            return false;
         }
     }
 
@@ -179,23 +177,37 @@ public class KeystoreUtil {
     }
 
 
-    /*
-        TODO Supports
-     */
-
-
-    public static void deleteKey(KeyStore keyStore, String alias) {
+    public static void deleteKey(String alias) {
         try {
+            KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
             keyStore.deleteEntry(alias);
             LogUtils.d("keystore", "deleteEntry: done for alias=" + alias);
-        } catch (KeyStoreException e) {
+        } catch (Exception e) {
             LogUtils.w("keystore", LogUtils.getStackTraceString(e));
         }
     }
 
 
-    public static String encryptString(KeyStore keyStore, String alias, String initialText) {
+    private static Cipher getCipher() {
         try {
+//            return Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL"); // IOException: CipherOutputStream.close when encrypt
+//            return Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidKeyStoreBCWorkaround"); // error when close input in encrypt
+            return Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding"); // error Cipher not found
+//            return Cipher.getInstance("AES/CFB8/NoPadding");
+
+        } catch(Exception exception) {
+            throw new RuntimeException("Failed to get an instance of Cipher", exception);
+        }
+    }
+
+
+    public static String encryptString(String alias, String initialText) {
+        LogUtils.d("keystore", "encryptString: alias: "+ alias + " text:\"" + initialText);
+        try {
+            KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
+
             KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry)keyStore.getEntry(alias, null);
             RSAPublicKey publicKey = (RSAPublicKey) privateKeyEntry.getCertificate().getPublicKey();
 
@@ -205,9 +217,7 @@ public class KeystoreUtil {
                 return null;
             }
 
-            Cipher input =
-//                    Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL");
-                    Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidKeyStoreBCWorkaround");
+            Cipher input = getCipher();
             input.init(Cipher.ENCRYPT_MODE, publicKey);
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -218,7 +228,7 @@ public class KeystoreUtil {
 
             byte [] vals = outputStream.toByteArray();
             String encryptedText = Base64.encodeToString(vals, Base64.DEFAULT); // encrypted text
-            LogUtils.d("keystore", "encryptString: alias: "+ alias + " text:\"" + initialText + "\"to:\n\"" + encryptedText + "\"");
+            LogUtils.d("keystore", "encryptString: alias: "+ alias + " text:\"" + initialText + "\" to: " + encryptedText);
             return encryptedText;
         } catch (Exception e) {
             LogUtils.w("keystore", LogUtils.getStackTraceString(e));
@@ -227,14 +237,16 @@ public class KeystoreUtil {
     }
 
 
-    public static String decryptString(KeyStore keyStore, String alias, String encryptedText) {
+    public static String decryptString(String alias, String encryptedText) {
+        LogUtils.d("keystore", "decryptString: alias=" + alias);
         try {
+            KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
+
             KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keyStore.getEntry(alias, null);
 
             // Decrypt the text
-            Cipher output =
-//                    Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL");
-                    Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidKeyStoreBCWorkaround");
+            Cipher output = getCipher();
             output.init(Cipher.DECRYPT_MODE, privateKeyEntry.getPrivateKey());
 
             CipherInputStream cipherInputStream = new CipherInputStream(
@@ -259,5 +271,4 @@ public class KeystoreUtil {
         }
         return null;
     }
-
 }

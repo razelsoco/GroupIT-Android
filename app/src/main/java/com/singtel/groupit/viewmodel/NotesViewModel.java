@@ -73,7 +73,7 @@ public class NotesViewModel extends RefreshingViewModel {
                     public void onError(Throwable e) {
 //                        LogUtils.w(NotesViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
                         setRefreshing(false);
-                        delegate.onError(e);
+                        delegate.onError(dataManager.logError(e));
                     }
 
                     @Override

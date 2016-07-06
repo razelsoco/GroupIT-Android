@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 
+import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 
 public class SplashActivity extends BaseActivity
@@ -31,7 +33,7 @@ public class SplashActivity extends BaseActivity
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -42,7 +44,12 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public boolean handleMessage(Message msg) {
-        gotoLoginScreen();
+        String token = GroupITApplication.get(this).getComponent().sharedPreferences().getUserToken(this);
+        if (TextUtils.isEmpty(token)) {
+            gotoLoginScreen();
+        } else {
+            gotoMainScreen();
+        }
         return true;
     }
 

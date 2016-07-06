@@ -4,12 +4,17 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ActivityMainBinding;
 import com.singtel.groupit.uiutil.UiUtils;
+import com.singtel.groupit.util.GroupITSharedPreferences;
+import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.view.fragment.DashboardFragment;
 import com.singtel.groupit.viewmodel.MainViewModel;
+
+import javax.inject.Inject;
 
 
 /**
@@ -19,6 +24,11 @@ import com.singtel.groupit.viewmodel.MainViewModel;
 
 public class MainActivity extends SlidingActivity {
 
+    /// dagger inject single instances
+    @Inject
+    GroupITSharedPreferences pref;
+
+    /// data binding
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
 
@@ -30,6 +40,11 @@ public class MainActivity extends SlidingActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // inject instances
+        LogUtils.i(this, "saved login token: " + GroupITApplication.get(this).getComponent().sharedPreferences().getUserToken(this));
+
+        // data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = new MainViewModel(this);
         binding.setViewModel(viewModel);

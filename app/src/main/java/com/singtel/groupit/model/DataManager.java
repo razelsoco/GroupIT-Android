@@ -7,9 +7,13 @@ import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.remote.GroupITService;
+import com.singtel.groupit.util.LogUtils;
+
+import java.io.IOException;
 
 import javax.inject.Inject;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -43,6 +47,9 @@ public class DataManager {
         return mSubscribeScheduler;
     }
 
+    /*
+        Support API callings
+     */
     public Observable<AccountInfo> login(String username, String password, String grantType) {
         return mGroupITService.getToken(username, password, grantType);
     }
@@ -69,5 +76,34 @@ public class DataManager {
 
     public Observable<NotesResponse> getSentNotes() {
         return mGroupITService.getSentNotes();
+    }
+
+    /*
+    HTTP Status: 400 BAD REQUEST
+    {
+      "error": {
+        "code": "600",
+        "title": "Bad request",
+        "detail": "The specified email is malformed."
+      }
+    }
+     */
+    public String logError(Throwable throwable) {
+        String message;
+        if (throwable instanceof HttpException) {
+            // We had non-2XX http error
+            message = "We had non-2XX http error: " + ((HttpException) throwable).response().message();
+        }
+        else if (throwable instanceof IOException) {
+            // A network or conversion error happened
+            message = "A network or conversion error happened: " + throwable.getMessage();
+        }
+        else {
+            // We don't know what happened. We need to simply convert to an unknown error
+            // ...
+            message = "We don't know what happened. We need to simply convert to an unknown error: " + throwable.getMessage();
+        }
+        LogUtils.d(this, "logError: " + message);
+        return message;
     }
 }

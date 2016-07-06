@@ -35,14 +35,15 @@ public class LoginActivity extends BaseActivity implements OnGetDataDelegate<Acc
 
     @Override
     public void onDataChanged(AccountInfo data) {
-        LogUtils.i(this, "onDataChanged: " + data);
+//        LogUtils.i(this, "onDataChanged: " + data);
+        UiUtils.makeToastShort(this, getString(R.string.login_success));
         gotoMainScreen();
     }
 
     @Override
-    public void onError(Throwable e) {
-        LogUtils.i(this, "onError: " + e.getMessage());
-        UiUtils.makeToastShort(this, "Error: " + e.getMessage());
+    public void onError(String message) {
+//        LogUtils.i(this, "onError: " + message);
+        UiUtils.makeToastShort(this, "Error: " + message);
     }
 
     private void gotoMainScreen() {

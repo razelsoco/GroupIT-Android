@@ -1,8 +1,10 @@
 package com.singtel.groupit.injection.module;
 
 import android.app.Application;
+import android.preference.PreferenceManager;
 
 import com.singtel.groupit.model.DataManager;
+import com.singtel.groupit.util.GroupITSharedPreferences;
 
 import javax.inject.Singleton;
 
@@ -31,6 +33,12 @@ public class ApplicationModule {
     @Singleton
     DataManager provideDataManager() {
         return new DataManager(mApplication);
+    }
+
+    @Provides
+    @Singleton
+    GroupITSharedPreferences provideSharedPreferences() {
+        return new GroupITSharedPreferences(PreferenceManager.getDefaultSharedPreferences(mApplication));
     }
 
 }
