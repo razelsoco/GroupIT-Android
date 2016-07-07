@@ -51,12 +51,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            tools:listitem="@layout/item_selectable_contact" />
+            tools:listitem="@layout/item_selectable_contact"
+            android:layout_above="@+id/layout_buttons"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
+        <LinearLayout android:id="@+id/layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mainYellow"
+            android:layout_alignParentBottom="true">
+            <TextView android:id="@+id/bt_cancel"
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textSize="15sp"
+                android:padding="@dimen/space_medium"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginBottom="@dimen/space_medium"
+                android:background="@color/white"/>
+            <TextView android:id="@+id/bt_done"
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:layout_height="wrap_content"
+                android:text="@string/done"
+                android:textSize="15sp"
+                android:padding="@dimen/space_medium"
+                android:gravity="center"
+                android:textColor="@color/white"
+                />
         </LinearLayout>
     </RelativeLayout>
 

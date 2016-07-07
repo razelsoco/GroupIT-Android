@@ -60,6 +60,7 @@ public class FilteredContactsAdapter extends BaseRecyclerAdapter<Contact, Filter
         public void onClick(View v) {
             if(onItemClickListener != null){
                 onItemClickListener.onItemClicked(v, getAdapterPosition(), binding.getViewModel().contact);
+                binding.getViewModel().contact.setSelected(true);
             }
 
         }

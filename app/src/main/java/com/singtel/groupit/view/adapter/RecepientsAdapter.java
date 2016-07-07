@@ -57,8 +57,10 @@ public class RecepientsAdapter extends BaseRecyclerAdapter<Contact, RecepientsAd
 
         @Override
         public void onClick(View v) {
-            if(onItemClickListener != null)
+            if(onItemClickListener != null) {
                 onItemClickListener.onItemClicked(v, getAdapterPosition(), this.binding.getViewModel().contact);
+                this.binding.getViewModel().contact.setSelected(false);
+            }
         }
     }
 }

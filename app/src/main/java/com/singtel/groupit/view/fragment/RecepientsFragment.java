@@ -1,5 +1,7 @@
 package com.singtel.groupit.view.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +12,13 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentRecepientsBinding;
+import com.singtel.groupit.model.domain.Contact;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.uiutil.ItemOffsetDecoration;
+import com.singtel.groupit.view.activity.SelectableContactsActivity;
 import com.singtel.groupit.viewmodel.RecepientsViewModel;
+
+import java.util.ArrayList;
 
 /**
  * Created by razelsoco on 6/23/16.
@@ -20,6 +26,8 @@ import com.singtel.groupit.viewmodel.RecepientsViewModel;
  */
 
 public class RecepientsFragment extends BaseMenuFragment {
+    public static final int REQUEST_CODE_SELECT_USERS=100;
+    FragmentRecepientsBinding binding;
     public static RecepientsFragment getInstance() {
         return new RecepientsFragment();
     }
@@ -37,15 +45,24 @@ public class RecepientsFragment extends BaseMenuFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentRecepientsBinding binding = DataBindingUtil.inflate(inflater,getLayoutRes(),container, false);
-        binding.setModel(new RecepientsViewModel(getActivity()));
-        binding.recepientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.recepientsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
-        binding.filteredContactsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.filteredContactsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
-        binding.filteredContactsRecyclerView.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.dimen.space_medium, false));
-
+        if(binding == null) {
+            binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
+            binding.setModel(new RecepientsViewModel(this));
+            binding.recepientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.recepientsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
+            binding.filteredContactsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.filteredContactsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
+            binding.filteredContactsRecyclerView.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.dimen.space_medium, false));
+        }
         return binding.getRoot();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_SELECT_USERS && resultCode == Activity.RESULT_OK) {
+            ArrayList<Contact> contacts = data.getExtras().getParcelableArrayList(SelectableContactsActivity.EXTRA_ALL_CONTACTS);
+            binding.getModel().filterSelectedUsers(contacts);
+        }else
+            super.onActivityResult(requestCode, resultCode, data);
+    }
 }

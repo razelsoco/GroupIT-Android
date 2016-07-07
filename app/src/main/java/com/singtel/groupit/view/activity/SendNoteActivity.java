@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 
 import com.singtel.groupit.R;
@@ -17,6 +18,7 @@ import com.singtel.groupit.view.fragment.RecepientsFragment;
  */
 
 public class SendNoteActivity extends BaseActivity {
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_sendnote;
@@ -41,8 +43,16 @@ public class SendNoteActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UiUtils.replaceFragment(SendNoteActivity.this, NoteTemplatesFragment.newInstance(), R.id.fragment_content, false);
+                UiUtils.replaceFragment(SendNoteActivity.this, NoteTemplatesFragment.newInstance(), R.id.fragment_content, true);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+            getSupportFragmentManager().popBackStack();
+        else
+            super.onBackPressed();
     }
 }

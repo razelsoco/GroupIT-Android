@@ -23,5 +23,6 @@ public class ItemSelectableContactViewModel {
 
     public void onCheckboxClicked(View v){
         this.selectedState.set(!this.selectedState.get());
+        contact.setSelected(selectedState.get());
     }
 }

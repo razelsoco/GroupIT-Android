@@ -30,10 +30,10 @@ public interface GroupITService {
     /*
         ENDPOINT
      */
-    String MOCKABLE_TEST = " http://demo1023649.mockable.io"; // test  // raz: demo6174646 lan: demo1023649
+    String MOCKABLE_TEST = " http://demo6174646.mockable.io"; // test  // raz: demo6174646 lan: demo1023649
     String SERVER_STAGING = "http://groupit-staging.ap-southeast-1.elasticbeanstalk.com"; // staging
 
-    String ENDPOINT = SERVER_STAGING;
+    String ENDPOINT = MOCKABLE_TEST;
 
     /*
         Api Constants
