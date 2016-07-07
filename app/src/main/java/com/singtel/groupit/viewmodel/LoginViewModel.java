@@ -13,7 +13,6 @@ import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.SimpleTextWatcher;
 import com.singtel.groupit.util.GroupITSharedPreferences;
-import com.singtel.groupit.util.KeystoreUtil;
 import com.singtel.groupit.util.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -67,8 +66,7 @@ public class LoginViewModel implements ViewModel {
         if (BuildConfig.DEBUG) {
             username.set("super.admin@2359media.com");
             password.set("Admin@123456");
-//            checkLogin();
-            KeystoreUtil.test(context);
+//            KeystoreUtil.test(context, "name", "lanna123");
         }
     }
 
@@ -136,6 +134,7 @@ public class LoginViewModel implements ViewModel {
     }
 
     private void storeUserData(AccountInfo account) {
+//        KeystoreUtil.test(context, "token", account.getAccessToken());
         boolean saveSuccess = pref.saveUserToken(context, account.getAccessToken());
         if (saveSuccess) {
             delegate.onDataChanged(account);

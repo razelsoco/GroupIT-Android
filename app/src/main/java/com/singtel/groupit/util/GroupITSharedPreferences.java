@@ -16,19 +16,26 @@ public class GroupITSharedPreferences extends BaseSharedPreferences {
 
     // Login account info
     /*
-        need split token to 2 strings to fix:
+        need split token to 3 strings to fix:
         Input too long: cannot operate on 534 bytes of data with 256-byte RSA key
      */
     private boolean checkUserTokenCreated(Context context) {
-        return KeystoreUtil.checkCreateNewKeys(context, USER_TOKEN_1)
-                && KeystoreUtil.checkCreateNewKeys(context, USER_TOKEN_2)
-                && KeystoreUtil.checkCreateNewKeys(context, USER_TOKEN_3)
+        return KeystoreUtil.generatePrivateKey(context, USER_TOKEN_1)
+                && KeystoreUtil.generatePrivateKey(context, USER_TOKEN_2)
+                && KeystoreUtil.generatePrivateKey(context, USER_TOKEN_3)
                 ;
     }
 
     public String getUserToken(Context context) {
         String token = "";
         if (checkUserTokenCreated(context)) {
+            // whole token for AES
+//            token = getString(USER_TOKEN_1);
+//            if (!TextUtils.isEmpty(token)) {
+//                token = KeystoreUtil.decryptString(USER_TOKEN_1, token);
+//            }
+
+            // split sub-strings for RSA
             String token1 = getString(USER_TOKEN_1);
             String token2 = getString(USER_TOKEN_2);
             String token3 = getString(USER_TOKEN_3);
@@ -46,11 +53,19 @@ public class GroupITSharedPreferences extends BaseSharedPreferences {
     public boolean saveUserToken(Context context, String token) {
         LogUtils.i(this, "saveUserToken: " + token.length() + ": " + token);
         if (checkUserTokenCreated(context)) {
+            // whole token for AES
+//            String encryptedToken = KeystoreUtil.encryptString(USER_TOKEN_1, token);
+//            if (!TextUtils.isEmpty(encryptedToken)) {
+//                submitString(USER_TOKEN_1, encryptedToken);
+//                return true;
+//            }
+
+            // split sub-strings for RSA
             int partIndex = token.length() / 3;
             String encryptedToken1 = KeystoreUtil.encryptString(USER_TOKEN_1, token.substring(0, partIndex));
             String encryptedToken2 = KeystoreUtil.encryptString(USER_TOKEN_2, token.substring(partIndex, partIndex*2));
             String encryptedToken3 = KeystoreUtil.encryptString(USER_TOKEN_3, token.substring(partIndex*2, token.length()));
-            if (!TextUtils.isEmpty(encryptedToken1) && !TextUtils.isEmpty(encryptedToken2)) {
+            if (!TextUtils.isEmpty(encryptedToken1) && !TextUtils.isEmpty(encryptedToken2) && !TextUtils.isEmpty(encryptedToken3)) {
                 submitString(USER_TOKEN_1, encryptedToken1);
                 submitString(USER_TOKEN_2, encryptedToken2);
                 submitString(USER_TOKEN_3, encryptedToken3);

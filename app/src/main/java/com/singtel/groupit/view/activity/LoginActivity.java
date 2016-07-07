@@ -10,7 +10,6 @@ import com.singtel.groupit.databinding.ActivityLoginBinding;
 import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.UiUtils;
-import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.viewmodel.LoginViewModel;
 
 /**
