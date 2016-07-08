@@ -1,16 +1,13 @@
 package com.singtel.groupit.view.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.databinding.ItemRecepientBinding;
 import com.singtel.groupit.databinding.ItemSelectableContactBinding;
-import com.singtel.groupit.model.domain.Contact;
-import com.singtel.groupit.viewmodel.ItemRecepientViewModel;
+import com.singtel.groupit.model.domain.User;
 import com.singtel.groupit.viewmodel.ItemSelectableContactViewModel;
 
 /**
@@ -18,13 +15,7 @@ import com.singtel.groupit.viewmodel.ItemSelectableContactViewModel;
  *
  */
 
-public class AllContactsAdapter extends BaseRecyclerAdapter<Contact, AllContactsAdapter.BindingHolder> {
-
-    private Context context;
-
-    public AllContactsAdapter(Context context) {
-        this.context = context;
-    }
+public class SelectUsersAdapter extends BaseRecyclerAdapter<User, SelectUsersAdapter.BindingHolder> {
 
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {

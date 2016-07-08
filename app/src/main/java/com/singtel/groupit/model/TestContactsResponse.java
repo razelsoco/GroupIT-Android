@@ -1,7 +1,6 @@
 package com.singtel.groupit.model;
 
-import com.google.gson.annotations.SerializedName;
-import com.singtel.groupit.model.domain.Contact;
+import com.singtel.groupit.model.domain.User;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,5 @@ import java.util.ArrayList;
  */
 
 public class TestContactsResponse {
-    @SerializedName("contacts")
-    public ArrayList<Contact> contacts;
+    public ArrayList<User> users;
 }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.singtel.groupit.viewmodel.RecepientsViewModel" />
+            type="com.singtel.groupit.viewmodel.RecipientsViewModel" />
     </data>
 
     <LinearLayout
@@ -38,7 +38,7 @@
                 android:textSize="15sp"
                 android:text="@{model.searchString}"
                 android:background="@null"
-                app:addTextChangedListener="@{model.contactNameEditTextWatcher}" />
+                android:onTextChanged="@{model.onTextChanged}" />
 
             <ImageView
                 android:id="@+id/bt_back"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/space_normal"
-                android:onClick="@{model::onOpenAllContacts}"
+                android:onClick="@{model.onOpenAllContacts}"
                 android:src="@drawable/ic_plus" />
 
         </LinearLayout>
@@ -64,8 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
-                app:setAdapter="@{model.recepientsAdapter}"
-                app:visibility="@{model.recepientsListVisibility}"
+                app:setAdapter="@{model.selectedUsersAdapter}"
+                app:visibility="@{model.selectedUsersListVisibility}"
                 tools:listitem="@layout/item_recepient" />
 
             <android.support.v7.widget.RecyclerView
@@ -73,8 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
-                app:setAdapter="@{model.filteredContactsAdapter}"
-                app:visibility="@{model.autocompleteListVisibility}" />
+                app:setAdapter="@{model.searchedUsersAdapter}"
+                app:visibility="@{model.searchedUsersListVisibility}" />
         </FrameLayout>
     </LinearLayout>
 </layout>

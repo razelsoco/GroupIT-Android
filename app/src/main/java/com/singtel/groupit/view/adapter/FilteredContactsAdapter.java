@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemContactBinding;
-import com.singtel.groupit.model.domain.Contact;
+import com.singtel.groupit.model.domain.User;
 import com.singtel.groupit.viewmodel.ItemRecepientViewModel;
 
 /**
@@ -17,7 +17,7 @@ import com.singtel.groupit.viewmodel.ItemRecepientViewModel;
  *
  */
 
-public class FilteredContactsAdapter extends BaseRecyclerAdapter<Contact, FilteredContactsAdapter.BindingHolder> {
+public class FilteredContactsAdapter extends BaseRecyclerAdapter<User, FilteredContactsAdapter.BindingHolder> {
 
     private Context context;
 
@@ -47,9 +47,9 @@ public class FilteredContactsAdapter extends BaseRecyclerAdapter<Contact, Filter
 
     public static class BindingHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ItemContactBinding binding;
-        private OnItemClickListener<Contact> onItemClickListener;
+        private OnItemClickListener<User> onItemClickListener;
 
-        public BindingHolder(ItemContactBinding binding, OnItemClickListener<Contact> onItemClickListener) {
+        public BindingHolder(ItemContactBinding binding, OnItemClickListener<User> onItemClickListener) {
             super(binding.getRoot());
             this.binding = binding;
             this.onItemClickListener = onItemClickListener;
@@ -59,8 +59,8 @@ public class FilteredContactsAdapter extends BaseRecyclerAdapter<Contact, Filter
         @Override
         public void onClick(View v) {
             if(onItemClickListener != null){
-                onItemClickListener.onItemClicked(v, getAdapterPosition(), binding.getViewModel().contact);
-                binding.getViewModel().contact.setSelected(true);
+                onItemClickListener.onItemClicked(v, getAdapterPosition(), binding.getViewModel().user);
+                binding.getViewModel().user.setSelected(true);
             }
 
         }

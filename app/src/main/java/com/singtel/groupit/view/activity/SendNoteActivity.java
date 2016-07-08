@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.uiutil.UiUtils;
-import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.view.fragment.NoteTemplatesFragment;
-import com.singtel.groupit.view.fragment.RecepientsFragment;
+import com.singtel.groupit.view.fragment.RecipientsFragment;
 
 /**
  * Created by razelsoco on 27/6/16.
@@ -31,7 +29,7 @@ public class SendNoteActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UiUtils.replaceFragment(this, RecepientsFragment.newInstance(), R.id.fragment_content, false);
+        UiUtils.replaceFragment(this, RecipientsFragment.newInstance(), R.id.fragment_content, false);
 
         findViewById(R.id.bt_back).setOnClickListener(new View.OnClickListener() {
             @Override

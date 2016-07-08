@@ -35,6 +35,7 @@
                 android:textSize="17sp"
                 fontPath="@string/font_avenirltpro_roman"
                 android:textColor="@color/warmGrey"
-                android:layout_margin="@dimen/space_normal"/>
+                android:layout_margin="@dimen/space_normal"
+                android:onClick="@{model.onCreateMessage}"/>
     </LinearLayout>
 </layout>

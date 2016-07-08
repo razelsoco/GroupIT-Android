@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.singtel.groupit.model.DataManager;
@@ -13,7 +14,9 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.model.TestTemplatesResponse;
 import com.singtel.groupit.model.domain.Template;
+import com.singtel.groupit.view.activity.MessageActivity;
 import com.singtel.groupit.view.adapter.ImageTemplateAdapter;
+import com.singtel.groupit.view.fragment.NoteTemplatesFragment;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -33,8 +36,8 @@ public class NoteTemplatesViewModel implements ViewModel {
     public ObservableField<String> message;
     private BindableFieldTarget bindableFieldTarget;
 
+    Fragment fragment;
     DataManager dataManager;
-    Context context;
     ImageTemplateAdapter templatesAdapter;
 
     Subscription subscription;
@@ -45,13 +48,13 @@ public class NoteTemplatesViewModel implements ViewModel {
     String selectedImgURL="url";
 
 
-    public NoteTemplatesViewModel(Context c) {
-        this.context = c;
-        this.dataManager = GroupITApplication.get(c).getComponent().dataManager();
+    public NoteTemplatesViewModel(Fragment fragment) {
+        this.fragment = fragment;
+        this.dataManager = GroupITApplication.get(fragment.getActivity()).getComponent().dataManager();
         this.selectedTemplateImage = new ObservableField<>();
         this.message = new ObservableField<>("Tap here to enter a custom message");
 
-        this.templatesAdapter = new ImageTemplateAdapter(c, new ImageTemplateAdapter.OnViewModelChangeListener() {
+        this.templatesAdapter = new ImageTemplateAdapter(fragment.getActivity(), new ImageTemplateAdapter.OnViewModelChangeListener() {
             @Override
             public void onItemClicked(View view, int position, ViewModel data) {
                 if(selectedTemplate != null)
@@ -65,14 +68,14 @@ public class NoteTemplatesViewModel implements ViewModel {
             }
         });
         this.templatesAdapter.setItems(templates);
-        bindableFieldTarget = new BindableFieldTarget(selectedTemplateImage, context.getResources());
+        bindableFieldTarget = new BindableFieldTarget(selectedTemplateImage, fragment.getActivity().getResources());
 
 
         loadContacts();
     }
 
     private void loadSelectedTemplate(){
-        Picasso.with(context)
+        Picasso.with(fragment.getActivity())
                 .load(selectedImgURL)
                 .placeholder(R.drawable.placeholder)
                 .into(bindableFieldTarget);
@@ -82,7 +85,9 @@ public class NoteTemplatesViewModel implements ViewModel {
     public ImageTemplateAdapter getTemplatesAdapter(){
         return this.templatesAdapter;
     }
-
+    public void onCreateMessage(View v){
+        fragment.startActivityForResult(MessageActivity.newIntent(fragment.getActivity()), NoteTemplatesFragment.REQUEST_CODE_CREATE_MESSAGE);
+    }
     /**Binding methods end**/
 
 

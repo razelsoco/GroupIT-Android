@@ -20,6 +20,9 @@ import com.singtel.groupit.viewmodel.NoteTemplatesViewModel;
  */
 
 public class NoteTemplatesFragment extends BaseFragment {
+    public static final int REQUEST_CODE_CREATE_MESSAGE=100;
+    public static final String EXTRA_MESSAGE="extra_message";
+
     public static NoteTemplatesFragment getInstance() {
         return new NoteTemplatesFragment();
     }
@@ -38,7 +41,7 @@ public class NoteTemplatesFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentNoteTemplatesBinding binding = DataBindingUtil.inflate(inflater,getLayoutRes(),container, false);
-        binding.setModel(new NoteTemplatesViewModel(getActivity()));
+        binding.setModel(new NoteTemplatesViewModel(this));
         binding.templatesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         binding.templatesRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.templates_divider));
         binding.templatesRecyclerView.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.dimen.space_medium, false));

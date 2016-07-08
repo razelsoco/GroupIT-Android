@@ -32,6 +32,7 @@
 
         <activity android:name=".view.activity.SendNoteActivity"/>
         <activity android:name=".view.activity.SelectableContactsActivity"/>
+        <activity android:name=".view.activity.MessageActivity"/>
         <activity
             android:name=".view.activity.NotesActivity"
             android:theme="@style/AppTheme"

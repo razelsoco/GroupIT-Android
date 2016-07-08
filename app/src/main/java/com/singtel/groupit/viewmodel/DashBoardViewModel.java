@@ -63,7 +63,7 @@ public class DashBoardViewModel implements ViewModel {
                     @Override
                     public void onNext(TestUserResponse testUserResponse) {
                         userName.set(testUserResponse.user.getName());
-                        userGroup.set(testUserResponse.user.getDepartment());
+                        userGroup.set(testUserResponse.user.getRole());
 
                         //TODO save to preferences or DB?
                     }

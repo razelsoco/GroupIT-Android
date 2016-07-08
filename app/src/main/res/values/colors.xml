@@ -29,5 +29,6 @@
     <color name="dividerDark">@color/greyishBrown</color>
     <color name="warmGrey">#777777</color>
     <color name="dividerLight">@color/silver</color>
+    <color name="brownishGrey">#666666</color>
 
 </resources>

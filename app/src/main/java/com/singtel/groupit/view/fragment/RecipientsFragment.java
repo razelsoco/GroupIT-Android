@@ -11,12 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.databinding.FragmentRecepientsBinding;
-import com.singtel.groupit.model.domain.Contact;
+import com.singtel.groupit.databinding.FragmentRecipientsBinding;
+import com.singtel.groupit.model.domain.User;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.uiutil.ItemOffsetDecoration;
 import com.singtel.groupit.view.activity.SelectableContactsActivity;
-import com.singtel.groupit.viewmodel.RecepientsViewModel;
+import com.singtel.groupit.viewmodel.RecipientsViewModel;
 
 import java.util.ArrayList;
 
@@ -25,21 +25,21 @@ import java.util.ArrayList;
  *
  */
 
-public class RecepientsFragment extends BaseMenuFragment {
+public class RecipientsFragment extends BaseMenuFragment {
     public static final int REQUEST_CODE_SELECT_USERS=100;
-    FragmentRecepientsBinding binding;
-    public static RecepientsFragment getInstance() {
-        return new RecepientsFragment();
+    FragmentRecipientsBinding binding;
+    public static RecipientsFragment getInstance() {
+        return new RecipientsFragment();
     }
 
-    public static RecepientsFragment newInstance() {
-        RecepientsFragment fragment = new RecepientsFragment();
+    public static RecipientsFragment newInstance() {
+        RecipientsFragment fragment = new RecipientsFragment();
         return fragment;
     }
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_recepients;
+        return R.layout.fragment_recipients;
     }
 
     @Nullable
@@ -47,7 +47,7 @@ public class RecepientsFragment extends BaseMenuFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(binding == null) {
             binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
-            binding.setModel(new RecepientsViewModel(this));
+            binding.setModel(new RecipientsViewModel(this));
             binding.recepientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             binding.recepientsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider_silver));
             binding.filteredContactsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -60,8 +60,8 @@ public class RecepientsFragment extends BaseMenuFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_SELECT_USERS && resultCode == Activity.RESULT_OK) {
-            ArrayList<Contact> contacts = data.getExtras().getParcelableArrayList(SelectableContactsActivity.EXTRA_ALL_CONTACTS);
-            binding.getModel().filterSelectedUsers(contacts);
+            ArrayList<User> users = data.getExtras().getParcelableArrayList(SelectableContactsActivity.EXTRA_ALL_USERS);
+            binding.getModel().filterSelectedUsers(users);
         }else
             super.onActivityResult(requestCode, resultCode, data);
     }

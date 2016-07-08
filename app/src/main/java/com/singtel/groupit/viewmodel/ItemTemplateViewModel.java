@@ -2,12 +2,10 @@ package com.singtel.groupit.viewmodel;
 
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.singtel.groupit.R;
-import com.singtel.groupit.model.domain.Contact;
 import com.singtel.groupit.model.domain.Template;
 import com.squareup.picasso.Picasso;
 

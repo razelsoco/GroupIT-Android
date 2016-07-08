@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemRecepientBinding;
-import com.singtel.groupit.model.domain.Contact;
+import com.singtel.groupit.model.domain.User;
 import com.singtel.groupit.viewmodel.ItemRecepientViewModel;
 
 /**
@@ -17,11 +17,11 @@ import com.singtel.groupit.viewmodel.ItemRecepientViewModel;
  *
  */
 
-public class RecepientsAdapter extends BaseRecyclerAdapter<Contact, RecepientsAdapter.BindingHolder> {
+public class SelectedUsersAdapter extends BaseRecyclerAdapter<User, SelectedUsersAdapter.BindingHolder> {
 
     private Context context;
 
-    public RecepientsAdapter(Context context, OnItemClickListener onItemClickListener) {
+    public SelectedUsersAdapter(Context context, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.onItemClickListener = onItemClickListener;
     }
@@ -47,8 +47,8 @@ public class RecepientsAdapter extends BaseRecyclerAdapter<Contact, RecepientsAd
 
     public static class BindingHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ItemRecepientBinding binding;
-        private OnItemClickListener<Contact> onItemClickListener;
-        public BindingHolder(ItemRecepientBinding binding, OnItemClickListener<Contact> onItemClickListener) {
+        private OnItemClickListener<User> onItemClickListener;
+        public BindingHolder(ItemRecepientBinding binding, OnItemClickListener<User> onItemClickListener) {
             super(binding.getRoot());
             this.binding = binding;
             this.onItemClickListener = onItemClickListener;
@@ -58,8 +58,8 @@ public class RecepientsAdapter extends BaseRecyclerAdapter<Contact, RecepientsAd
         @Override
         public void onClick(View v) {
             if(onItemClickListener != null) {
-                onItemClickListener.onItemClicked(v, getAdapterPosition(), this.binding.getViewModel().contact);
-                this.binding.getViewModel().contact.setSelected(false);
+                onItemClickListener.onItemClicked(v, getAdapterPosition(), this.binding.getViewModel().user);
+                this.binding.getViewModel().user.setSelected(false);
             }
         }
     }
