@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.singtel.groupit.model.DataManager;
@@ -47,12 +48,15 @@ public class NoteTemplatesViewModel implements ViewModel {
 
     String selectedImgURL="url";
 
+    Listener listener;
 
-    public NoteTemplatesViewModel(Fragment fragment) {
+
+    public NoteTemplatesViewModel(Fragment fragment, Listener listener) {
         this.fragment = fragment;
+        this.listener = listener;
         this.dataManager = GroupITApplication.get(fragment.getActivity()).getComponent().dataManager();
         this.selectedTemplateImage = new ObservableField<>();
-        this.message = new ObservableField<>("Tap here to enter a custom message");
+        this.message = new ObservableField<>();
 
         this.templatesAdapter = new ImageTemplateAdapter(fragment.getActivity(), new ImageTemplateAdapter.OnViewModelChangeListener() {
             @Override
@@ -70,15 +74,7 @@ public class NoteTemplatesViewModel implements ViewModel {
         this.templatesAdapter.setItems(templates);
         bindableFieldTarget = new BindableFieldTarget(selectedTemplateImage, fragment.getActivity().getResources());
 
-
         loadContacts();
-    }
-
-    private void loadSelectedTemplate(){
-        Picasso.with(fragment.getActivity())
-                .load(selectedImgURL)
-                .placeholder(R.drawable.placeholder)
-                .into(bindableFieldTarget);
     }
 
     /**Binding methods start**/
@@ -86,10 +82,16 @@ public class NoteTemplatesViewModel implements ViewModel {
         return this.templatesAdapter;
     }
     public void onCreateMessage(View v){
-        fragment.startActivityForResult(MessageActivity.newIntent(fragment.getActivity()), NoteTemplatesFragment.REQUEST_CODE_CREATE_MESSAGE);
+        fragment.startActivityForResult(MessageActivity.newIntent(fragment.getActivity(),message.get()), NoteTemplatesFragment.REQUEST_CODE_CREATE_MESSAGE);
     }
     /**Binding methods end**/
 
+    private void loadSelectedTemplate(){
+        Picasso.with(fragment.getActivity())
+                .load(selectedImgURL)
+                .placeholder(R.drawable.placeholder)
+                .into(bindableFieldTarget);
+    }
 
     private void loadContacts(){
 
@@ -142,6 +144,15 @@ public class NoteTemplatesViewModel implements ViewModel {
         public void onPrepareLoad(Drawable placeHolderDrawable) {
             observableField.set(placeHolderDrawable);
         }
+    }
+
+    public void setMessage(String message){
+        this.message.set(message);
+        this.listener.onMessageChanged(message);
+    }
+
+    public interface Listener{
+        void onMessageChanged(String message);
     }
 
     @Override

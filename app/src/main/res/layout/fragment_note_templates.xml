@@ -28,7 +28,7 @@
                 android:layout_height="0dp"
                 android:src="@{model.selectedTemplateImage}" />
 
-            <TextView
+            <TextView android:id="@+id/tv_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{model.message}"
@@ -36,6 +36,7 @@
                 fontPath="@string/font_avenirltpro_roman"
                 android:textColor="@color/warmGrey"
                 android:layout_margin="@dimen/space_normal"
+                android:hint="Tap here to enter a custom message"
                 android:onClick="@{model.onCreateMessage}"/>
     </LinearLayout>
 </layout>

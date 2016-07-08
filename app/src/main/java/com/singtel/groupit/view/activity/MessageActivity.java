@@ -15,20 +15,25 @@ import com.singtel.groupit.viewmodel.MessageViewModel;
  */
 
 public class MessageActivity extends BaseActivity {
+    private static final String EXTRA_MESSAGE="EXTRA_MESSAGE";
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_message;
     }
 
-    public static Intent newIntent(Context c){
+    public static Intent newIntent(Context c, String message){
         Intent intent = new Intent(c, MessageActivity.class);
+        intent.putExtra(EXTRA_MESSAGE,message);
         return intent;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String message = getIntent().getStringExtra(EXTRA_MESSAGE);
         ActivityMessageBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_message);
-        binding.setViewModel(new MessageViewModel(this));
+        binding.setViewModel(new MessageViewModel(this, message));
+        binding.etMessage.setText(message);
+        binding.etMessage.append("a");
     }
 }

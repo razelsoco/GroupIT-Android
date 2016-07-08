@@ -34,7 +34,7 @@
         <item name="android:clickable">true</item>
         <item name="android:gravity">center</item>
         <item name="fontPath">@string/font_avenirltpro_book</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/cst_text_white</item>
         <item name="android:paddingLeft">@dimen/space_normal</item>
         <item name="android:paddingRight">@dimen/space_normal</item>
         <item name="android:maxLines">1</item>

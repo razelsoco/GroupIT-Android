@@ -26,6 +26,7 @@ import java.util.ArrayList;
  */
 
 public class RecipientsFragment extends BaseMenuFragment {
+    public static String TAG="RecipientsFragment";
     public static final int REQUEST_CODE_SELECT_USERS=100;
     FragmentRecipientsBinding binding;
     public static RecipientsFragment getInstance() {

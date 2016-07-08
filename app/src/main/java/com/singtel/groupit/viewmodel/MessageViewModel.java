@@ -17,9 +17,10 @@ public class MessageViewModel{
     String message;
     Context context;
 
-    public MessageViewModel(Context c) {
+    public MessageViewModel(Context c, String message) {
         this.context = c;
         this.characterCountLeft = new ObservableField<>("300");
+        this.message = message;
     }
 
     /**Binding methods start**/
@@ -36,6 +37,7 @@ public class MessageViewModel{
 
     public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
         int countLeft = 300 - charSequence.length();
+        message = charSequence.toString();
         characterCountLeft.set(countLeft+"");
     }
     /**Binding methods end**/

@@ -6,13 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.FragmentMenuNotesBinding;
-import com.singtel.groupit.databinding.FragmentNotesBinding;
 import com.singtel.groupit.view.activity.NotesActivity;
-import com.singtel.groupit.view.activity.SendNoteActivity;
+import com.singtel.groupit.view.activity.ComposerActivity;
 import com.singtel.groupit.viewmodel.NotesViewModel;
 
 /**
@@ -48,7 +46,7 @@ public class MenuNotesFragment extends BaseMenuFragment {
     }
 
     public void onSendNoteClick(View view){
-        startActivity(SendNoteActivity.newIntent(getActivity()));
+        startActivity(ComposerActivity.newIntent(getActivity()));
     }
 
     public void onInboxClick(View view) {

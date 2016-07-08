@@ -30,7 +30,7 @@
             android:windowSoftInputMode="adjustNothing"
             />
 
-        <activity android:name=".view.activity.SendNoteActivity"/>
+        <activity android:name=".view.activity.ComposerActivity"/>
         <activity android:name=".view.activity.SelectableContactsActivity"/>
         <activity android:name=".view.activity.MessageActivity"/>
         <activity

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.singtel.groupit.viewmodel.MessageViewModel" />
+            type="com.singtel.groupit.viewmodel.ComposerViewModel" />
     </data>
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.singtel.groupit.view.activity.MainActivity">
+        tools:context="com.singtel.groupit.view.activity.ComposerActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -33,15 +33,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical">
 
-                <TextView android:id="@+id/bt_cancel"
-                    style="@style/topbarButton"
-                    android:layout_alignParentLeft="true"
-                    android:text="@string/cancel"
-                    android:onClick="@{viewModel.onCancelClicked}"/>
+                <ImageView android:id="@+id/bt_back"
+                    android:layout_width="@dimen/padded_action_bar_size"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_back"
+                    android:onClick="@{viewModel.onLeftButtonClicked}"/>
 
-                <TextView
-                    android:layout_toLeftOf="@+id/bt_done"
-                    android:layout_toRightOf="@+id/bt_cancel"
+                <TextView android:layout_toRightOf="@+id/bt_back"
+                    android:layout_toLeftOf="@+id/bt_next"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -53,11 +54,12 @@
                     android:textSize="@dimen/textSize_title"
                     app:fontPath="@string/font_avenirltpro_book" />
 
-                <TextView android:id="@+id/bt_done"
+                <TextView android:id="@+id/bt_next"
                     style="@style/topbarButton"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/done"
-                    android:onClick="@{viewModel.onDoneClicked}"/>
+                    android:text="@{viewModel.rightButtonText}"
+                    android:enabled="@{viewModel.isRightButtonEnabled}"
+                    android:onClick="@{viewModel.onRightButtonClicked}"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -66,30 +68,7 @@
         <FrameLayout
             android:id="@+id/fragment_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText android:id="@+id/et_message"
-                android:layout_width="match_parent"
-                android:maxLength="300"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:onTextChanged="@{viewModel.onTextChanged}"
-                android:padding="@dimen/space_normal"
-                android:textColor="@color/black"
-                fontPath="@string/font_avenirltpro_roman"
-                android:textSize="17sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.characterCountLeft}"
-                android:textColor="@color/brownishGrey"
-                android:textSize="13sp"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="@dimen/space_normal"
-                />
-        </FrameLayout>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </layout>

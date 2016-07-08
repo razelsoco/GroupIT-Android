@@ -86,5 +86,5 @@
     // Main screen
     <string name="main_category_title">Home</string>
     <string name="next">Next</string>
-
+    <string name="send">Send</string>
 </resources>
