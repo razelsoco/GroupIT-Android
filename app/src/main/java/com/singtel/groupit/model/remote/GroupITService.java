@@ -106,4 +106,7 @@ public interface GroupITService {
 
     @GET("/templates")
     Observable<TestTemplatesResponse> getTemplates();
+
+    @GET("/templates")
+    Observable<TestTemplatesResponse> sendNote();
 }

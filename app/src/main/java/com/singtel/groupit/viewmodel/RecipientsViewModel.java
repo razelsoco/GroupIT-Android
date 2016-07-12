@@ -10,6 +10,7 @@ import android.view.View;
 import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.TestContactsResponse;
+import com.singtel.groupit.model.domain.NewNoteSession;
 import com.singtel.groupit.model.domain.Suborganization;
 import com.singtel.groupit.model.domain.User;
 import com.singtel.groupit.view.activity.SelectableContactsActivity;
@@ -39,18 +40,20 @@ public class RecipientsViewModel implements ViewModel {
     Context context;
     SelectedUsersAdapter selectedUsersAdapter;
     FilteredContactsAdapter searchedUsersAdapter;
+    NewNoteSession newNoteSession;
 
     Subscription subscription;
     Fragment fragment;
 
     ArrayList<User> allUsers = new ArrayList<>();
     List<User> selectedUsers = new ArrayList<>();
-    List<User> filteredUsers = new ArrayList<>();
+    List<User> searchedUsers = new ArrayList<>();
 
     public RecipientsViewModel(Fragment fragment) {
         this.fragment = fragment;
         this.context = fragment.getContext();
         this.dataManager = GroupITApplication.get(context).getComponent().dataManager();
+        this.newNoteSession = NewNoteSession.getInstance();
 
         this.selectedUsersListVisibility = new ObservableInt(View.VISIBLE);
         this.searchedUsersListVisibility = new ObservableInt(View.GONE);
@@ -71,7 +74,7 @@ public class RecipientsViewModel implements ViewModel {
         });
 
         this.selectedUsersAdapter.setItems(selectedUsers);
-        this.searchedUsersAdapter.setItems(filteredUsers);
+        this.searchedUsersAdapter.setItems(searchedUsers);
 
         loadContacts();
     }
@@ -94,6 +97,7 @@ public class RecipientsViewModel implements ViewModel {
     private void deleteRecepient(User data){
         selectedUsers.remove(data);
         selectedUsersAdapter.notifyDataSetChanged();
+        newNoteSession.deleteRecipient(data);
     }
 
     private void addRecepient(User data){
@@ -101,6 +105,8 @@ public class RecipientsViewModel implements ViewModel {
             selectedUsers.add(data);
 
         searchString.set("");
+
+        newNoteSession.addRecipient(data);
     }
 
     private void loadContacts(){
@@ -134,9 +140,9 @@ public class RecipientsViewModel implements ViewModel {
 
         if(!TextUtils.isEmpty(text) ){
             //this.allUsers;
-            this.filteredUsers.clear();
-            this.filteredUsers.addAll(allUsers);
-            filterSearchedUsers(this.filteredUsers);
+            this.searchedUsers.clear();
+            this.searchedUsers.addAll(allUsers);
+            filterSearchedUsers(this.searchedUsers);
             searchedUsersAdapter.notifyDataSetChanged();
         }
 
@@ -151,6 +157,10 @@ public class RecipientsViewModel implements ViewModel {
         subscription.unsubscribe();
     }
 
+    /**
+     * When user types on the text field to search for a user,
+     * this method will filter the user list according to the search string
+     * */
     public void filterSearchedUsers(List<User> userArrayList) {
         Iterator<User> userIterator = userArrayList.iterator();
         while (userIterator.hasNext()) {
@@ -161,7 +171,13 @@ public class RecipientsViewModel implements ViewModel {
         }
     }
 
+    /**
+     * This method is called after {@link SelectableContactsActivity} returns result.
+     * User list will be filtered according to the selected state of each user
+     * */
     public void filterSelectedUsers(List<User> userArrayList){
+        //update all user list, passing thru parcealable does not give the exact instance of the object
+        //so we need to update the all users list
         this.allUsers.clear();
         this.allUsers.addAll(userArrayList);
 
@@ -177,9 +193,14 @@ public class RecipientsViewModel implements ViewModel {
         }
 
         selectedUsersAdapter.notifyDataSetChanged();
+        newNoteSession.setRecipients(selectedUsers);
 
     }
 
+    /**
+     * Note sending feature is only applicable for users in the GroupIT department
+     * This method filters the users returned by server since it returns all type of user
+     * */
     public void filterGroupITUsers(List<User> userArrayList){
         Iterator<User> userIterator = userArrayList.iterator();
         while (userIterator.hasNext()) {

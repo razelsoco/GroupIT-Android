@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.singtel.groupit.R;
+import com.singtel.groupit.model.domain.NewNoteSession;
 import com.singtel.groupit.uiutil.UiUtils;
 import com.singtel.groupit.view.activity.ComposerActivity;
 import com.singtel.groupit.view.fragment.NoteTemplatesFragment;
@@ -24,12 +25,14 @@ public class ComposerViewModel {
     public ObservableBoolean isRightButtonEnabled;
     String currentSreen;
     Context context;
+    NewNoteSession newNoteSession;
 
     public ComposerViewModel(Context c) {
         this.context = c;
         this.currentSreen = RecipientsFragment.TAG;
         this.rightButtonText = new ObservableField<>(context.getString(R.string.next));
         this.isRightButtonEnabled = new ObservableBoolean(true);
+        this.newNoteSession = NewNoteSession.getInstance();
     }
 
     /**Binding methods start**/
@@ -47,6 +50,7 @@ public class ComposerViewModel {
             this.currentSreen = NoteTemplatesFragment.TAG;
         }else{
             //send note to server
+
         }
 
     }

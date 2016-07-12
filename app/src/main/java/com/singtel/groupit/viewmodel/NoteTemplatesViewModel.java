@@ -1,19 +1,18 @@
 package com.singtel.groupit.viewmodel;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.View;
 
-import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
+import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.model.TestTemplatesResponse;
+import com.singtel.groupit.model.domain.NewNoteSession;
 import com.singtel.groupit.model.domain.Template;
 import com.singtel.groupit.view.activity.MessageActivity;
 import com.singtel.groupit.view.adapter.ImageTemplateAdapter;
@@ -37,6 +36,7 @@ public class NoteTemplatesViewModel implements ViewModel {
     public ObservableField<String> message;
     private BindableFieldTarget bindableFieldTarget;
 
+    NewNoteSession newNoteSession;
     Fragment fragment;
     DataManager dataManager;
     ImageTemplateAdapter templatesAdapter;
@@ -46,7 +46,7 @@ public class NoteTemplatesViewModel implements ViewModel {
     List<Template> templates = new ArrayList<>();
     ItemTemplateViewModel selectedTemplate;
 
-    String selectedImgURL="url";
+    //String selectedImgURL="url";
 
     Listener listener;
 
@@ -55,6 +55,8 @@ public class NoteTemplatesViewModel implements ViewModel {
         this.fragment = fragment;
         this.listener = listener;
         this.dataManager = GroupITApplication.get(fragment.getActivity()).getComponent().dataManager();
+        this.newNoteSession = NewNoteSession.getInstance();
+
         this.selectedTemplateImage = new ObservableField<>();
         this.message = new ObservableField<>();
 
@@ -65,9 +67,8 @@ public class NoteTemplatesViewModel implements ViewModel {
                     selectedTemplate.selectedState.set(false);
 
                 selectedTemplate = (ItemTemplateViewModel) data;
-
-                selectedImgURL = selectedTemplate.getImageUrl();
-                loadSelectedTemplate();
+                newNoteSession.setTemplateId(selectedTemplate.template.getId());
+                loadSelectedTemplate(selectedTemplate.getImageUrl());
 
             }
         });
@@ -86,9 +87,9 @@ public class NoteTemplatesViewModel implements ViewModel {
     }
     /**Binding methods end**/
 
-    private void loadSelectedTemplate(){
+    private void loadSelectedTemplate(String url){
         Picasso.with(fragment.getActivity())
-                .load(selectedImgURL)
+                .load(url)
                 .placeholder(R.drawable.placeholder)
                 .into(bindableFieldTarget);
     }
@@ -149,6 +150,7 @@ public class NoteTemplatesViewModel implements ViewModel {
     public void setMessage(String message){
         this.message.set(message);
         this.listener.onMessageChanged(message);
+        this.newNoteSession.setMessage(message);
     }
 
     public interface Listener{

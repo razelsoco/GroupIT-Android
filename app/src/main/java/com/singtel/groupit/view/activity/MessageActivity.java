@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ActivityMessageBinding;
@@ -34,6 +35,6 @@ public class MessageActivity extends BaseActivity {
         ActivityMessageBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_message);
         binding.setViewModel(new MessageViewModel(this, message));
         binding.etMessage.setText(message);
-        binding.etMessage.append("a");
+        binding.etMessage.setSelection(TextUtils.isEmpty(message)?0:message.length());
     }
 }

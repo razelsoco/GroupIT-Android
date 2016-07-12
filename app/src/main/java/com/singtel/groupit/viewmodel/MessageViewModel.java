@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.singtel.groupit.view.fragment.NoteTemplatesFragment;
@@ -13,13 +14,14 @@ import com.singtel.groupit.view.fragment.NoteTemplatesFragment;
  */
 
 public class MessageViewModel{
+    private static final int MAX_CHARS=300;
     public ObservableField<String> characterCountLeft;
     String message;
     Context context;
 
     public MessageViewModel(Context c, String message) {
         this.context = c;
-        this.characterCountLeft = new ObservableField<>("300");
+        this.characterCountLeft = new ObservableField<>(getCount(message));
         this.message = message;
     }
 
@@ -36,10 +38,16 @@ public class MessageViewModel{
     }
 
     public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-        int countLeft = 300 - charSequence.length();
         message = charSequence.toString();
-        characterCountLeft.set(countLeft+"");
+        characterCountLeft.set(getCount(charSequence.toString()));
     }
     /**Binding methods end**/
 
+    public String getCount(String message){
+
+        int len = TextUtils.isEmpty(message)?0:message.length();
+        int countLeft = MAX_CHARS - len;
+
+        return countLeft+"";
+    }
 }

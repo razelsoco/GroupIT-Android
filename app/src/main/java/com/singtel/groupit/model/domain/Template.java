@@ -5,6 +5,7 @@ package com.singtel.groupit.model.domain;
  */
 
 public class Template {
+    public int id;
     public String url;
     boolean isSelected;
 
@@ -22,5 +23,13 @@ public class Template {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
