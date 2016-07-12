@@ -80,6 +80,7 @@
             android:layout_marginTop="@dimen/space_small"
             android:layout_toLeftOf="@id/iv_need_read"
             android:maxLines="2"
+            android:lineSpacingExtra="@dimen/space_min_extra"
             android:paddingRight="@dimen/space_min"
             android:text="@{viewModel.articleContent()}"
             />

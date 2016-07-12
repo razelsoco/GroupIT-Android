@@ -84,8 +84,8 @@ public class NotesFragment extends BaseFragment implements OnGetDataDelegate<Lis
     }
 
     @Override
-    public void onError(Throwable e) {
-        LogUtils.i(this, "onError: " + e.getMessage());
-        UiUtils.makeToastShort(getContext(), "Error: " + e.getMessage());
+    public void onError(String message) {
+        LogUtils.i(this, "onError: " + message);
+        UiUtils.makeToastShort(getContext(), "Error: " + message);
     }
 }

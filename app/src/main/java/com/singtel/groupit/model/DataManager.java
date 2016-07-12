@@ -7,6 +7,7 @@ import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.domain.User;
+import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.model.remote.GroupITService;
 
 import java.util.List;
@@ -20,11 +21,9 @@ public class DataManager {
 
     @Inject GroupITService mGroupITService;
     @Inject Scheduler mSubscribeScheduler;
-    PreferencesManager prefManager;
 
     public DataManager(Context context) {
         injectDependencies(context);
-        prefManager = PreferencesManager.getInstance();
     }
 
     /* This constructor is provided so we can set up a DataManager with mocks from unit test.
@@ -48,31 +47,34 @@ public class DataManager {
         return mSubscribeScheduler;
     }
 
+    /*
+        Support API callings
+     */
     public Observable<AccountInfo> login(String username, String password, String grantType) {
         return mGroupITService.getToken(username, password, grantType);
     }
 
     public Observable<ArticlesResponse> getTopStories() {
-        return mGroupITService.getTopStories(prefManager.getAuthToken());
+        return mGroupITService.getTopStories();
     }
 
-    public Observable<TestUserResponse> getUser() {
-        return mGroupITService.getUser(prefManager.getAuthToken());
+    public Observable<TestUserResponse> getUser(String token) {
+        return mGroupITService.getUser(token);
     }
 
-    public Observable<List<User>> getUsers() {
-        return mGroupITService.getUsers(prefManager.getAuthToken());
+    public Observable<List<User>> getUsers(String token) {
+        return mGroupITService.getUsers(token);
     }
 
-    public Observable<TestTemplatesResponse> getTemplates() {
-        return mGroupITService.getTemplates(prefManager.getAuthToken());
+    public Observable<TestTemplatesResponse> getTemplates(String token) {
+        return mGroupITService.getTemplates(token);
     }
 
-    public Observable<NotesResponse> getInbox() {
-        return mGroupITService.getInbox(prefManager.getAuthToken());
+    public Observable<List<Note>> getInbox(String token) {
+        return mGroupITService.getInbox(token);
     }
 
-    public Observable<NotesResponse> getSentNotes() {
-        return mGroupITService.getSentNotes(prefManager.getAuthToken());
+    public Observable<List<Note>> getSentNotes(String token) {
+        return mGroupITService.getSentNotes(token);
     }
 }

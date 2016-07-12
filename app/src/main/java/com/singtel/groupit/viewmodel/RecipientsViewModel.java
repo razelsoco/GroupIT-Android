@@ -13,6 +13,7 @@ import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.domain.NewNoteSession;
 import com.singtel.groupit.model.domain.Suborganization;
 import com.singtel.groupit.model.domain.User;
+import com.singtel.groupit.util.GroupITSharedPreferences;
 import com.singtel.groupit.view.activity.SelectableContactsActivity;
 import com.singtel.groupit.view.adapter.BaseRecyclerAdapter;
 import com.singtel.groupit.view.adapter.FilteredContactsAdapter;
@@ -36,6 +37,7 @@ public class RecipientsViewModel implements ViewModel {
     public ObservableInt searchedUsersListVisibility;
     public ObservableField<String> searchString;
 
+    GroupITSharedPreferences pref;
     DataManager dataManager;
     Context context;
     SelectedUsersAdapter selectedUsersAdapter;
@@ -53,6 +55,7 @@ public class RecipientsViewModel implements ViewModel {
         this.fragment = fragment;
         this.context = fragment.getContext();
         this.dataManager = GroupITApplication.get(context).getComponent().dataManager();
+        this.pref = GroupITApplication.get(context).getComponent().sharedPreferences();
         this.newNoteSession = NewNoteSession.getInstance();
 
         this.selectedUsersListVisibility = new ObservableInt(View.VISIBLE);
@@ -110,7 +113,7 @@ public class RecipientsViewModel implements ViewModel {
     }
 
     private void loadContacts(){
-        subscription = this.dataManager.getUsers().observeOn(AndroidSchedulers.mainThread())
+        subscription = this.dataManager.getUsers(pref.getUserToken(fragment.getContext())).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(this.dataManager.getScheduler())
                 .subscribe(new Subscriber<List<User>>() {
                     @Override

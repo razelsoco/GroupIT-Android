@@ -56,7 +56,7 @@
     <string name="seconds">Seconds</string>
 
 
-    // dialogs
+    // dialogs / toast (message need to confirm to user)
     <string name="loading">Loading&#8230;</string>
     <string name="saving">Saving&#8230;</string>
     <string name="please_wait">Please wait&#8230;</string>
@@ -67,10 +67,13 @@
     <string name="internet_connection_problem_title">Internet connection problem</string>
     <string name="internet_connection_problem_message">You currently have no internet connection. Please check your network / Wi-Fi connection and try again.</string>
 
+    <string name="save_data_error">Can not save data!</string>
 
     // Login screen
     <string name="email">Email</string>
     <string name="password">Password</string>
+
+    <string name="login_success">Login success</string>
 
     //dashboard
     <string name="notes">Notes</string>

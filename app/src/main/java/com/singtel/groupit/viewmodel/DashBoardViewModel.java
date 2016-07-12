@@ -9,8 +9,11 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.model.TestUserResponse;
 import com.singtel.groupit.uiutil.UiUtils;
+import com.singtel.groupit.util.GroupITSharedPreferences;
 import com.singtel.groupit.view.fragment.MenuNotesFragment;
 import com.singtel.groupit.view.fragment.SettingsFragment;
+
+import javax.inject.Inject;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -24,6 +27,7 @@ public class DashBoardViewModel implements ViewModel {
     public ObservableField<String> userName;
     public ObservableField<String> userGroup;
 
+    GroupITSharedPreferences pref;
     DataManager dataManager;
     Subscription subscription;
 
@@ -35,19 +39,24 @@ public class DashBoardViewModel implements ViewModel {
         this.userGroup =  new ObservableField<>("Group IT");
         this.mFragment = fragment;
         this.dataManager = GroupITApplication.get(fragment.getContext()).getComponent().dataManager();
+        this.pref = GroupITApplication.get(fragment.getContext()).getComponent().sharedPreferences();
         loadUser();
     }
 
     public void onNotesClick(View view){
-        UiUtils.replaceFragment(mFragment.getActivity(), MenuNotesFragment.class.getName(), MenuNotesFragment.newInstance(), R.id.menu_frame);
+        UiUtils.replaceFragmentRightIn(
+                mFragment.getActivity(), MenuNotesFragment.class.getName(),
+                MenuNotesFragment.newInstance(), R.id.menu_frame);
     }
 
     public void onSettingsClick(View view){
-        UiUtils.replaceFragment(mFragment.getActivity(), SettingsFragment.class.getName(), SettingsFragment.newInstance(), R.id.menu_frame);
+        UiUtils.replaceFragmentRightIn(
+                mFragment.getActivity(), SettingsFragment.class.getName(),
+                SettingsFragment.newInstance(), R.id.menu_frame);
     }
 
     public void loadUser(){
-        subscription = dataManager.getUser().observeOn(AndroidSchedulers.mainThread())
+        subscription = dataManager.getUser(pref.getUserToken(this.mFragment.getContext())).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(dataManager.getScheduler())
                 .subscribe(new Subscriber<TestUserResponse>() {
                     @Override
