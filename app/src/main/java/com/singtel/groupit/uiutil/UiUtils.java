@@ -15,6 +15,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.AnimRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -362,27 +363,51 @@ public class UiUtils {
     }
 
     /*
-    Fragment supports
+        Fragment supports
     */
     public static void replaceFragment(FragmentActivity context, String tag,
                                        Fragment f, @IdRes int containerId) {
+        replaceFragment(context, tag, f, containerId,
+                android.R.anim.fade_in, android.R.anim.fade_out,
+                android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public static void replaceFragmentRightIn(FragmentActivity context, String tag,
+                                              Fragment f, @IdRes int containerId) {
+        replaceFragment(context, tag, f, containerId,
+                R.anim.slide_in_right, R.anim.slide_out_left,
+                android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    }
+
+    public static void replaceFragment(FragmentActivity context, String tag,
+                                       Fragment f, @IdRes int containerId,
+                                       @AnimRes int enter, @AnimRes int exit,
+                                       @AnimRes int popEnter, @AnimRes int popExit) {
         context.getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(
-                        android.R.anim.fade_in, android.R.anim.fade_out,
-                        android.R.anim.fade_in, android.R.anim.fade_out)
+                .setCustomAnimations(enter, exit, popEnter, popExit)
                 .addToBackStack(tag)
-                .replace(containerId, f).commit();
+                .replace(containerId, f)
+                .commit();
     }
 
     public static void replaceFragmentWithoutHistory(FragmentActivity context,
                                                      Fragment f, @IdRes int containerId) {
+        replaceFragmentWithoutHistory(context, f, containerId,
+                android.R.anim.fade_in, android.R.anim.fade_out,
+                android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+
+    public static void replaceFragmentWithoutHistory(FragmentActivity context,
+                                                     Fragment f, @IdRes int containerId,
+                                                     @AnimRes int enter, @AnimRes int exit,
+                                                     @AnimRes int popEnter, @AnimRes int popExit) {
         context.getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(
-                        android.R.anim.fade_in, android.R.anim.fade_out,
-                        android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(containerId, f).commit();
+                .setCustomAnimations(enter, exit, popEnter, popExit)
+                .replace(containerId, f)
+                .commit();
     }
 
     public static void replaceFragment(FragmentActivity context,

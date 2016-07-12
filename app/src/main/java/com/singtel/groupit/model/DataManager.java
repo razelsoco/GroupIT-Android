@@ -6,7 +6,10 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.model.domain.AccountInfo;
+import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.model.remote.GroupITService;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -43,12 +46,16 @@ public class DataManager {
         return mSubscribeScheduler;
     }
 
+    /*
+        Support API callings
+     */
     public Observable<AccountInfo> login(String username, String password, String grantType) {
         return mGroupITService.getToken(username, password, grantType);
     }
 
     public Observable<ArticlesResponse> getTopStories() {
         return mGroupITService.getTopStories();
+//        return mGroupITService.getTestTopStories();
     }
 
     public Observable<TestUserResponse> getUser() {
@@ -63,11 +70,11 @@ public class DataManager {
         return mGroupITService.getTemplates();
     }
 
-    public Observable<NotesResponse> getInbox() {
-        return mGroupITService.getInbox();
+    public Observable<List<Note>> getInbox(String token) {
+        return mGroupITService.getInbox("Bearer " + token);
     }
 
-    public Observable<NotesResponse> getSentNotes() {
-        return mGroupITService.getSentNotes();
+    public Observable<List<Note>> getSentNotes(String token) {
+        return mGroupITService.getSentNotes("Bearer " + token);
     }
 }

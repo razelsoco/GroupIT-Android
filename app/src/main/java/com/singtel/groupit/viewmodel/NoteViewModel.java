@@ -26,8 +26,9 @@ public class NoteViewModel {
 
     public NoteViewModel(Note note) {
         this();
-        title.set(note.sender);
-        content.set(note.title);
-        replyNoteVisibility.set(note.replied ? View.VISIBLE : View.INVISIBLE);
+        title.set(note.getFullName());
+        content.set(note.getMessage());
+        replyNoteVisibility.set(note.getReplies() != null && note.getReplies().size() > 0 ?
+                View.VISIBLE : View.INVISIBLE);
     }
 }

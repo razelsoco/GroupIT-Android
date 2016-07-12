@@ -39,11 +39,15 @@ public class DashBoardViewModel implements ViewModel {
     }
 
     public void onNotesClick(View view){
-        UiUtils.replaceFragment(mFragment.getActivity(), MenuNotesFragment.class.getName(), MenuNotesFragment.newInstance(), R.id.menu_frame);
+        UiUtils.replaceFragmentRightIn(
+                mFragment.getActivity(), MenuNotesFragment.class.getName(),
+                MenuNotesFragment.newInstance(), R.id.menu_frame);
     }
 
     public void onSettingsClick(View view){
-        UiUtils.replaceFragment(mFragment.getActivity(), SettingsFragment.class.getName(), SettingsFragment.newInstance(), R.id.menu_frame);
+        UiUtils.replaceFragmentRightIn(
+                mFragment.getActivity(), SettingsFragment.class.getName(),
+                SettingsFragment.newInstance(), R.id.menu_frame);
     }
 
     public void loadUser(){

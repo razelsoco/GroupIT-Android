@@ -11,16 +11,14 @@ import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.model.ArticlesResponse;
+import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.uiutil.AlertUtils;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.util.LogUtils;
 import com.singtel.groupit.util.NetworkUtils;
 import com.singtel.groupit.view.adapter.HomeArticlesAdapter;
 
-import java.io.IOException;
-
 import butterknife.Bind;
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -106,22 +104,23 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     @Override
                     public void onError(Throwable e) {
                         swipeRefreshLayout.setRefreshing(false);
-                        if (e instanceof HttpException) {
-                            // We had non-2XX http error
-                            LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+((HttpException) e).response().code());
-                        }
-                        else if (e instanceof IOException) {
-                            // A network or conversion error happened
-                            LogUtils.w(MainFragment.this, "fetchTopStories: onError: A network or conversion error happened");
-                        }
-
-                        // We don't know what happened. We need to simply convert to an unknown error
-                        LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+ e.getMessage());
+                        ApiCommons.parseErrorMessage(e);
+//                        if (e instanceof HttpException) {
+//                            // We had non-2XX http error
+//                            LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+((HttpException) e).response().code());
+//                        }
+//                        else if (e instanceof IOException) {
+//                            // A network or conversion error happened
+//                            LogUtils.w(MainFragment.this, "fetchTopStories: onError: A network or conversion error happened");
+//                        }
+//
+//                        // We don't know what happened. We need to simply convert to an unknown error
+//                        LogUtils.w(MainFragment.this, "fetchTopStories: onError: "+ e.getMessage());
                     }
 
                     @Override
                     public void onNext(ArticlesResponse articles) {
-                        //LogUtils.w(MainFragment.this, "fetchTopStories: onNext: "+", "+ articles.articles);
+                        LogUtils.w(MainFragment.this, "fetchTopStories: onNext: " + articles.articles.size());
                         adapter.setItems(articles.articles);
                     }
                 })

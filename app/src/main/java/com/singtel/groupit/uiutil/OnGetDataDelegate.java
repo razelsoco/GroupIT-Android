@@ -7,5 +7,5 @@ package com.singtel.groupit.uiutil;
 
 public interface OnGetDataDelegate<T> {
     void onDataChanged(T data);
-    void onError(Throwable e);
+    void onError(String message);
 }
