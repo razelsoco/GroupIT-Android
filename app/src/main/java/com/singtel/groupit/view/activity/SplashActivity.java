@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
+import com.singtel.groupit.util.LogUtils;
 
 public class SplashActivity extends BaseActivity
     implements Handler.Callback {
@@ -45,6 +46,7 @@ public class SplashActivity extends BaseActivity
     @Override
     public boolean handleMessage(Message msg) {
         String token = GroupITApplication.get(this).getComponent().sharedPreferences().getUserToken(this);
+        LogUtils.i("token", "token="+token);
         if (TextUtils.isEmpty(token)) {
             gotoLoginScreen();
         } else {

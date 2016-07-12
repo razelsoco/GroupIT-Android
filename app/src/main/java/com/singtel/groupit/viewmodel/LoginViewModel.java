@@ -10,6 +10,7 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.R;
 import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.model.domain.AccountInfo;
+import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.SimpleTextWatcher;
 import com.singtel.groupit.util.GroupITSharedPreferences;
@@ -123,7 +124,7 @@ public class LoginViewModel implements ViewModel {
                     @Override
                     public void onError(Throwable e) {
                         loadingVisible.set(GONE);
-                        delegate.onError(dataManager.logError(e));
+                        delegate.onError(ApiCommons.parseErrorMessage(e));
                     }
 
                     @Override

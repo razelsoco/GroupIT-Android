@@ -46,12 +46,12 @@ public class GroupITSharedPreferences extends BaseSharedPreferences {
 
             }
         }
-        LogUtils.i(this, "getUserToken: " + token.length() + ": " + token);
+//        LogUtils.i(this, "getUserToken: " + token.length() + ": " + token);
         return token;
     }
 
     public boolean saveUserToken(Context context, String token) {
-        LogUtils.i(this, "saveUserToken: " + token.length() + ": " + token);
+//        LogUtils.i(this, "saveUserToken: " + token.length() + ": " + token);
         if (checkUserTokenCreated(context)) {
             // whole token for AES
 //            String encryptedToken = KeystoreUtil.encryptString(USER_TOKEN_1, token);

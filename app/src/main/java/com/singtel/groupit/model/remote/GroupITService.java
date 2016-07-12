@@ -17,7 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -30,7 +33,7 @@ public interface GroupITService {
     /*
         ENDPOINT
      */
-    String MOCKABLE_TEST = " http://demo1023649.mockable.io"; // dev test // raz: demo6174646, lan: demo1023649
+    String MOCKABLE_ENDPOINT_TEST = "http://demo1023649.mockable.io"; // dev test // raz: demo6174646, lan: demo1023649
     String SERVER_STAGING = "http://groupit-staging.ap-southeast-1.elasticbeanstalk.com"; // staging
 
     String ENDPOINT = SERVER_STAGING;
@@ -49,7 +52,8 @@ public interface GroupITService {
         public static GroupITService create() {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(GroupITService.ENDPOINT)
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(getRequestHeader())
                     .build();
@@ -80,23 +84,31 @@ public interface GroupITService {
             @Field("grant_type") String grantType
     );
 
+
     /**
      * Return a list of articles.
      */
-    @GET("/main")
+//    @GET("/main")
+    @GET("http://demo1023649.mockable.io/main") // test
     Observable<ArticlesResponse> getTopStories();
+
 
     /**
      * Return a list of Inbox Notes.
      */
-    @GET("/inbox")
-    Observable<NotesResponse> getInbox();
+    @GET("/api/notes/inbox")
+//    @Headers({"Transfer-Encoding: chunked"})
+//    @GET("http://demo1023649.mockable.io/inbox") // test
+    Observable<NotesResponse> getInbox(@Header("Authorization") String authorization); // authorization: Bearer {{access_token}}
+
 
     /**
      * Return a list of Sent Notes.
      */
-    @GET("/sentnotes")
+//    @GET("/sentnotes")
+    @GET("http://demo1023649.mockable.io/sentnotes") // test
     Observable<NotesResponse> getSentNotes();
+
 
     @GET("/user")
     Observable<TestUserResponse> getUser();

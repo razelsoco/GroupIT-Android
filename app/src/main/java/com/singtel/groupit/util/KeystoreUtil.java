@@ -14,7 +14,6 @@ import java.security.Signature;
 import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Enumeration;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -30,40 +29,41 @@ import javax.security.auth.x500.X500Principal;
  */
 
 public class KeystoreUtil {
+    private static final boolean LOGGABLE = false;
 
 //    private static final String ANDROID_KEY_STORE = "AndroidKeyStore";
 
     // FIXME
-    public static void test(Context context, String alias, String value) {
-        /*
-         * Load the Android KeyStore instance using the the
-         * "AndroidKeyStore" provider to list out what entries are
-         * currently stored.
-         */
-        KeyStore ks = null;
-        Enumeration<String> aliases = null;
-        try {
-            ks = KeyStore.getInstance("AndroidKeyStore");
-            ks.load(null);
-            aliases = ks.aliases();
-        } catch (Exception e) {
-            LogUtils.w("keystore", "test: " + LogUtils.getStackTraceString(e));
-        }
-
-        String lastAlias = null;
-        if (aliases != null) {
-            while (aliases.hasMoreElements()) {
-                lastAlias = aliases.nextElement();
-                LogUtils.d("keystore", "test: get aliases:" + lastAlias);
-            }
-        }
-
-        if (ks != null) {
-            generatePrivateKey(context, alias);
-            String encryptedText = encryptString(alias, value);
-            decryptString(alias, encryptedText);
-        }
-    }
+//    public static void test(Context context, String alias, String value) {
+//        /*
+//         * Load the Android KeyStore instance using the the
+//         * "AndroidKeyStore" provider to list out what entries are
+//         * currently stored.
+//         */
+//        KeyStore ks = null;
+//        Enumeration<String> aliases = null;
+//        try {
+//            ks = KeyStore.getInstance("AndroidKeyStore");
+//            ks.load(null);
+//            aliases = ks.aliases();
+//        } catch (Exception e) {
+//            LogUtils.w("keystore", "test: " + LogUtils.getStackTraceString(e));
+//        }
+//
+//        String lastAlias = null;
+//        if (aliases != null) {
+//            while (aliases.hasMoreElements()) {
+//                lastAlias = aliases.nextElement();
+//                LogUtils.d("keystore", "test: get aliases:" + lastAlias);
+//            }
+//        }
+//
+//        if (ks != null) {
+//            generatePrivateKey(context, alias);
+//            String encryptedText = encryptString(alias, value);
+//            decryptString(alias, encryptedText);
+//        }
+//    }
 
 
 //    @TargetApi(Build.VERSION_CODES.M)
@@ -85,8 +85,10 @@ public class KeystoreUtil {
 //                    .build());
 //
 //            KeyPair kp = kpg.generateKeyPair();
-//            LogUtils.i("keystore", "generatePrivateKey: privateKey=" + kp.getPrivate().toString()
-//                    +", publicKey=" + kp.getPublic().toString());
+//            if (LOGGABLE) {
+//                LogUtils.i("keystore", "generatePrivateKey: privateKey=" + kp.getPrivate().toString()
+//                        +", publicKey=" + kp.getPublic().toString());
+//                }
 //        } catch (Exception e) {
 //            LogUtils.e("keystore", LogUtils.getStackTraceString(e));
 //        }
@@ -112,9 +114,11 @@ public class KeystoreUtil {
                 KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA", "AndroidKeyStore"); // "RSA" is to support 18+
                 generator.initialize(spec);
                 KeyPair keyPair = generator.generateKeyPair(); // creates the new pair of keys (Private and corresponding Public key)
-                LogUtils.d("keystore", "generatePrivateKey: alias=" + alias
-                        + ", privateKey=" + keyPair.getPrivate().toString()
-                        +", publicKey=" + keyPair.getPublic().toString());
+                if (LOGGABLE) {
+                    LogUtils.d("keystore", "generatePrivateKey: alias=" + alias
+                            + ", privateKey=" + keyPair.getPrivate().toString()
+                            + ", publicKey=" + keyPair.getPublic().toString());
+                }
 
                 // AES
 //                byte[] input = value.getBytes();
@@ -122,23 +126,30 @@ public class KeystoreUtil {
 //                Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
 //                KeyGenerator generator = KeyGenerator.getInstance("AES", "BC");
 //                generator.init(128);
-//                LogUtils.d("keystore", "generatePrivateKey: text \""+value+"\" and ivBytes \"1234567812345678\" with algorithm \"AES/CTR/NoPadding, BC\" ");
-//
+//                if (LOGGABLE) {
+//                    LogUtils.d("keystore", "generatePrivateKey: text \""+value+"\" and ivBytes \"1234567812345678\" with algorithm \"AES/CTR/NoPadding, BC\" ");
+//                }
 //                Key encryptionKey = generator.generateKey();
-//                LogUtils.d("keystore", "generatePrivateKey: key : " + new String(encryptionKey.getEncoded()));
+//                if (LOGGABLE) {
+//                    LogUtils.d("keystore", "generatePrivateKey: key : " + new String(encryptionKey.getEncoded()));
+//                }
 //
 //                cipher.init(Cipher.ENCRYPT_MODE, encryptionKey, new IvParameterSpec(ivBytes));
 //                byte[] cipherText = new byte[cipher.getOutputSize(input.length)];
 //                int ctLength = cipher.update(input, 0, input.length, cipherText, 0);
 //                ctLength += cipher.doFinal(cipherText, ctLength);
-//                LogUtils.d("keystore", "generatePrivateKey: ctLength: " + ctLength + " cipherText: " + new String(cipherText));
+//                if (LOGGABLE) {
+//                    LogUtils.d("keystore", "generatePrivateKey: ctLength: " + ctLength + " cipherText: " + new String(cipherText));
+//                }
 //
 //                Key decryptionKey = new SecretKeySpec(encryptionKey.getEncoded(), encryptionKey.getAlgorithm());
 //                cipher.init(Cipher.DECRYPT_MODE, decryptionKey, new IvParameterSpec(ivBytes));
 //                byte[] plainText = new byte[cipher.getOutputSize(ctLength)];
 //                int ptLength = cipher.update(cipherText, 0, ctLength, plainText, 0);
 //                ptLength += cipher.doFinal(plainText, ptLength);
-//                LogUtils.d("keystore", "generatePrivateKey: ptLength: " + ptLength + " plainText: " + new String(plainText));
+//                if (LOGGABLE) {
+//                    LogUtils.d("keystore", "generatePrivateKey: ptLength: " + ptLength + " plainText: " + new String(plainText));
+//                }
             }
             return true;
         } catch (Exception e) {
@@ -258,12 +269,21 @@ public class KeystoreUtil {
 
             byte [] vals = outputStream.toByteArray();
             String encryptedText = Base64.encodeToString(vals, Base64.DEFAULT); // encrypted text
-            LogUtils.d("keystore", "encryptString: alias: "+ alias + " text:\"" + initialText + "\" to: " + encryptedText);
+
+            if (LOGGABLE) {
+                LogUtils.d("keystore", "encryptString: alias: " + alias + " text:\"" + initialText + "\" to: " + encryptedText);
+            }
+
             return encryptedText;
+
         } catch (Exception e) {
             LogUtils.w("keystore", "encryptString: " + LogUtils.getStackTraceString(e));
         }
-        LogUtils.d("keystore", "encryptString: alias: "+ alias + " text:\"" + initialText + "\" to: null");
+
+        if (LOGGABLE) {
+            LogUtils.d("keystore", "encryptString: alias: " + alias + " text:\"" + initialText + "\" to: null");
+        }
+
         return null;
     }
 
@@ -293,13 +313,21 @@ public class KeystoreUtil {
             }
 
             String decryptedText = new String(bytes, 0, bytes.length, "UTF-8"); // decrypted text
-            LogUtils.d("keystore", "decryptString: alias=" + alias + " got \"" + decryptedText+"\"");
+
+            if (LOGGABLE) {
+                LogUtils.d("keystore", "decryptString: alias=" + alias + " got \"" + decryptedText + "\"");
+            }
+
             return decryptedText;
 
         } catch (Exception e) {
             LogUtils.w("keystore", "decryptString: " + LogUtils.getStackTraceString(e));
         }
-        LogUtils.d("keystore", "decryptString: alias=" + alias+ " got null");
+
+        if (LOGGABLE) {
+            LogUtils.d("keystore", "decryptString: alias=" + alias + " got null");
+        }
+
         return null;
     }
 }

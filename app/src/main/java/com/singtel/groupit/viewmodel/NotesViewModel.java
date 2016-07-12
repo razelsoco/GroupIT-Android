@@ -7,6 +7,7 @@ import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.NotesResponse;
 import com.singtel.groupit.model.domain.Note;
+import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +74,7 @@ public class NotesViewModel extends RefreshingViewModel {
                     public void onError(Throwable e) {
 //                        LogUtils.w(NotesViewModel.this, "fetchTopStories: onError: "+ e.getMessage());
                         setRefreshing(false);
-                        delegate.onError(dataManager.logError(e));
+                        delegate.onError(ApiCommons.logError(e));
                     }
 
                     @Override

@@ -17,6 +17,8 @@ import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Scheduler;
 
+import static com.singtel.groupit.model.remote.GroupITService.MOCKABLE_ENDPOINT_TEST;
+
 public class DataManager {
 
     @Inject GroupITService mGroupITService;
@@ -56,6 +58,7 @@ public class DataManager {
 
     public Observable<ArticlesResponse> getTopStories() {
         return mGroupITService.getTopStories();
+//        return mGroupITService.getTestTopStories();
     }
 
     public Observable<TestUserResponse> getUser() {
@@ -70,40 +73,11 @@ public class DataManager {
         return mGroupITService.getTemplates();
     }
 
-    public Observable<NotesResponse> getInbox() {
-        return mGroupITService.getInbox();
+    public Observable<NotesResponse> getInbox(String token) {
+        return mGroupITService.getInbox("Bearer " + token);
     }
 
     public Observable<NotesResponse> getSentNotes() {
         return mGroupITService.getSentNotes();
-    }
-
-    /*
-    HTTP Status: 400 BAD REQUEST
-    {
-      "error": {
-        "code": "600",
-        "title": "Bad request",
-        "detail": "The specified email is malformed."
-      }
-    }
-     */
-    public String logError(Throwable throwable) {
-        String message;
-        if (throwable instanceof HttpException) {
-            // We had non-2XX http error
-            message = "We had non-2XX http error: " + ((HttpException) throwable).response().message();
-        }
-        else if (throwable instanceof IOException) {
-            // A network or conversion error happened
-            message = "A network or conversion error happened: " + throwable.getMessage();
-        }
-        else {
-            // We don't know what happened. We need to simply convert to an unknown error
-            // ...
-            message = "We don't know what happened. We need to simply convert to an unknown error: " + throwable.getMessage();
-        }
-        LogUtils.d(this, "logError: " + message);
-        return message;
     }
 }
