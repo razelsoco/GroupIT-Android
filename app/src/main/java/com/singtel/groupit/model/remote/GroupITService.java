@@ -1,26 +1,24 @@
 package com.singtel.groupit.model.remote;
 
 
+import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.TestTemplatesResponse;
 import com.singtel.groupit.model.TestUserResponse;
 import com.singtel.groupit.model.domain.AccountInfo;
-import com.singtel.groupit.model.ArticlesResponse;
-import com.singtel.groupit.model.NotesResponse;
+import com.singtel.groupit.model.domain.Note;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -99,15 +97,15 @@ public interface GroupITService {
     @GET("/api/notes/inbox")
 //    @Headers({"Transfer-Encoding: chunked"})
 //    @GET("http://demo1023649.mockable.io/inbox") // test
-    Observable<NotesResponse> getInbox(@Header("Authorization") String authorization); // authorization: Bearer {{access_token}}
+    Observable<List<Note>> getInbox(@Header("Authorization") String authorization); // authorization: Bearer {{access_token}}
 
 
     /**
      * Return a list of Sent Notes.
      */
-//    @GET("/sentnotes")
-    @GET("http://demo1023649.mockable.io/sentnotes") // test
-    Observable<NotesResponse> getSentNotes();
+    @GET("/api/Notes/sent")
+//    @GET("http://demo1023649.mockable.io/sentnotes") // test
+    Observable<List<Note>> getSentNotes(@Header("Authorization") String authorization);
 
 
     @GET("/user")

@@ -6,18 +6,15 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.injection.component.DaggerDataManagerComponent;
 import com.singtel.groupit.injection.module.DataManagerModule;
 import com.singtel.groupit.model.domain.AccountInfo;
+import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.model.remote.GroupITService;
-import com.singtel.groupit.util.LogUtils;
 
-import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Scheduler;
-
-import static com.singtel.groupit.model.remote.GroupITService.MOCKABLE_ENDPOINT_TEST;
 
 public class DataManager {
 
@@ -73,11 +70,11 @@ public class DataManager {
         return mGroupITService.getTemplates();
     }
 
-    public Observable<NotesResponse> getInbox(String token) {
+    public Observable<List<Note>> getInbox(String token) {
         return mGroupITService.getInbox("Bearer " + token);
     }
 
-    public Observable<NotesResponse> getSentNotes() {
-        return mGroupITService.getSentNotes();
+    public Observable<List<Note>> getSentNotes(String token) {
+        return mGroupITService.getSentNotes("Bearer " + token);
     }
 }
