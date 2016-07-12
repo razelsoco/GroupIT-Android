@@ -42,8 +42,8 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public boolean handleMessage(Message msg) {
-        //gotoLoginScreen();
-        gotoMainScreen();
+        gotoLoginScreen();
+        //gotoMainScreen();
         return true;
     }
 

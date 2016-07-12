@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 
 import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
+import com.singtel.groupit.model.PreferencesManager;
 import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.SimpleTextWatcher;
@@ -116,7 +117,7 @@ public class LoginViewModel implements ViewModel {
     }
 
     private void storeUserData(AccountInfo account) {
-
+        PreferencesManager.getInstance().setAuthToken(account.getAccessToken());
     }
 
     private void checkUnsubscribe() {

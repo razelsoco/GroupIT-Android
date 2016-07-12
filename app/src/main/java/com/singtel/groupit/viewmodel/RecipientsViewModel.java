@@ -110,9 +110,9 @@ public class RecipientsViewModel implements ViewModel {
     }
 
     private void loadContacts(){
-        subscription = this.dataManager.getContacts().observeOn(AndroidSchedulers.mainThread())
+        subscription = this.dataManager.getUsers().observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(this.dataManager.getScheduler())
-                .subscribe(new Subscriber<TestContactsResponse>() {
+                .subscribe(new Subscriber<List<User>>() {
                     @Override
                     public void onCompleted() {
 
@@ -124,9 +124,9 @@ public class RecipientsViewModel implements ViewModel {
                     }
 
                     @Override
-                    public void onNext(TestContactsResponse testContactsResponse) {
-                        if(testContactsResponse.users != null) {
-                            allUsers = testContactsResponse.users;
+                    public void onNext(List<User> users) {
+                        if(users != null) {
+                            allUsers.addAll(users);
                             filterGroupITUsers(allUsers);
                         }
                     }

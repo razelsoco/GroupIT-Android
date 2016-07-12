@@ -7,7 +7,9 @@ import com.singtel.groupit.model.TestUserResponse;
 import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.ArticlesResponse;
 import com.singtel.groupit.model.NotesResponse;
+import com.singtel.groupit.model.domain.User;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -17,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -33,7 +36,7 @@ public interface GroupITService {
     String MOCKABLE_TEST = " http://demo6174646.mockable.io"; // test  // raz: demo6174646 lan: demo1023649
     String SERVER_STAGING = "http://groupit-staging.ap-southeast-1.elasticbeanstalk.com"; // staging
 
-    String ENDPOINT = MOCKABLE_TEST;
+    String ENDPOINT = SERVER_STAGING;
 
     /*
         Api Constants
@@ -84,29 +87,29 @@ public interface GroupITService {
      * Return a list of articles.
      */
     @GET("/main")
-    Observable<ArticlesResponse> getTopStories();
+    Observable<ArticlesResponse> getTopStories(@Header("Authorization") String authToken);
 
     /**
      * Return a list of Inbox Notes.
      */
     @GET("/inbox")
-    Observable<NotesResponse> getInbox();
+    Observable<NotesResponse> getInbox(@Header("Authorization") String authToken);
 
     /**
      * Return a list of Sent Notes.
      */
     @GET("/sentnotes")
-    Observable<NotesResponse> getSentNotes();
+    Observable<NotesResponse> getSentNotes(@Header("Authorization") String authToken);
 
     @GET("/user")
-    Observable<TestUserResponse> getUser();
+    Observable<TestUserResponse> getUser(@Header("Authorization") String authToken);
 
-    @GET("/contacts")
-    Observable<TestContactsResponse> getContacts();
+    @GET("/api/users")
+    Observable<List<User>> getUsers(@Header("Authorization") String authToken);
 
-    @GET("/templates")
-    Observable<TestTemplatesResponse> getTemplates();
+    @GET("/api/templates")
+    Observable<TestTemplatesResponse> getTemplates(@Header("Authorization") String authToken);
 
-    @GET("/templates")
-    Observable<TestTemplatesResponse> sendNote();
+    @POST("/api/Notes")
+    Observable<TestTemplatesResponse> sendNote(@Header("Authorization") String authToken);
 }
