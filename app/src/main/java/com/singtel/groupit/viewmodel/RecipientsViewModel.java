@@ -9,12 +9,11 @@ import android.view.View;
 
 import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.GroupITApplication;
-import com.singtel.groupit.model.TestContactsResponse;
 import com.singtel.groupit.model.domain.NewNoteSession;
 import com.singtel.groupit.model.domain.Suborganization;
 import com.singtel.groupit.model.domain.User;
-import com.singtel.groupit.util.GroupITSharedPreferences;
-import com.singtel.groupit.view.activity.SelectableContactsActivity;
+import com.singtel.groupit.model.local.GroupITSharedPreferences;
+import com.singtel.groupit.view.activity.SelectUsersActivity;
 import com.singtel.groupit.view.adapter.BaseRecyclerAdapter;
 import com.singtel.groupit.view.adapter.FilteredContactsAdapter;
 import com.singtel.groupit.view.adapter.SelectedUsersAdapter;
@@ -113,7 +112,7 @@ public class RecipientsViewModel implements ViewModel {
     }
 
     private void loadContacts(){
-        subscription = this.dataManager.getUsers(pref.getUserToken(fragment.getContext())).observeOn(AndroidSchedulers.mainThread())
+        subscription = this.dataManager.getUsers(pref.getUserToken()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(this.dataManager.getScheduler())
                 .subscribe(new Subscriber<List<User>>() {
                     @Override
@@ -152,7 +151,7 @@ public class RecipientsViewModel implements ViewModel {
     }
 
     public void onOpenAllContacts(View view){
-        fragment.startActivityForResult(SelectableContactsActivity.newIntent(context, allUsers), RecipientsFragment.REQUEST_CODE_SELECT_USERS);
+        fragment.startActivityForResult(SelectUsersActivity.newIntent(context, allUsers), RecipientsFragment.REQUEST_CODE_SELECT_USERS);
     }
 
     @Override
@@ -175,7 +174,7 @@ public class RecipientsViewModel implements ViewModel {
     }
 
     /**
-     * This method is called after {@link SelectableContactsActivity} returns result.
+     * This method is called after {@link SelectUsersActivity} returns result.
      * User list will be filtered according to the selected state of each user
      * */
     public void filterSelectedUsers(List<User> userArrayList){

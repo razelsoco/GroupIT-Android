@@ -59,22 +59,26 @@ public class DataManager {
     }
 
     public Observable<TestUserResponse> getUser(String token) {
-        return mGroupITService.getUser(token);
+        return mGroupITService.getUser(appendBearer(token));
     }
 
     public Observable<List<User>> getUsers(String token) {
-        return mGroupITService.getUsers(token);
+        return mGroupITService.getUsers(appendBearer(token));
     }
 
     public Observable<TestTemplatesResponse> getTemplates(String token) {
-        return mGroupITService.getTemplates(token);
+        return mGroupITService.getTemplates(appendBearer(token));
     }
 
     public Observable<List<Note>> getInbox(String token) {
-        return mGroupITService.getInbox(token);
+        return mGroupITService.getInbox(appendBearer(token));
     }
 
     public Observable<List<Note>> getSentNotes(String token) {
-        return mGroupITService.getSentNotes(token);
+        return mGroupITService.getSentNotes(appendBearer(token));
+    }
+
+    private String appendBearer(String token){
+        return "Bearer "+token;
     }
 }

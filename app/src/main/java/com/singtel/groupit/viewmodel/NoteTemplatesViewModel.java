@@ -14,7 +14,7 @@ import com.singtel.groupit.model.DataManager;
 import com.singtel.groupit.model.TestTemplatesResponse;
 import com.singtel.groupit.model.domain.NewNoteSession;
 import com.singtel.groupit.model.domain.Template;
-import com.singtel.groupit.util.GroupITSharedPreferences;
+import com.singtel.groupit.model.local.GroupITSharedPreferences;
 import com.singtel.groupit.view.activity.MessageActivity;
 import com.singtel.groupit.view.adapter.ImageTemplateAdapter;
 import com.singtel.groupit.view.fragment.NoteTemplatesFragment;
@@ -100,7 +100,7 @@ public class NoteTemplatesViewModel implements ViewModel {
 
     private void loadContacts(){
 
-        subscription = this.dataManager.getTemplates(pref.getUserToken(fragment.getContext())).observeOn(AndroidSchedulers.mainThread())
+        subscription = this.dataManager.getTemplates(pref.getUserToken()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(this.dataManager.getScheduler())
                 .subscribe(new Subscriber<TestTemplatesResponse>() {
                     @Override

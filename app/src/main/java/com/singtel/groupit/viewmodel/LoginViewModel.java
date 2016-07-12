@@ -13,7 +13,7 @@ import com.singtel.groupit.model.domain.AccountInfo;
 import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
 import com.singtel.groupit.uiutil.SimpleTextWatcher;
-import com.singtel.groupit.util.GroupITSharedPreferences;
+import com.singtel.groupit.model.local.GroupITSharedPreferences;
 import com.singtel.groupit.util.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -135,7 +135,7 @@ public class LoginViewModel implements ViewModel {
     }
 
     private void storeUserData(AccountInfo account) {
-        boolean saveSuccess = pref.saveUserToken(context, account.getAccessToken());
+        boolean saveSuccess = pref.saveUserToken(account.getAccessToken());
         if (saveSuccess) {
             delegate.onDataChanged(account);
         } else {

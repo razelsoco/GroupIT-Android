@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemNoteBinding;
 import com.singtel.groupit.model.domain.Note;
-import com.singtel.groupit.viewmodel.NoteViewModel;
+import com.singtel.groupit.viewmodel.ItemNoteViewModel;
 
 /**
  * Created by lanna on 6/22/16.
@@ -32,7 +32,7 @@ public class NotesAdapter extends BaseRecyclerAdapter<Note, NotesAdapter.Binding
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        holder.binding.setViewModel(new NoteViewModel(getItem(position)));
+        holder.binding.setViewModel(new ItemNoteViewModel(getItem(position)));
     }
 
     /*

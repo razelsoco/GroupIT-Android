@@ -11,20 +11,20 @@ import com.singtel.groupit.model.domain.Note;
  *
  */
 
-public class NoteViewModel {
+public class ItemNoteViewModel {
 
     public ObservableInt replyNoteVisibility;
     public ObservableField<String> title;
     public ObservableField<String> content;
 
 
-    private NoteViewModel() {
+    private ItemNoteViewModel() {
         replyNoteVisibility = new ObservableInt(View.INVISIBLE);
         title = new ObservableField<>();
         content = new ObservableField<>();
     }
 
-    public NoteViewModel(Note note) {
+    public ItemNoteViewModel(Note note) {
         this();
         title.set(note.getFullName());
         content.set(note.getMessage());

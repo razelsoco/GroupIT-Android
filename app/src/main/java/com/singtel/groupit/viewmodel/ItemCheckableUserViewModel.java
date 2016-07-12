@@ -9,12 +9,12 @@ import com.singtel.groupit.model.domain.User;
 /**
  * Created by razelsoco on 28/6/16.
  */
-public class ItemSelectableContactViewModel {
+public class ItemCheckableUserViewModel {
     public ObservableField<String> name;
     public ObservableBoolean selectedState;
     private User contact;
 
-    public ItemSelectableContactViewModel(User contact) {
+    public ItemCheckableUserViewModel(User contact) {
         this.contact = contact;
         this.name = new ObservableField<>(contact.getName());
         this.selectedState = new ObservableBoolean(contact.isSelected());

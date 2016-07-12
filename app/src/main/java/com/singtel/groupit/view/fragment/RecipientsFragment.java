@@ -15,7 +15,7 @@ import com.singtel.groupit.databinding.FragmentRecipientsBinding;
 import com.singtel.groupit.model.domain.User;
 import com.singtel.groupit.uiutil.DividerItemDecoration;
 import com.singtel.groupit.uiutil.ItemOffsetDecoration;
-import com.singtel.groupit.view.activity.SelectableContactsActivity;
+import com.singtel.groupit.view.activity.SelectUsersActivity;
 import com.singtel.groupit.viewmodel.RecipientsViewModel;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class RecipientsFragment extends BaseMenuFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_SELECT_USERS && resultCode == Activity.RESULT_OK) {
-            ArrayList<User> users = data.getExtras().getParcelableArrayList(SelectableContactsActivity.EXTRA_ALL_USERS);
+            ArrayList<User> users = data.getExtras().getParcelableArrayList(SelectUsersActivity.EXTRA_ALL_USERS);
             binding.getModel().filterSelectedUsers(users);
         }else
             super.onActivityResult(requestCode, resultCode, data);

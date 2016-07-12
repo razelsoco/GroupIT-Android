@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ActivityMainBinding;
 import com.singtel.groupit.uiutil.UiUtils;
-import com.singtel.groupit.util.GroupITSharedPreferences;
+import com.singtel.groupit.model.local.GroupITSharedPreferences;
 import com.singtel.groupit.view.fragment.DashboardFragment;
 import com.singtel.groupit.view.fragment.MainFragment;
 import com.singtel.groupit.viewmodel.MainViewModel;

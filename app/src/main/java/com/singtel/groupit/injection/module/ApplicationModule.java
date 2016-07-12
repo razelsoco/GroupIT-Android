@@ -4,7 +4,7 @@ import android.app.Application;
 import android.preference.PreferenceManager;
 
 import com.singtel.groupit.model.DataManager;
-import com.singtel.groupit.util.GroupITSharedPreferences;
+import com.singtel.groupit.model.local.GroupITSharedPreferences;
 
 import javax.inject.Singleton;
 
@@ -38,7 +38,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     GroupITSharedPreferences provideSharedPreferences() {
-        return new GroupITSharedPreferences(PreferenceManager.getDefaultSharedPreferences(mApplication));
+        return new GroupITSharedPreferences(mApplication);
     }
 
 }

@@ -8,7 +8,7 @@ import com.singtel.groupit.GroupITApplication;
 import com.singtel.groupit.model.domain.Note;
 import com.singtel.groupit.model.remote.ApiCommons;
 import com.singtel.groupit.uiutil.OnGetDataDelegate;
-import com.singtel.groupit.util.GroupITSharedPreferences;
+import com.singtel.groupit.model.local.GroupITSharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -62,7 +62,7 @@ public class NotesViewModel extends RefreshingViewModel {
         checkUnsubscribe();
 
         setRefreshing(true);
-        String token = sharedPreferences.getUserToken(context);
+        String token = sharedPreferences.getUserToken();
         subscription = (type == PAGE_TYPE_INBOX
                 ? dataManager.getInbox(token)
                 : dataManager.getSentNotes(token))

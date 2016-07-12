@@ -1,21 +1,21 @@
-package com.singtel.groupit.util;
+package com.singtel.groupit.model.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class BaseSharedPreferences {
 //	public static final String DEFAULT_LANGUAGE = Locale.ENGLISH.getLanguage();
-
+    private static final String PREF_NAME = "com.singtel.groupit.PREF";
 	public static final String DEFAULT_STRING = "";
 	public static final boolean DEFAULT_BOOLEAN = false;
 	public static final int DEFAULT_NUMBER = 0;
 
-	public static final String DEFAULT_PREFERENCE_NAME = "references";
-	public static final int DEFAULT_PREFERENCE_MODE = Context.MODE_PRIVATE;
-
+    protected Context context;
     protected SharedPreferences pref;
-    public BaseSharedPreferences(SharedPreferences pref) {
-        this.pref = pref;
+    public BaseSharedPreferences(Context context) {
+        this.pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        this.context = context;
     }
 
 	// get, set string

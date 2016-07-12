@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.singtel.groupit.R;
 import com.singtel.groupit.databinding.ItemSelectableContactBinding;
 import com.singtel.groupit.model.domain.User;
-import com.singtel.groupit.viewmodel.ItemSelectableContactViewModel;
+import com.singtel.groupit.viewmodel.ItemCheckableUserViewModel;
 
 /**
  * Created by razelsoco on 6/28/16.
@@ -29,7 +29,7 @@ public class SelectUsersAdapter extends BaseRecyclerAdapter<User, SelectUsersAda
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
         ItemSelectableContactBinding itemBinding = holder.binding;
-        itemBinding.setViewModel(new ItemSelectableContactViewModel(getItem(position)));
+        itemBinding.setViewModel(new ItemCheckableUserViewModel(getItem(position)));
     }
 
     /*

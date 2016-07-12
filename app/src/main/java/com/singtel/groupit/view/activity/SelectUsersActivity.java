@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by razelsoco on 27/6/16.
  */
 
-public class SelectableContactsActivity extends BaseActivity {
+public class SelectUsersActivity extends BaseActivity {
 
     public static final String EXTRA_ALL_USERS ="all_users";
 
@@ -31,7 +31,7 @@ public class SelectableContactsActivity extends BaseActivity {
     }
 
     public static Intent newIntent(Context context, ArrayList<User> contacts){
-        Intent intent = new Intent(context, SelectableContactsActivity.class);
+        Intent intent = new Intent(context, SelectUsersActivity.class);
         intent.putParcelableArrayListExtra(EXTRA_ALL_USERS, contacts);
         return intent;
     }

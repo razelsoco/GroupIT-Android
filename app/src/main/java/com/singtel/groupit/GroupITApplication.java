@@ -6,7 +6,6 @@ import android.content.Context;
 import com.singtel.groupit.injection.component.ApplicationComponent;
 import com.singtel.groupit.injection.component.DaggerApplicationComponent;
 import com.singtel.groupit.injection.module.ApplicationModule;
-import com.singtel.groupit.model.PreferencesManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -22,7 +21,6 @@ public class GroupITApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        PreferencesManager.initializeInstance(this);
         // default font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath(getString(R.string.font_avenirltpro_roman))

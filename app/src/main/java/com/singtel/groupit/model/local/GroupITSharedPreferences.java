@@ -1,8 +1,9 @@
-package com.singtel.groupit.util;
+package com.singtel.groupit.model.local;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
+
+import com.singtel.groupit.util.KeystoreUtil;
 
 public class GroupITSharedPreferences extends BaseSharedPreferences {
 
@@ -10,8 +11,8 @@ public class GroupITSharedPreferences extends BaseSharedPreferences {
     private static final String USER_TOKEN_2 = "user_token_2";
     private static final String USER_TOKEN_3 = "user_token_3";
 
-    public GroupITSharedPreferences(SharedPreferences pref) {
-        super(pref);
+    public GroupITSharedPreferences(Context context) {
+        super(context);
     }
 
     // Login account info
@@ -26,7 +27,7 @@ public class GroupITSharedPreferences extends BaseSharedPreferences {
                 ;
     }
 
-    public String getUserToken(Context context) {
+    public String getUserToken() {
         String token = "";
         if (checkUserTokenCreated(context)) {
             // whole token for AES
@@ -50,7 +51,7 @@ public class GroupITSharedPreferences extends BaseSharedPreferences {
         return token;
     }
 
-    public boolean saveUserToken(Context context, String token) {
+    public boolean saveUserToken(String token) {
 //        LogUtils.i(this, "saveUserToken: " + token.length() + ": " + token);
         if (checkUserTokenCreated(context)) {
             // whole token for AES
